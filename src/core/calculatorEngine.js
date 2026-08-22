@@ -377,10 +377,55 @@ var CalculatorEngine = {
       totalLinhNguyen,
       breakdown
     };
+  },
+
+  // 18. Đột Phá Thẻ Bài (Lv 1 -> 30)
+  calculateTheBaiDotPha: function(startLevel = 0, targetLevel = 30) {
+    let totalDa = 0, totalDiemHon = 0;
+    const breakdown = [];
+    if (typeof TheBaiDotPhaData !== 'undefined') {
+      TheBaiDotPhaData.levels.forEach(r => {
+        if (r.level > startLevel && r.level <= targetLevel) {
+          totalDa += (r.daDotPha || 0);
+          totalDiemHon += (r.diemHon || 0);
+          breakdown.push({
+            step: `Cấp ${r.level}`,
+            daDotPha: r.daDotPha,
+            diemHon: r.diemHon,
+            cumDa: totalDa,
+            cumDiemHon: totalDiemHon
+          });
+        }
+      });
+    }
+    return { startLevel, targetLevel, totalDaDotPha: totalDa, totalDiemHon, breakdown };
+  },
+
+  // 19. Ô Tinh Hạch Thú Cưỡi (Lv 1 -> 10)
+  calculateTinhHachThuCuoi: function(startLevel = 1, targetLevel = 10) {
+    let totalKetTinh = 0, totalThuoc = 0;
+    const breakdown = [];
+    if (typeof TinhHachThuCuoiData !== 'undefined') {
+      TinhHachThuCuoiData.levels.forEach(r => {
+        if (r.level > startLevel && r.level <= targetLevel) {
+          totalKetTinh += (r.ketTinh || 0);
+          totalThuoc += (r.thuocTuyetCanh || 0);
+          breakdown.push({
+            step: `Lên Lv ${r.level}`,
+            ketTinh: r.ketTinh,
+            thuocTuyetCanh: r.thuocTuyetCanh,
+            cumKetTinh: totalKetTinh,
+            cumThuoc: totalThuoc
+          });
+        }
+      });
+    }
+    return { startLevel, targetLevel, totalKetTinh, totalThuocTuyetCanh: totalThuoc, breakdown };
   }
 };
 
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = CalculatorEngine;
 }
+
 

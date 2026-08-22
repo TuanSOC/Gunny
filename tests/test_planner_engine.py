@@ -24,6 +24,8 @@ def load_planner_via_node(js_code):
         global.HoaThanTuLuyenData = require('./src/data/hoa_than_tu_luyen.js');
         global.NgocVuKhiData = require('./src/data/ngoc_vu_khi.js');
         global.ThanHoMenhData = require('./src/data/than_ho_menh.js');
+        global.TheBaiDotPhaData = require('./src/data/the_bai_dot_pha.js');
+        global.TinhHachThuCuoiData = require('./src/data/tinh_hach_thu_cuoi.js');
 
         global.CalculatorEngine = require('./src/core/calculatorEngine.js');
         const PlannerEngine = require('./src/core/plannerEngine.js');

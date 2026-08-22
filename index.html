@@ -184,6 +184,13 @@
                     <small class="tile-sub">Cấp 1 → 9</small>
                   </span>
                 </button>
+                <button class="hub-tile" data-target="the_bai_dot_pha">
+                  <span class="tile-icon">🃏</span>
+                  <span class="tile-info">
+                    <strong class="tile-name">Đột Phá Thẻ</strong>
+                    <small class="tile-sub">Lv 1 → 30</small>
+                  </span>
+                </button>
               </div>
             </div>
 
@@ -234,6 +241,13 @@
                   <span class="tile-info">
                     <strong class="tile-name">Ngọc Tọa Kỵ</strong>
                     <small class="tile-sub">Ngọc 1 / 2 / 3</small>
+                  </span>
+                </button>
+                <button class="hub-tile" data-target="tinh_hach_thu_cuoi">
+                  <span class="tile-icon">💎</span>
+                  <span class="tile-info">
+                    <strong class="tile-name">Ô Tinh Hạch</strong>
+                    <small class="tile-sub">Lv 1 → 10</small>
                   </span>
                 </button>
               </div>
@@ -1224,6 +1238,124 @@
               </table>
             </div>
           </div>
+
+          <!-- 19. ĐỘT PHÁ THẺ BÀI (LEVEL 1 -> 30) -->
+          <div class="calculator-subpanel" id="calc-the_bai_dot_pha">
+            <div class="panel-header-row">
+              <div class="panel-title-group">
+                <span class="panel-icon">🃏</span>
+                <div>
+                  <h3 class="panel-title">19. Đột Phá Thẻ Bài (Lv 1 → 30)</h3>
+                  <p class="panel-subtitle">Tra cứu chi phí Đá Đột Phá Thẻ Bài &amp; Điểm Hồn tiêu hao từng mốc cấp độ</p>
+                </div>
+              </div>
+              <div class="panel-badge-group">
+                <span class="badge gold">Cấp 1 → 30</span>
+                <span class="badge cyan">Đá Đột Phá</span>
+              </div>
+            </div>
+
+            <div class="calc-form-grid">
+              <div class="form-group">
+                <label for="theBaiStartLevel">Cấp Hiện Tại:</label>
+                <select id="theBaiStartLevel" class="input-select"></select>
+              </div>
+              <div class="form-group">
+                <label for="theBaiTargetLevel">Cấp Mục Tiêu:</label>
+                <select id="theBaiTargetLevel" class="input-select"></select>
+              </div>
+            </div>
+
+            <div class="stat-summary-grid" style="grid-template-columns: 1fr 1fr;">
+              <div class="stat-box">
+                <span class="s-label">🎯 Tổng Đá Đột Phá Cần Dùng</span>
+                <span class="s-val cyan" id="resTheBaiDa">0</span>
+              </div>
+              <div class="stat-box">
+                <span class="s-label">🔮 Tổng Điểm Hồn Cần Dùng</span>
+                <span class="s-val purple" id="resTheBaiDiemHon">0</span>
+              </div>
+            </div>
+
+            <div class="table-responsive" style="margin-top:20px;">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Cấp Đột Phá</th>
+                    <th>Điểm Hồn</th>
+                    <th>Đá Đột Phá</th>
+                  </tr>
+                </thead>
+                <tbody id="theBaiTableBody"></tbody>
+                <tfoot>
+                  <tr>
+                    <td>TỔNG (Lv 1 → 30)</td>
+                    <td class="purple" id="theBaiFootDiemHon">--</td>
+                    <td class="cyan" id="theBaiFootDa">--</td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+          </div>
+
+          <!-- 20. Ô TINH HẠCH THÚ CƯỠI (LEVEL 1 -> 10) -->
+          <div class="calculator-subpanel" id="calc-tinh_hach_thu_cuoi">
+            <div class="panel-header-row">
+              <div class="panel-title-group">
+                <span class="panel-icon">💎</span>
+                <div>
+                  <h3 class="panel-title">20. Ô Tinh Hạch Thú Cưỡi (Lv 1 → 10)</h3>
+                  <p class="panel-subtitle">Tra cứu Kết Tinh Thuần Túy &amp; Thuốc Tuyệt Cảnh nâng cấp Ô Tinh Hạch Tọa Kỵ</p>
+                </div>
+              </div>
+              <div class="panel-badge-group">
+                <span class="badge gold">Cấp 1 → 10</span>
+                <span class="badge cyan">Kết Tinh / Thuốc TC</span>
+              </div>
+            </div>
+
+            <div class="calc-form-grid">
+              <div class="form-group">
+                <label for="tinhHachStartLevel">Cấp Hiện Tại:</label>
+                <select id="tinhHachStartLevel" class="input-select"></select>
+              </div>
+              <div class="form-group">
+                <label for="tinhHachTargetLevel">Cấp Mục Tiêu:</label>
+                <select id="tinhHachTargetLevel" class="input-select"></select>
+              </div>
+            </div>
+
+            <div class="stat-summary-grid" style="grid-template-columns: 1fr 1fr;">
+              <div class="stat-box">
+                <span class="s-label">🎯 Tổng Kết Tinh Thuần Túy</span>
+                <span class="s-val cyan" id="resTinhHachKetTinh">0</span>
+              </div>
+              <div class="stat-box">
+                <span class="s-label">💊 Tổng Thuốc Tuyệt Cảnh</span>
+                <span class="s-val gold" id="resTinhHachThuoc">0</span>
+              </div>
+            </div>
+
+            <div class="table-responsive" style="margin-top:20px;">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Cấp Độ</th>
+                    <th>Kết Tinh Thuần Túy</th>
+                    <th>Thuốc Tuyệt Cảnh</th>
+                  </tr>
+                </thead>
+                <tbody id="tinhHachTableBody"></tbody>
+                <tfoot>
+                  <tr>
+                    <td>TỔNG CỘNG (Lv 1 → 10)</td>
+                    <td class="cyan">3,990 Kết Tinh</td>
+                    <td class="gold">51,100 Thuốc</td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+          </div>
         </div>
 
       </section>
@@ -1791,6 +1923,8 @@
 <script src="src/data/hoa_than_tu_luyen.js"></script>
 <script src="src/data/ngoc_vu_khi.js"></script>
 <script src="src/data/than_ho_menh.js"></script>
+<script src="src/data/the_bai_dot_pha.js"></script>
+<script src="src/data/tinh_hach_thu_cuoi.js"></script>
 
 <!-- Engine scripts -->
 <script src="src/core/calculatorEngine.js"></script>

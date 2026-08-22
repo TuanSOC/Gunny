@@ -309,7 +309,43 @@ class TestThanHoMenh:
 
 
 # ==============================================================================
-# 19. FASHION WIKI (540+ Sets & Special Sets)
+# 19. ĐỘT PHÁ THẺ BÀI (Lv 1 -> 30)
+# ==============================================================================
+class TestTheBaiDotPha:
+    @pytest.fixture(autouse=True)
+    def setup(self):
+        self.data = load_data_via_node('the_bai_dot_pha.js')
+
+    def test_the_bai_dot_pha_levels_count(self):
+        assert len(self.data['levels']) == 30, "Phải có đủ 30 cấp độ đột phá thẻ bài"
+
+    def test_the_bai_total_materials(self):
+        total_da = sum(lv['daDotPha'] for lv in self.data['levels'])
+        total_diem_hon = sum(lv['diemHon'] for lv in self.data['levels'])
+        assert total_da == 124165, "Tổng Đá Đột Phá Lv 1 -> 30 phải là 124,165 Đá"
+        assert total_diem_hon == 9874500, "Tổng Điểm Hồn Lv 1 -> 30 phải là 9,874,500 Điểm Hồn"
+
+
+# ==============================================================================
+# 20. Ô TINH HẠCH THÚ CƯỠI (Lv 1 -> 10)
+# ==============================================================================
+class TestTinhHachThuCuoi:
+    @pytest.fixture(autouse=True)
+    def setup(self):
+        self.data = load_data_via_node('tinh_hach_thu_cuoi.js')
+
+    def test_tinh_hach_levels_count(self):
+        assert len(self.data['levels']) == 9, "Phải có đủ 9 mốc cấp độ (Lv 2 -> 10)"
+
+    def test_tinh_hach_totals(self):
+        total_ket_tinh = sum(lv['ketTinh'] for lv in self.data['levels'])
+        total_thuoc = sum(lv['thuocTuyetCanh'] for lv in self.data['levels'])
+        assert total_ket_tinh == 3990, "Tổng Kết Tinh Thuần Túy phải là 3,990"
+        assert total_thuoc == 51100, "Tổng Thuốc Tuyệt Cảnh phải là 51,100"
+
+
+# ==============================================================================
+# 21. FASHION WIKI (540+ Sets & Special Sets)
 # ==============================================================================
 class TestFashionData:
     @pytest.fixture(autouse=True)

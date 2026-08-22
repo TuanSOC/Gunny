@@ -27,8 +27,10 @@ export function initCalculators() {
   renderHoaThanTuLuyen();
   renderNgocVuKhi();
   renderThanHoMenh();
+  renderTheBaiDotPha();
+  renderTinhHachThuCuoi();
 
-  // 2. Bind listeners for all 18 interactive calculators
+  // 2. Bind listeners for all 20 interactive calculators
   bindCalculator('refStartLevel', 'refTargetLevel', updateRefiningCalc);
   bindCalculator('petEvoStartLevel', 'petEvoTargetLevel', updatePetEvoCalc);
   bindCalculator('magicExpStartLevel', 'magicExpTargetLevel', updateMagicExpCalc, 'magicExpRarity');
@@ -45,6 +47,8 @@ export function initCalculators() {
   bindCalculator('hoaThanStartTier', 'hoaThanTargetTier', updateHoaThanTuLuyenCalc);
   bindCalculator('ngocVuKhiStartLevel', 'ngocVuKhiTargetLevel', updateNgocVuKhiCalc);
   bindCalculator('thmStartLevel', 'thmTargetLevel', updateThanHoMenhCalc, 'thmStarType');
+  bindCalculator('theBaiStartLevel', 'theBaiTargetLevel', updateTheBaiDotPhaCalc);
+  bindCalculator('tinhHachStartLevel', 'tinhHachTargetLevel', updateTinhHachThuCuoiCalc);
 
   // 3. Initial Calculations
   updateRefiningCalc();
@@ -63,6 +67,8 @@ export function initCalculators() {
   updateHoaThanTuLuyenCalc();
   updateNgocVuKhiCalc();
   updateThanHoMenhCalc();
+  updateTheBaiDotPhaCalc();
+  updateTinhHachThuCuoiCalc();
 }
 
 function bindCalculator(startId, targetId, updateFn, extraId = null) {
@@ -980,4 +986,130 @@ function updateThanHoMenhCalc() {
     goalItems
   );
 }
+
+/* ────────────────────────────────────────────────────────────
+   19. ĐỘT PHÁ THẺ BÀI (LEVEL 1 -> 30)
+   ──────────────────────────────────────────────────────────── */
+function renderTheBaiDotPha() {
+  const tbody = document.getElementById('theBaiTableBody');
+  const selStart = document.getElementById('theBaiStartLevel');
+  const selTarget = document.getElementById('theBaiTargetLevel');
+
+  if (typeof TheBaiDotPhaData === 'undefined') return;
+
+  if (selStart && selTarget) {
+    let startOpts = '<option value="0" selected>Cấp 0 (Chưa ĐP)</option>';
+    let targetOpts = '';
+    for (let lv = 1; lv <= 30; lv++) {
+      startOpts += `<option value="${lv}">Cấp ${lv}</option>`;
+      targetOpts += `<option value="${lv}" ${lv === 30 ? 'selected' : ''}>Cấp ${lv}${lv === 30 ? ' (MAX)' : ''}</option>`;
+    }
+    selStart.innerHTML = startOpts;
+    selTarget.innerHTML = targetOpts;
+  }
+
+  let totDiemHon = 0, totDa = 0;
+  if (tbody) {
+    tbody.innerHTML = TheBaiDotPhaData.levels.map(r => {
+      totDiemHon += r.diemHon;
+      totDa += r.daDotPha;
+      return `
+        <tr>
+          <td><strong>Cấp ${r.level}</strong></td>
+          <td class="purple">${r.diemHon.toLocaleString()}</td>
+          <td class="cyan">${r.daDotPha.toLocaleString()} Đá</td>
+        </tr>`;
+    }).join('');
+  }
+
+  const footDiemHon = document.getElementById('theBaiFootDiemHon');
+  const footDa = document.getElementById('theBaiFootDa');
+  if (footDiemHon) footDiemHon.innerText = `${totDiemHon.toLocaleString()} Điểm Hồn`;
+  if (footDa) footDa.innerText = `${totDa.toLocaleString()} Đá`;
+}
+
+function updateTheBaiDotPhaCalc() {
+  const s = parseInt(document.getElementById('theBaiStartLevel')?.value || '0');
+  const t = parseInt(document.getElementById('theBaiTargetLevel')?.value || '30');
+
+  if (typeof CalculatorEngine === 'undefined') return;
+  const validTarget = Math.max(s + 1, t);
+  const res = CalculatorEngine.calculateTheBaiDotPha(s, validTarget);
+
+  animateVal('resTheBaiDa', res.totalDaDotPha);
+  animateVal('resTheBaiDiemHon', res.totalDiemHon);
+
+  const rows = res.breakdown.map(b => [
+    b.step,
+    `${b.daDotPha.toLocaleString()} Đá Đột Phá`,
+    `${b.diemHon.toLocaleString()} Điểm Hồn`,
+    `Tích lũy: ${b.cumDa.toLocaleString()} Đá`
+  ]);
+
+  const goalItems = [
+    { name: 'Đá Đột Phá Thẻ Bài', qty: res.totalDaDotPha.toLocaleString() },
+    { name: 'Điểm Hồn Thẻ Bài', qty: res.totalDiemHon.toLocaleString() }
+  ];
+
+  renderSubBreakdown('sub-the_bai_dot_pha', `Đột Phá Thẻ Bài: Cấp ${s} → Cấp ${validTarget}`, ['Cấp Đột Phá', 'Đá ĐP Cần', 'Điểm Hồn', 'Lũy Kế'], rows, '', goalItems);
+}
+
+/* ────────────────────────────────────────────────────────────
+   20. Ô TINH HẠCH THÚ CƯỠI (LEVEL 1 -> 10)
+   ──────────────────────────────────────────────────────────── */
+function renderTinhHachThuCuoi() {
+  const tbody = document.getElementById('tinhHachTableBody');
+  const selStart = document.getElementById('tinhHachStartLevel');
+  const selTarget = document.getElementById('tinhHachTargetLevel');
+
+  if (typeof TinhHachThuCuoiData === 'undefined') return;
+
+  if (selStart && selTarget) {
+    let startOpts = '<option value="1" selected>Cấp 1</option>';
+    let targetOpts = '';
+    for (let lv = 2; lv <= 10; lv++) {
+      startOpts += `<option value="${lv}">Cấp ${lv}</option>`;
+      targetOpts += `<option value="${lv}" ${lv === 10 ? 'selected' : ''}>Cấp ${lv}${lv === 10 ? ' (MAX)' : ''}</option>`;
+    }
+    selStart.innerHTML = startOpts;
+    selTarget.innerHTML = targetOpts;
+  }
+
+  if (tbody) {
+    tbody.innerHTML = TinhHachThuCuoiData.levels.map(r => `
+      <tr>
+        <td><strong>Lên Lv ${r.level}</strong></td>
+        <td class="cyan">${r.ketTinh.toLocaleString()}</td>
+        <td class="gold">${r.thuocTuyetCanh.toLocaleString()}</td>
+      </tr>
+    `).join('');
+  }
+}
+
+function updateTinhHachThuCuoiCalc() {
+  const s = parseInt(document.getElementById('tinhHachStartLevel')?.value || '1');
+  const t = parseInt(document.getElementById('tinhHachTargetLevel')?.value || '10');
+
+  if (typeof CalculatorEngine === 'undefined') return;
+  const validTarget = Math.max(s + 1, t);
+  const res = CalculatorEngine.calculateTinhHachThuCuoi(s, validTarget);
+
+  animateVal('resTinhHachKetTinh', res.totalKetTinh);
+  animateVal('resTinhHachThuoc', res.totalThuocTuyetCanh);
+
+  const rows = res.breakdown.map(b => [
+    b.step,
+    `${b.ketTinh.toLocaleString()} Kết Tinh`,
+    `${b.thuocTuyetCanh.toLocaleString()} Thuốc Tuyệt Cảnh`,
+    `Tích lũy: ${b.cumKetTinh.toLocaleString()} Kết Tinh`
+  ]);
+
+  const goalItems = [
+    { name: 'Kết Tinh Thuần Túy', qty: res.totalKetTinh.toLocaleString() },
+    { name: 'Thuốc Tuyệt Cảnh', qty: res.totalThuocTuyetCanh.toLocaleString() }
+  ];
+
+  renderSubBreakdown('sub-tinh_hach_thu_cuoi', `Ô Tinh Hạch: Cấp ${s} → Cấp ${validTarget}`, ['Mốc Cấp Độ', 'Kết Tinh Cần', 'Thuốc TC Cần', 'Lũy Kế'], rows, '', goalItems);
+}
+
 

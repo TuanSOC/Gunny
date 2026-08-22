@@ -31,7 +31,9 @@ var PlannerEngine = {
     hoaThan:       { name: "Hóa Thần Tu Luyện", min: 0, max: 10, unit: "Bậc", resourceName: "Đá Hóa Thần" },
     ngocVuKhi:     { name: "Ngọc Vũ Khí", min: 0, max: 20, unit: "Cấp", resourceName: "Đá Ngọc Vũ Khí" },
     thanHoMenh:    { name: "Thần Hộ Mệnh", min: 1, max: 70, unit: "Cấp", resourceName: "EXP Thần Hộ Mệnh" },
-    linhBao:       { name: "Linh Bảo (THM)", min: 1, max: 50, unit: "Cấp", resourceName: "Pha Lê / Linh Nguyên" }
+    linhBao:       { name: "Linh Bảo (THM)", min: 1, max: 50, unit: "Cấp", resourceName: "Pha Lê / Linh Nguyên" },
+    theBaiDotPha:  { name: "Đột Phá Thẻ Bài", min: 0, max: 30, unit: "Cấp", resourceName: "Đá Đột Phá" },
+    tinhHach:      { name: "Ô Tinh Hạch Thú Cưỡi", min: 1, max: 10, unit: "Cấp", resourceName: "Kết Tinh / Thuốc TC" }
   },
 
   /**
@@ -63,7 +65,9 @@ var PlannerEngine = {
         hoaThan: 0,
         ngocVuKhi: 0,
         thanHoMenh: 1,
-        linhBao: 1
+        linhBao: 1,
+        theBaiDotPha: 0,
+        tinhHach: 1
       }
     };
   },
@@ -210,6 +214,17 @@ var PlannerEngine = {
             if (result.totalLinhNguyen > 0) {
               requiredRes['linhNguyen'] = result.totalLinhNguyen;
             }
+            break;
+
+          case 'theBaiDotPha':
+            result = engine.calculateTheBaiDotPha(cur, tgt);
+            requiredRes['daDotPha'] = result.totalDaDotPha;
+            break;
+
+          case 'tinhHach':
+            result = engine.calculateTinhHachThuCuoi(cur, tgt);
+            requiredRes['ketTinhThuanTuy'] = result.totalKetTinh;
+            requiredRes['thuocTuyetCanh'] = result.totalThuocTuyetCanh;
             break;
         }
 
