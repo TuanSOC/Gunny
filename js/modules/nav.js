@@ -104,7 +104,7 @@ function initCommandPalette(activateMainTab, showSubPanel) {
     { title: '🛡️ Thần Hộ Mệnh (Level 1 → 70 & Linh Bảo)', sub: 'Bảng EXP THM 4 Sao / 5 Sao, Pha Lê và Linh Nguyên', tab: 'tab-refining', target: 'than_ho_menh' },
     { title: '🃏 Đột Phá Thẻ Bài (Level 1 → 30 MAX)', sub: 'Bảng đá đột phá và điểm hồn thẻ bài', tab: 'tab-refining', target: 'the_bai_dot_pha' },
     { title: '💎 Ô Tinh Hạch Thú Cưỡi (Level 1 → 10 MAX)', sub: 'Bảng kết tinh thuần túy và thuốc tuyệt cảnh', tab: 'tab-refining', target: 'tinh_hach_thu_cuoi' },
-    { title: '👤 Kế Hoạch & Quản Lý Hồ Sơ Nhân Vật', sub: 'Tạo profile, thiết lập mục tiêu, kiểm tra kho và tài nguyên thiếu', tab: 'tab-planner', target: null },
+    { title: '🐾 Cá Tính Pet (Level 1 → 60 MAX)', sub: 'Bảng đá tín nhiệm nâng cá tính pet', tab: 'tab-refining', target: 'pet_ca_tinh' },
     { title: '🎯 Thước Tính Góc 65° Chuẩn Toàn Năng', sub: 'Công thức 65 kinh điển, tính theo cự ly và gió', tab: 'tab-ballistics', target: null, formula: '65' },
     { title: '🚀 Thước Tính Góc Siêu Cao 90°', sub: 'Công thức siêu cao (90 - khoảng cách +- gió)', tab: 'tab-ballistics', target: null, formula: '90' },
     { title: '🎯 Thước Tính Góc 70° Chiều Sâu', sub: 'Công thức 70 bắn lựu đạn và tivi', tab: 'tab-ballistics', target: null, formula: '70' },
@@ -205,10 +205,9 @@ function initCommandPalette(activateMainTab, showSubPanel) {
       if (modal.classList.contains('active')) closePalette();
     } else if (!isTyping && !e.ctrlKey && !e.altKey && !e.metaKey) {
       if (e.key === '1') activateMainTab('tab-refining');
-      else if (e.key === '2') activateMainTab('tab-planner');
-      else if (e.key === '3') activateMainTab('tab-ballistics');
-      else if (e.key === '4') activateMainTab('tab-fashion');
-      else if (e.key === '5') activateMainTab('tab-services');
+      else if (e.key === '2') activateMainTab('tab-ballistics');
+      else if (e.key === '3') activateMainTab('tab-fashion');
+      else if (e.key === '4') activateMainTab('tab-services');
     }
   });
 }

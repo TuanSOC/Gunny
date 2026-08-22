@@ -29,8 +29,9 @@ export function initCalculators() {
   renderThanHoMenh();
   renderTheBaiDotPha();
   renderTinhHachThuCuoi();
+  renderPetCaTinh();
 
-  // 2. Bind listeners for all 20 interactive calculators
+  // 2. Bind listeners for all 21 interactive calculators
   bindCalculator('refStartLevel', 'refTargetLevel', updateRefiningCalc);
   bindCalculator('petEvoStartLevel', 'petEvoTargetLevel', updatePetEvoCalc);
   bindCalculator('magicExpStartLevel', 'magicExpTargetLevel', updateMagicExpCalc, 'magicExpRarity');
@@ -49,6 +50,7 @@ export function initCalculators() {
   bindCalculator('thmStartLevel', 'thmTargetLevel', updateThanHoMenhCalc, 'thmStarType');
   bindCalculator('theBaiStartLevel', 'theBaiTargetLevel', updateTheBaiDotPhaCalc);
   bindCalculator('tinhHachStartLevel', 'tinhHachTargetLevel', updateTinhHachThuCuoiCalc);
+  bindCalculator('caTinhStartLevel', 'caTinhTargetLevel', updatePetCaTinhCalc);
 
   // 3. Initial Calculations
   updateRefiningCalc();
@@ -69,6 +71,7 @@ export function initCalculators() {
   updateThanHoMenhCalc();
   updateTheBaiDotPhaCalc();
   updateTinhHachThuCuoiCalc();
+  updatePetCaTinhCalc();
 }
 
 function bindCalculator(startId, targetId, updateFn, extraId = null) {
@@ -1112,4 +1115,62 @@ function updateTinhHachThuCuoiCalc() {
   renderSubBreakdown('sub-tinh_hach_thu_cuoi', `Ô Tinh Hạch: Cấp ${s} → Cấp ${validTarget}`, ['Mốc Cấp Độ', 'Kết Tinh Cần', 'Thuốc TC Cần', 'Lũy Kế'], rows, '', goalItems);
 }
 
+/* ────────────────────────────────────────────────────────────
+   21. CÁ TÍNH PET (LEVEL 1 -> 60 & ĐÁ TÍN NHIỆM)
+   ──────────────────────────────────────────────────────────── */
+function renderPetCaTinh() {
+  const tbody = document.getElementById('caTinhTableBody');
+  const selStart = document.getElementById('caTinhStartLevel');
+  const selTarget = document.getElementById('caTinhTargetLevel');
 
+  if (typeof PetCaTinhData === 'undefined') return;
+
+  if (selStart && selTarget) {
+    let startOpts = '<option value="1" selected>Cấp 1</option>';
+    let targetOpts = '';
+    for (let lv = 2; lv <= 60; lv++) {
+      startOpts += `<option value="${lv}">Cấp ${lv}</option>`;
+      targetOpts += `<option value="${lv}" ${lv === 60 ? 'selected' : ''}>Cấp ${lv}${lv === 60 ? ' (MAX)' : ''}</option>`;
+    }
+    selStart.innerHTML = startOpts;
+    selTarget.innerHTML = targetOpts;
+  }
+
+  let totDa = 0;
+  if (tbody) {
+    tbody.innerHTML = PetCaTinhData.levels.map(r => {
+      totDa += r.daTinNhiem;
+      return `
+        <tr>
+          <td><strong>Lên Lv ${r.level}</strong></td>
+          <td class="cyan">${r.daTinNhiem.toLocaleString()} Đá Tín Nhiệm</td>
+        </tr>`;
+    }).join('');
+  }
+
+  const footDa = document.getElementById('caTinhFootDa');
+  if (footDa) footDa.innerText = `${totDa.toLocaleString()} Đá Tín Nhiệm`;
+}
+
+function updatePetCaTinhCalc() {
+  const s = parseInt(document.getElementById('caTinhStartLevel')?.value || '1');
+  const t = parseInt(document.getElementById('caTinhTargetLevel')?.value || '60');
+
+  if (typeof CalculatorEngine === 'undefined') return;
+  const validTarget = Math.max(s + 1, t);
+  const res = CalculatorEngine.calculatePetCaTinh(s, validTarget);
+
+  animateVal('resCaTinhDa', res.totalDaTinNhiem);
+
+  const rows = res.breakdown.map(b => [
+    b.step,
+    `${b.daTinNhiem.toLocaleString()} Đá Tín Nhiệm`,
+    `Tích lũy: ${b.cumDa.toLocaleString()} Đá`
+  ]);
+
+  const goalItems = [
+    { name: 'Đá Tín Nhiệm (Cá Tính Pet)', qty: res.totalDaTinNhiem.toLocaleString() }
+  ];
+
+  renderSubBreakdown('sub-pet_ca_tinh', `Cá Tính Pet: Cấp ${s} → Cấp ${validTarget}`, ['Mốc Cấp Độ', 'Đá Tín Nhiệm Cần', 'Lũy Kế'], rows, '', goalItems);
+}

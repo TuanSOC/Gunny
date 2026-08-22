@@ -421,6 +421,25 @@ var CalculatorEngine = {
       });
     }
     return { startLevel, targetLevel, totalKetTinh, totalThuocTuyetCanh: totalThuoc, breakdown };
+  },
+
+  // 20. Cá Tính Pet (Lv 1 -> 60 & Đá Tín Nhiệm)
+  calculatePetCaTinh: function(startLevel = 1, targetLevel = 60) {
+    let totalDa = 0;
+    const breakdown = [];
+    if (typeof PetCaTinhData !== 'undefined') {
+      PetCaTinhData.levels.forEach(r => {
+        if (r.level > startLevel && r.level <= targetLevel) {
+          totalDa += (r.daTinNhiem || 0);
+          breakdown.push({
+            step: `Lên Lv ${r.level}`,
+            daTinNhiem: r.daTinNhiem,
+            cumDa: totalDa
+          });
+        }
+      });
+    }
+    return { startLevel, targetLevel, totalDaTinNhiem: totalDa, breakdown };
   }
 };
 

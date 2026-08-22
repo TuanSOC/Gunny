@@ -412,3 +412,20 @@ class TestBallisticsEngine:
         assert res['recommendedAngle'] == 20, "Góc 20 phải là 20°"
         assert res['recommendedPower'] == 54, "Lực góc 20 ở 1 màn hình (10 cự ly) phải là 54 lực"
 
+
+# ==============================================================================
+# 21. CÁ TÍNH PET (LEVEL 1 -> 60 & ĐÁ TÍN NHIỆM)
+# ==============================================================================
+class TestPetCaTinh:
+    @pytest.fixture(autouse=True)
+    def setup(self):
+        self.data = load_data_via_node('pet_ca_tinh.js')
+
+    def test_ca_tinh_levels_count(self):
+        assert len(self.data['levels']) == 59, "Cá tính Pet từ Lv 2->60 phải có 59 mốc"
+
+    def test_ca_tinh_total_da(self):
+        total_da = sum(r['daTinNhiem'] for r in self.data['levels'])
+        assert total_da == 97714, "Tổng Đá Tín Nhiệm nâng max Lv 60 phải là 97,714"
+
+

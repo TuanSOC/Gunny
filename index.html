@@ -74,11 +74,7 @@
     <div class="tabs-container">
       <button class="main-tab active" data-tab="tab-refining" id="tab-btn-refining">
         <span class="tab-icon">🧮</span>
-        <span class="tab-text">17 Bảng Tra Cứu &amp; Hóa Thần</span>
-      </button>
-      <button class="main-tab" data-tab="tab-planner" id="tab-btn-planner">
-        <span class="tab-icon">👤</span>
-        <span class="tab-text">Kế Hoạch Nhân Vật &amp; Mục Tiêu</span>
+        <span class="tab-text">21 Bảng Tra Cứu Gunny</span>
       </button>
       <button class="main-tab" data-tab="tab-ballistics" id="tab-btn-ballistics">
         <span class="tab-icon">🎯</span>
@@ -107,7 +103,7 @@
           <div class="hub-header">
             <div class="hub-title-group">
               <span class="hub-badge"><span class="pulse-dot"></span> SYSTEM MASTER HUB</span>
-              <h3 class="hub-title">Trung Tâm Tra Cứu 17 Tính Năng Gunny</h3>
+              <h3 class="hub-title">Trung Tâm Tra Cứu 20 Tính Năng Gunny</h3>
             </div>
             <div class="hub-quick-select-wrap">
               <span class="quick-icon">⚡ Chọn Nhanh:</span>
@@ -129,6 +125,10 @@
                 <option value="pet_tai_nang">📖 15. Pet Tài Năng (Sách Trí Tuệ Lv 1 → 10)</option>
                 <option value="hoa_than_tu_luyen">🔥 16. Hóa Thần Tu Luyện (Đột Phá Bậc 1 → 10 &amp; Đá Hóa Thần)</option>
                 <option value="ngoc_vu_khi">🎯 17. Ngọc Vũ Khí (Lv 1 → 20 &amp; Đá Cần)</option>
+                <option value="than_ho_menh">🛡️ 18. Thần Hộ Mệnh (Lv 1 → 70 &amp; Linh Bảo)</option>
+                <option value="the_bai_dot_pha">🃏 19. Đột Phá Thẻ Bài (Lv 1 → 30 &amp; Đá Đột Phá)</option>
+                <option value="tinh_hach_thu_cuoi">💎 20. Ô Tinh Hạch Thú Cưỡi (Lv 1 → 10 &amp; Thuốc TC)</option>
+                <option value="pet_ca_tinh">🎭 21. Cá Tính Pet (Lv 1 → 60 &amp; Đá Tín Nhiệm)</option>
               </select>
             </div>
           </div>
@@ -248,6 +248,13 @@
                   <span class="tile-info">
                     <strong class="tile-name">Ô Tinh Hạch</strong>
                     <small class="tile-sub">Lv 1 → 10</small>
+                  </span>
+                </button>
+                <button class="hub-tile" data-target="pet_ca_tinh">
+                  <span class="tile-icon">🎭</span>
+                  <span class="tile-info">
+                    <strong class="tile-name">Cá Tính Pet</strong>
+                    <small class="tile-sub">Lv 1 → 60</small>
                   </span>
                 </button>
               </div>
@@ -1164,24 +1171,17 @@
               </table>
             </div>
           </div>
+        </div>
 
-          <!-- 18. THẦN HỘ MỆNH (LEVEL 1 -> 70 & LINH BẢO) -->
-          <div class="calculator-subpanel" id="calc-than_ho_menh">
-            <div class="panel-header-row">
-              <div class="panel-title-group">
-                <span class="panel-icon">🛡️</span>
-                <div>
-                  <h3 class="panel-title">18. Thần Hộ Mệnh (Lv 1 → 70 &amp; Linh Bảo)</h3>
-                  <p class="panel-subtitle">Tra cứu chi tiết lượng EXP nâng cấp Thần Hộ Mệnh 4 Sao / 5 Sao, Pha Lê &amp; Linh Nguyên đập Linh Bảo</p>
-                </div>
-              </div>
-              <div class="panel-badge-group">
-                <span class="badge gold">Cấp 1 → 70</span>
-                <span class="badge cyan">Linh Bảo 50</span>
-              </div>
+        <!-- ─── 18. THẦN HỘ MỆNH (LEVEL 1 -> 70 & LINH BẢO) ─── -->
+        <div id="sub-than_ho_menh" class="sub-panel">
+          <div class="glass-card">
+            <div class="card-header-bar">
+              <h2>🛡️ Bảng Tra EXP Thần Hộ Mệnh (Lv 1 → 70) &amp; Linh Bảo (Pha Lê / Linh Nguyên)</h2>
+              <span class="badge gold">Cấp 1 → 70 &amp; LB 50</span>
             </div>
 
-            <div class="calc-form-grid" style="grid-template-columns: 1fr 1fr 1fr;">
+            <div class="grid-form" style="grid-template-columns: 1fr 1fr 1fr;">
               <div class="form-group">
                 <label for="thmStarType">Phẩm Chất THM:</label>
                 <select id="thmStarType" class="input-select">
@@ -1238,24 +1238,17 @@
               </table>
             </div>
           </div>
+        </div>
 
-          <!-- 19. ĐỘT PHÁ THẺ BÀI (LEVEL 1 -> 30) -->
-          <div class="calculator-subpanel" id="calc-the_bai_dot_pha">
-            <div class="panel-header-row">
-              <div class="panel-title-group">
-                <span class="panel-icon">🃏</span>
-                <div>
-                  <h3 class="panel-title">19. Đột Phá Thẻ Bài (Lv 1 → 30)</h3>
-                  <p class="panel-subtitle">Tra cứu chi phí Đá Đột Phá Thẻ Bài &amp; Điểm Hồn tiêu hao từng mốc cấp độ</p>
-                </div>
-              </div>
-              <div class="panel-badge-group">
-                <span class="badge gold">Cấp 1 → 30</span>
-                <span class="badge cyan">Đá Đột Phá</span>
-              </div>
+        <!-- ─── 19. ĐỘT PHÁ THẺ BÀI (LEVEL 1 -> 30) ─── -->
+        <div id="sub-the_bai_dot_pha" class="sub-panel">
+          <div class="glass-card">
+            <div class="card-header-bar">
+              <h2>🃏 Bảng Tra Đột Phá Thẻ Bài (Đá Đột Phá &amp; Điểm Hồn)</h2>
+              <span class="badge gold">Cấp 1 → 30 MAX</span>
             </div>
 
-            <div class="calc-form-grid">
+            <div class="grid-form">
               <div class="form-group">
                 <label for="theBaiStartLevel">Cấp Hiện Tại:</label>
                 <select id="theBaiStartLevel" class="input-select"></select>
@@ -1297,24 +1290,17 @@
               </table>
             </div>
           </div>
+        </div>
 
-          <!-- 20. Ô TINH HẠCH THÚ CƯỠI (LEVEL 1 -> 10) -->
-          <div class="calculator-subpanel" id="calc-tinh_hach_thu_cuoi">
-            <div class="panel-header-row">
-              <div class="panel-title-group">
-                <span class="panel-icon">💎</span>
-                <div>
-                  <h3 class="panel-title">20. Ô Tinh Hạch Thú Cưỡi (Lv 1 → 10)</h3>
-                  <p class="panel-subtitle">Tra cứu Kết Tinh Thuần Túy &amp; Thuốc Tuyệt Cảnh nâng cấp Ô Tinh Hạch Tọa Kỵ</p>
-                </div>
-              </div>
-              <div class="panel-badge-group">
-                <span class="badge gold">Cấp 1 → 10</span>
-                <span class="badge cyan">Kết Tinh / Thuốc TC</span>
-              </div>
+        <!-- ─── 20. Ô TINH HẠCH THÚ CƯỠI (LEVEL 1 -> 10) ─── -->
+        <div id="sub-tinh_hach_thu_cuoi" class="sub-panel">
+          <div class="glass-card">
+            <div class="card-header-bar">
+              <h2>💎 Bảng Tra Nâng Cấp Ô Tinh Hạch Thú Cưỡi (Kết Tinh &amp; Thuốc Tuyệt Cảnh)</h2>
+              <span class="badge gold">Cấp 1 → 10 MAX</span>
             </div>
 
-            <div class="calc-form-grid">
+            <div class="grid-form">
               <div class="form-group">
                 <label for="tinhHachStartLevel">Cấp Hiện Tại:</label>
                 <select id="tinhHachStartLevel" class="input-select"></select>
@@ -1358,121 +1344,55 @@
           </div>
         </div>
 
-      </section>
-
-      <!-- ════════ TAB 2: KẾ HOẠCH NHÂN VẬT & MỤC TIÊU ════════ -->
-      <section id="tab-planner" class="tab-panel">
-        <div class="planner-layout">
-          <!-- Hub Banner -->
-          <div class="category-hub-card glass-card">
-            <div class="hub-header">
-              <div class="hub-title-group">
-                <span class="hub-badge"><span class="pulse-dot"></span> CHARACTER COMPANION &amp; PLANNER</span>
-                <h2 class="hub-title">👤 Kế Hoạch &amp; Quản Lý Hồ Sơ Nhân Vật</h2>
-              </div>
-              <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;">
-                <span class="badge gold">🛡️ Lưu LocalStorage Tự Động</span>
-                <span class="badge cyan">⚡ Tính Toán Thiếu Hụt Kho</span>
-                <button id="btnCopyPlanReport" class="btn-planner-action gold" style="padding:6px 14px;">
-                  📋 Sao Chép Kế Hoạch
-                </button>
-              </div>
-            </div>
-            <p class="hub-desc">Theo dõi thông số nhân vật hiện tại, thiết lập mục tiêu nâng cấp trên toàn bộ 15 hệ thống Gunny, quản lý kho nguyên liệu và tính toán chính xác số lượng tài nguyên còn thiếu để đạt mốc mong muốn.</p>
-          </div>
-
-          <!-- Character Switcher & Profile Bar -->
-          <div class="char-switcher-bar">
-            <div class="char-select-group">
-              <label for="charSelect" style="font-weight:700;color:var(--gold);white-space:nowrap;">Hồ Sơ:</label>
-              <select id="charSelect" class="input-select" style="min-width:220px;"></select>
-            </div>
-            <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
-              <input type="text" id="charNameInput" class="input-text" placeholder="Tên nhân vật" style="width:140px;padding:6px 10px;font-size:12.5px;">
-              <input type="number" id="charLevelInput" class="input-text" placeholder="Cấp độ" title="Cấp độ nhân vật" style="width:80px;padding:6px 10px;font-size:12.5px;">
-              <input type="number" id="charPowerInput" class="input-text" placeholder="Lực chiến" title="Lực chiến hiện tại" style="width:120px;padding:6px 10px;font-size:12.5px;">
-            </div>
-            <div class="char-actions-group">
-              <button id="btnNewChar" class="btn-planner-action" title="Tạo nhân vật mới">➕ Tạo Mới</button>
-              <button id="btnDuplicateChar" class="btn-planner-action" title="Nhân bản nhân vật">📋 Nhân Bản</button>
-              <button id="btnDeleteChar" class="btn-planner-action danger" title="Xóa nhân vật">🗑️ Xóa</button>
-            </div>
-          </div>
-
-          <!-- Overall Progress Card -->
-          <div class="planner-progress-card">
-            <div class="progress-header">
-              <div style="font-family:var(--font-heading);font-weight:800;font-size:15px;color:var(--cyan);display:flex;align-items:center;gap:8px;">
-                <span>📊</span> TIẾN ĐỘ HOÀN THÀNH TOÀN BỘ MỤC TIÊU
-              </div>
-              <div style="font-family:var(--font-heading);font-weight:900;font-size:18px;color:var(--gold);" id="planProgressText">
-                100%
-              </div>
-            </div>
-            <div class="progress-track-bg">
-              <div id="planProgressFill" class="progress-track-fill" style="width:100%;"></div>
-            </div>
-          </div>
-
-          <!-- 2-Column Comparison Grid: Current State vs Target Goals -->
-          <div class="planner-matrix-grid">
-            <!-- Column 1: Current State -->
-            <div class="glass-card">
-              <div class="card-header-bar">
-                <h3>⚙️ TRẠNG THÁI HIỆN TẠI (CURRENT STATE)</h3>
-                <span class="badge purple">15 Hệ Thống</span>
-              </div>
-              <div id="currentSystemsContainer" style="margin-top:14px;"></div>
-            </div>
-
-            <!-- Column 2: Target Goals -->
-            <div class="glass-card">
-              <div class="card-header-bar">
-                <h3>🎯 MỤC TIÊU MONG MUỐN (TARGET GOALS)</h3>
-                <span class="badge gold">Thiết Lập Mục Tiêu</span>
-              </div>
-              <div id="targetGoalsContainer" style="margin-top:14px;"></div>
-            </div>
-          </div>
-
-          <!-- Resource Deficit & Inventory Management Table -->
+        <!-- ─── 21. CÁ TÍNH PET (LEVEL 1 -> 60 & ĐÁ TÍN NHIỆM) ─── -->
+        <div id="sub-pet_ca_tinh" class="sub-panel">
           <div class="glass-card">
             <div class="card-header-bar">
-              <div>
-                <h3>📦 KHO NGUYÊN LIỆU &amp; PHÂN TÍCH THÂM HỤT (RESOURCE DEFICIT)</h3>
-                <p>Nhập số lượng nguyên liệu bạn đang có trong túi vào cột "Đang Có" để tính toán số còn thiếu</p>
-              </div>
-              <span class="badge cyan">Thời Gian Thực</span>
+              <h2>🎭 Bảng Tra Cá Tính Pet (Cấp 1 → 60 &amp; Đá Tín Nhiệm)</h2>
+              <span class="badge gold">Cấp 1 → 60 MAX</span>
             </div>
 
-            <div class="deficit-table-wrap" style="margin-top:16px;">
-              <table class="data-table min-w-800">
+            <div class="grid-form">
+              <div class="form-group">
+                <label for="caTinhStartLevel">Cấp Hiện Tại:</label>
+                <select id="caTinhStartLevel" class="input-select"></select>
+              </div>
+              <div class="form-group">
+                <label for="caTinhTargetLevel">Cấp Mục Tiêu:</label>
+                <select id="caTinhTargetLevel" class="input-select"></select>
+              </div>
+            </div>
+
+            <div class="stat-summary-grid" style="grid-template-columns: 1fr;">
+              <div class="stat-box">
+                <span class="s-label">🎯 Tổng Đá Tín Nhiệm Cần Dùng</span>
+                <span class="s-val cyan" id="resCaTinhDa">0</span>
+              </div>
+            </div>
+
+            <div class="table-responsive" style="margin-top:20px;">
+              <table class="data-table">
                 <thead>
                   <tr>
-                    <th>Tên Tài Nguyên</th>
-                    <th>Tổng Cần Dùng</th>
-                    <th>Đang Có (Kho)</th>
-                    <th>Còn Thiếu</th>
-                    <th>Trạng Thái</th>
+                    <th>Cấp Độ</th>
+                    <th>Đá Tín Nhiệm Cần</th>
                   </tr>
                 </thead>
-                <tbody id="plannerDeficitTableBody"></tbody>
+                <tbody id="caTinhTableBody"></tbody>
+                <tfoot>
+                  <tr>
+                    <td>TỔNG CỘNG (Lv 1 → 60)</td>
+                    <td class="cyan" id="caTinhFootDa">97,714 Đá Tín Nhiệm</td>
+                  </tr>
+                </tfoot>
               </table>
             </div>
           </div>
-
-          <!-- Detailed Itemized Upgrade Steps Breakdown -->
-          <div class="glass-card">
-            <div class="card-header-bar">
-              <h3>📋 LỘ TRÌNH NÂNG CẤP CHI TIẾT TỪNG HỆ THỐNG</h3>
-              <span class="badge gold">Breakdown Steps</span>
-            </div>
-            <div id="plannerBreakdownList" style="margin-top:16px;"></div>
-          </div>
         </div>
+
       </section>
 
-      <!-- ════════ TAB 3: THƯỚC BẮN GÓC ════════ -->
+      <!-- ════════ TAB 2: THƯỚC BẮN GÓC ════════ -->
       <section id="tab-ballistics" class="tab-panel">
         <div class="glass-card">
           <div class="card-header-bar">
@@ -1922,15 +1842,222 @@
 <script src="src/data/pet_tai_nang.js"></script>
 <script src="src/data/hoa_than_tu_luyen.js"></script>
 <script src="src/data/ngoc_vu_khi.js"></script>
-<script src="src/data/than_ho_menh.js"></script>
-<script src="src/data/the_bai_dot_pha.js"></script>
-<script src="src/data/tinh_hach_thu_cuoi.js"></script>
+
+<!-- Inline data — 18. Thần Hộ Mệnh (Lv 1→70 & Linh Bảo) — nhúng thẳng để tránh cache -->
+<script>
+var ThanHoMenhData = {
+  maxLevel: 70,
+  maxLinhBaoLevel: 50,
+  levels: [
+    { level: 2, exp4Star: 150, exp5Star: 225, phaLe: 20, linhNguyen: 0 },
+    { level: 3, exp4Star: 180, exp5Star: 270, phaLe: 40, linhNguyen: 0 },
+    { level: 4, exp4Star: 225, exp5Star: 337, phaLe: 70, linhNguyen: 0 },
+    { level: 5, exp4Star: 285, exp5Star: 427, phaLe: 130, linhNguyen: 1 },
+    { level: 6, exp4Star: 345, exp5Star: 517, phaLe: 180, linhNguyen: 0 },
+    { level: 7, exp4Star: 420, exp5Star: 630, phaLe: 250, linhNguyen: 0 },
+    { level: 8, exp4Star: 495, exp5Star: 742, phaLe: 330, linhNguyen: 0 },
+    { level: 9, exp4Star: 600, exp5Star: 900, phaLe: 410, linhNguyen: 0 },
+    { level: 10, exp4Star: 705, exp5Star: 1057, phaLe: 470, linhNguyen: 2 },
+    { level: 11, exp4Star: 825, exp5Star: 1237, phaLe: 145, linhNguyen: 0 },
+    { level: 12, exp4Star: 960, exp5Star: 1440, phaLe: 255, linhNguyen: 0 },
+    { level: 13, exp4Star: 1110, exp5Star: 1665, phaLe: 370, linhNguyen: 0 },
+    { level: 14, exp4Star: 1260, exp5Star: 1890, phaLe: 485, linhNguyen: 0 },
+    { level: 15, exp4Star: 1440, exp5Star: 2160, phaLe: 610, linhNguyen: 5 },
+    { level: 16, exp4Star: 1650, exp5Star: 2475, phaLe: 730, linhNguyen: 0 },
+    { level: 17, exp4Star: 1950, exp5Star: 2925, phaLe: 860, linhNguyen: 0 },
+    { level: 18, exp4Star: 2100, exp5Star: 3150, phaLe: 995, linhNguyen: 0 },
+    { level: 19, exp4Star: 2400, exp5Star: 3600, phaLe: 1130, linhNguyen: 0 },
+    { level: 20, exp4Star: 2550, exp5Star: 3825, phaLe: 1270, linhNguyen: 10 },
+    { level: 21, exp4Star: 2850, exp5Star: 4275, phaLe: 325, linhNguyen: 0 },
+    { level: 22, exp4Star: 3600, exp5Star: 5400, phaLe: 580, linhNguyen: 0 },
+    { level: 23, exp4Star: 4350, exp5Star: 6525, phaLe: 845, linhNguyen: 0 },
+    { level: 24, exp4Star: 4800, exp5Star: 7200, phaLe: 1120, linhNguyen: 0 },
+    { level: 25, exp4Star: 5250, exp5Star: 7875, phaLe: 1410, linhNguyen: 15 },
+    { level: 26, exp4Star: 5700, exp5Star: 8550, phaLe: 1710, linhNguyen: 0 },
+    { level: 27, exp4Star: 6150, exp5Star: 9225, phaLe: 2025, linhNguyen: 0 },
+    { level: 28, exp4Star: 6750, exp5Star: 10125, phaLe: 2350, linhNguyen: 0 },
+    { level: 29, exp4Star: 7200, exp5Star: 10800, phaLe: 2685, linhNguyen: 0 },
+    { level: 30, exp4Star: 7800, exp5Star: 11700, phaLe: 3035, linhNguyen: 20 },
+    { level: 31, exp4Star: 8400, exp5Star: 12600, phaLe: 610, linhNguyen: 0 },
+    { level: 32, exp4Star: 9000, exp5Star: 13500, phaLe: 995, linhNguyen: 0 },
+    { level: 33, exp4Star: 9600, exp5Star: 14400, phaLe: 1415, linhNguyen: 0 },
+    { level: 34, exp4Star: 10200, exp5Star: 15300, phaLe: 1875, linhNguyen: 0 },
+    { level: 35, exp4Star: 10950, exp5Star: 16425, phaLe: 2380, linhNguyen: 30 },
+    { level: 36, exp4Star: 11700, exp5Star: 17550, phaLe: 2930, linhNguyen: 0 },
+    { level: 37, exp4Star: 12450, exp5Star: 18675, phaLe: 3540, linhNguyen: 0 },
+    { level: 38, exp4Star: 13200, exp5Star: 19800, phaLe: 4210, linhNguyen: 0 },
+    { level: 39, exp4Star: 13950, exp5Star: 20925, phaLe: 4940, linhNguyen: 0 },
+    { level: 40, exp4Star: 14700, exp5Star: 22050, phaLe: 5740, linhNguyen: 40 },
+    { level: 41, exp4Star: 15600, exp5Star: 23400, phaLe: 970, linhNguyen: 0 },
+    { level: 42, exp4Star: 16500, exp5Star: 24750, phaLe: 1555, linhNguyen: 0 },
+    { level: 43, exp4Star: 17400, exp5Star: 26100, phaLe: 2175, linhNguyen: 0 },
+    { level: 44, exp4Star: 18300, exp5Star: 27450, phaLe: 2835, linhNguyen: 0 },
+    { level: 45, exp4Star: 19200, exp5Star: 28800, phaLe: 3540, linhNguyen: 45 },
+    { level: 46, exp4Star: 20250, exp5Star: 30375, phaLe: 4290, linhNguyen: 0 },
+    { level: 47, exp4Star: 21300, exp5Star: 31950, phaLe: 5100, linhNguyen: 0 },
+    { level: 48, exp4Star: 22350, exp5Star: 33525, phaLe: 5970, linhNguyen: 0 },
+    { level: 49, exp4Star: 23400, exp5Star: 35100, phaLe: 6900, linhNguyen: 0 },
+    { level: 50, exp4Star: 24450, exp5Star: 36675, phaLe: 7900, linhNguyen: 50 },
+    { level: 51, exp4Star: 25500, exp5Star: 38250, phaLe: 0, linhNguyen: 0 },
+    { level: 52, exp4Star: 28050, exp5Star: 42075, phaLe: 0, linhNguyen: 0 },
+    { level: 53, exp4Star: 30300, exp5Star: 45450, phaLe: 0, linhNguyen: 0 },
+    { level: 54, exp4Star: 32700, exp5Star: 49050, phaLe: 0, linhNguyen: 0 },
+    { level: 55, exp4Star: 34950, exp5Star: 52425, phaLe: 0, linhNguyen: 0 },
+    { level: 56, exp4Star: 37500, exp5Star: 56250, phaLe: 0, linhNguyen: 0 },
+    { level: 57, exp4Star: 40200, exp5Star: 60300, phaLe: 0, linhNguyen: 0 },
+    { level: 58, exp4Star: 42600, exp5Star: 63900, phaLe: 0, linhNguyen: 0 },
+    { level: 59, exp4Star: 45300, exp5Star: 67950, phaLe: 0, linhNguyen: 0 },
+    { level: 60, exp4Star: 48150, exp5Star: 72225, phaLe: 0, linhNguyen: 0 },
+    { level: 61, exp4Star: 50850, exp5Star: 76275, phaLe: 0, linhNguyen: 0 },
+    { level: 62, exp4Star: 53700, exp5Star: 80550, phaLe: 0, linhNguyen: 0 },
+    { level: 63, exp4Star: 56700, exp5Star: 85050, phaLe: 0, linhNguyen: 0 },
+    { level: 64, exp4Star: 59700, exp5Star: 89550, phaLe: 0, linhNguyen: 0 },
+    { level: 65, exp4Star: 62700, exp5Star: 94050, phaLe: 0, linhNguyen: 0 },
+    { level: 66, exp4Star: 66000, exp5Star: 99000, phaLe: 0, linhNguyen: 0 },
+    { level: 67, exp4Star: 69000, exp5Star: 103500, phaLe: 0, linhNguyen: 0 },
+    { level: 68, exp4Star: 72300, exp5Star: 108450, phaLe: 0, linhNguyen: 0 },
+    { level: 69, exp4Star: 75750, exp5Star: 113625, phaLe: 0, linhNguyen: 0 },
+    { level: 70, exp4Star: 79200, exp5Star: 118800, phaLe: 0, linhNguyen: 0 }
+  ]
+};
+</script>
+
+<!-- Inline data — 19. Đột Phá Thẻ Bài (Lv 1→30) — nhúng thẳng để tránh cache -->
+<script>
+var TheBaiDotPhaData = {
+  maxLevel: 30,
+  levels: [
+    { level: 1, diemHon: 3500, daDotPha: 50 },
+    { level: 2, diemHon: 5500, daDotPha: 85 },
+    { level: 3, diemHon: 8000, daDotPha: 135 },
+    { level: 4, diemHon: 11500, daDotPha: 200 },
+    { level: 5, diemHon: 15500, daDotPha: 285 },
+    { level: 6, diemHon: 21000, daDotPha: 395 },
+    { level: 7, diemHon: 28000, daDotPha: 520 },
+    { level: 8, diemHon: 36000, daDotPha: 675 },
+    { level: 9, diemHon: 46500, daDotPha: 855 },
+    { level: 10, diemHon: 59000, daDotPha: 1065 },
+    { level: 11, diemHon: 74000, daDotPha: 1300 },
+    { level: 12, diemHon: 91500, daDotPha: 1570 },
+    { level: 13, diemHon: 112500, daDotPha: 1870 },
+    { level: 14, diemHon: 136500, daDotPha: 2205 },
+    { level: 15, diemHon: 164000, daDotPha: 2575 },
+    { level: 16, diemHon: 195500, daDotPha: 2980 },
+    { level: 17, diemHon: 231000, daDotPha: 3425 },
+    { level: 18, diemHon: 271000, daDotPha: 3910 },
+    { level: 19, diemHon: 315500, daDotPha: 4430 },
+    { level: 20, diemHon: 365000, daDotPha: 4995 },
+    { level: 21, diemHon: 420000, daDotPha: 5600 },
+    { level: 22, diemHon: 480500, daDotPha: 6250 },
+    { level: 23, diemHon: 546500, daDotPha: 6940 },
+    { level: 24, diemHon: 619000, daDotPha: 7675 },
+    { level: 25, diemHon: 698000, daDotPha: 8460 },
+    { level: 26, diemHon: 783500, daDotPha: 9290 },
+    { level: 27, diemHon: 876500, daDotPha: 10165 },
+    { level: 28, diemHon: 976000, daDotPha: 11095 },
+    { level: 29, diemHon: 1084000, daDotPha: 12070 },
+    { level: 30, diemHon: 1199500, daDotPha: 13095 }
+  ]
+};
+</script>
+
+<!-- Inline data — 20. Ô Tinh Hạch Thú Cưỡi (Lv 1→10) — nhúng thẳng để tránh cache -->
+<script>
+var TinhHachThuCuoiData = {
+  maxLevel: 10,
+  levels: [
+    { level: 2, ketTinh: 60, thuocTuyetCanh: 100 },
+    { level: 3, ketTinh: 120, thuocTuyetCanh: 200 },
+    { level: 4, ketTinh: 180, thuocTuyetCanh: 400 },
+    { level: 5, ketTinh: 270, thuocTuyetCanh: 800 },
+    { level: 6, ketTinh: 360, thuocTuyetCanh: 1600 },
+    { level: 7, ketTinh: 480, thuocTuyetCanh: 3200 },
+    { level: 8, ketTinh: 600, thuocTuyetCanh: 6400 },
+    { level: 9, ketTinh: 840, thuocTuyetCanh: 12800 },
+    { level: 10, ketTinh: 1080, thuocTuyetCanh: 25600 }
+  ],
+  totalsForMax: { ketTinh: 3990, thuocTuyetCanh: 51100 }
+};
+</script>
+
+<!-- Inline data — 21. Cá Tính Pet (Lv 1→60 & Đá Tín Nhiệm) — nhúng thẳng để tránh cache -->
+<script>
+var PetCaTinhData = {
+  maxLevel: 60,
+  levels: [
+    { level: 2, daTinNhiem: 25 },
+    { level: 3, daTinNhiem: 32 },
+    { level: 4, daTinNhiem: 42 },
+    { level: 5, daTinNhiem: 54 },
+    { level: 6, daTinNhiem: 68 },
+    { level: 7, daTinNhiem: 85 },
+    { level: 8, daTinNhiem: 105 },
+    { level: 9, daTinNhiem: 127 },
+    { level: 10, daTinNhiem: 152 },
+    { level: 11, daTinNhiem: 180 },
+
+    { level: 12, daTinNhiem: 64 },
+    { level: 13, daTinNhiem: 108 },
+    { level: 14, daTinNhiem: 155 },
+    { level: 15, daTinNhiem: 205 },
+    { level: 16, daTinNhiem: 260 },
+    { level: 17, daTinNhiem: 318 },
+    { level: 18, daTinNhiem: 381 },
+    { level: 19, daTinNhiem: 447 },
+    { level: 20, daTinNhiem: 518 },
+    { level: 21, daTinNhiem: 592 },
+
+    { level: 22, daTinNhiem: 284 },
+    { level: 23, daTinNhiem: 386 },
+    { level: 24, daTinNhiem: 494 },
+    { level: 25, daTinNhiem: 606 },
+    { level: 26, daTinNhiem: 724 },
+    { level: 27, daTinNhiem: 848 },
+    { level: 28, daTinNhiem: 977 },
+    { level: 29, daTinNhiem: 1111 },
+    { level: 30, daTinNhiem: 1252 },
+    { level: 31, daTinNhiem: 1398 },
+
+    { level: 32, daTinNhiem: 658 },
+    { level: 33, daTinNhiem: 851 },
+    { level: 34, daTinNhiem: 1052 },
+    { level: 35, daTinNhiem: 1260 },
+    { level: 36, daTinNhiem: 1476 },
+    { level: 37, daTinNhiem: 1700 },
+    { level: 38, daTinNhiem: 1931 },
+    { level: 39, daTinNhiem: 2171 },
+    { level: 40, daTinNhiem: 2418 },
+    { level: 41, daTinNhiem: 2673 },
+
+    { level: 42, daTinNhiem: 1222 },
+    { level: 43, daTinNhiem: 1557 },
+    { level: 44, daTinNhiem: 1902 },
+    { level: 45, daTinNhiem: 2257 },
+    { level: 46, daTinNhiem: 2623 },
+    { level: 47, daTinNhiem: 3000 },
+    { level: 48, daTinNhiem: 3388 },
+    { level: 49, daTinNhiem: 3787 },
+    { level: 50, daTinNhiem: 4197 },
+    { level: 51, daTinNhiem: 4618 },
+
+    { level: 52, daTinNhiem: 2212 },
+    { level: 53, daTinNhiem: 2762 },
+    { level: 54, daTinNhiem: 3327 },
+    { level: 55, daTinNhiem: 3907 },
+    { level: 56, daTinNhiem: 4502 },
+    { level: 57, daTinNhiem: 5113 },
+    { level: 58, daTinNhiem: 5738 },
+    { level: 59, daTinNhiem: 6379 },
+    { level: 60, daTinNhiem: 7035 }
+  ],
+  totalsForMax: { daTinNhiem: 97714 }
+};
+</script>
 
 <!-- Engine scripts -->
 <script src="src/core/calculatorEngine.js"></script>
 <script src="src/core/ballisticsEngine.js"></script>
 <script src="src/core/resourceEngine.js"></script>
-<script src="src/core/plannerEngine.js"></script>
 
 <!-- Client App Logic (Modular ES6 Architecture) -->
 <script type="module" src="js/app.js"></script>
