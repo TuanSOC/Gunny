@@ -38,6 +38,7 @@ var BallisticsEngine = {
     return {
       formulaCode: '65',
       formulaName: 'Góc 65° Chuẩn',
+      features: 'Toàn năng, áp dụng cho mọi địa hình',
       recommendedAngle: Math.max(20, Math.min(89, finalAngle)),
       recommendedPower: power,
       windAdjust: windAdjust,
@@ -58,6 +59,7 @@ var BallisticsEngine = {
     return {
       formulaCode: '20',
       formulaName: 'Góc 20° Siêu Thấp',
+      features: 'Kháng gió cực mạnh, góc bắn thấp',
       recommendedAngle: 20,
       recommendedPower: Math.min(100, Math.max(10, Math.round(finalPower))),
       windAdjust: windPowerAdjust,
@@ -78,6 +80,7 @@ var BallisticsEngine = {
     return {
       formulaCode: '30',
       formulaName: 'Góc 30° Đường Thẳng',
+      features: 'Đường đạn thẳng, đục chân và đào đất',
       recommendedAngle: Math.max(15, Math.min(45, finalAngle)),
       recommendedPower: Math.min(100, Math.max(10, basePower)),
       windAdjust: windAdjust,
@@ -99,6 +102,7 @@ var BallisticsEngine = {
     return {
       formulaCode: '90',
       formulaName: 'Siêu Cao (Góc 90°)',
+      features: 'Siêu cao né địa hình cản trở, đạn rơi thẳng đứng',
       recommendedAngle: Math.max(30, Math.min(89, finalAngle)),
       recommendedPower: 95,
       windAdjust: windAngle,
@@ -120,6 +124,7 @@ var BallisticsEngine = {
     return {
       formulaCode: '50',
       formulaName: 'Góc 50° Tầm Trung',
+      features: 'Tầm trung ổn định, kiểm soát lực tốt',
       recommendedAngle: Math.max(20, Math.min(89, finalAngle)),
       recommendedPower: power,
       windAdjust: windAngle,
@@ -143,6 +148,7 @@ var BallisticsEngine = {
     return {
       formulaCode: '70',
       formulaName: 'Góc 70° Chiều Sâu',
+      features: 'Góc chiều sâu, cực mạnh khi bắn Lựu Đạn / Tivi',
       recommendedAngle: Math.max(20, Math.min(89, finalAngle)),
       recommendedPower: power,
       windAdjust: windAdjust,

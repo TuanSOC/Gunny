@@ -60,3 +60,8 @@ export function showToast(message, type = 'gold') {
     setTimeout(() => toast.remove(), 350);
   }, 2400);
 }
+
+export function formatNumber(num) {
+  return (Number(num) || 0).toLocaleString();
+}
+
