@@ -1,0 +1,357 @@
+/* ============================================================
+   GUNNY MASTER WEB APP — PMT Gaming Services & Contact Styling
+   ============================================================ */
+
+.services-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: 24px;
+  align-items: start;
+}
+
+@media (max-width: 992px) {
+  .services-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.service-banner-card {
+  position: relative;
+  background: rgba(12, 18, 32, 0.85);
+  border: 1px solid var(--border-glass-glow);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(16px);
+  text-align: center;
+}
+
+.service-banner-img-wrap {
+  position: relative;
+  width: 100%;
+  max-height: 480px;
+  overflow: hidden;
+  background: radial-gradient(circle at 50% 50%, rgba(255, 215, 0, 0.15), rgba(5, 8, 18, 0.95));
+}
+
+.service-banner-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: transform 0.4s ease;
+}
+
+.service-banner-img-wrap:hover img {
+  transform: scale(1.02);
+}
+
+.service-banner-footer {
+  padding: 18px 20px;
+  background: rgba(8, 12, 24, 0.95);
+  border-top: 1px solid var(--border-glass);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.service-brand-tag {
+  font-family: var(--font-heading);
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--gold);
+  letter-spacing: 0.5px;
+}
+
+/* Service Grid Cards */
+.services-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+.service-card-item {
+  background: rgba(16, 24, 42, 0.75);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  position: relative;
+  overflow: hidden;
+}
+
+.service-card-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 100%;
+  background: var(--gold);
+  opacity: 0.5;
+  transition: opacity 0.25s ease, width 0.25s ease;
+}
+
+.service-card-item:hover {
+  background: rgba(20, 32, 56, 0.9);
+  border-color: rgba(255, 215, 0, 0.45);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+}
+
+.service-card-item:hover::before {
+  opacity: 1;
+  width: 5px;
+}
+
+.service-card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.service-icon-box {
+  font-size: 24px;
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  background: rgba(255, 215, 0, 0.12);
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.service-icon-box.cyan {
+  background: rgba(0, 242, 254, 0.12);
+  border-color: rgba(0, 242, 254, 0.3);
+}
+
+.service-icon-box.purple {
+  background: rgba(168, 85, 247, 0.12);
+  border-color: rgba(168, 85, 247, 0.3);
+}
+
+.service-card-title {
+  font-family: var(--font-heading);
+  font-size: 14px;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.service-card-desc {
+  font-size: 12.5px;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.service-tag {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--gold);
+  background: rgba(255, 215, 0, 0.1);
+  padding: 2px 8px;
+  border-radius: 4px;
+  align-self: flex-start;
+  border: 1px solid rgba(255, 215, 0, 0.2);
+}
+
+/* Contact Action Hub */
+.contact-hub-card {
+  background: linear-gradient(135deg, rgba(14, 24, 46, 0.95), rgba(8, 14, 28, 0.98));
+  border: 1px solid rgba(0, 242, 254, 0.35);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.contact-hub-title {
+  font-family: var(--font-heading);
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--cyan);
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.contact-channels-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+@media (max-width: 600px) {
+  .contact-channels-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.contact-channel-box {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: all 0.2s ease;
+}
+
+.contact-channel-box:hover {
+  border-color: var(--cyan);
+  background: rgba(0, 242, 254, 0.05);
+}
+
+.channel-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.channel-icon {
+  font-size: 26px;
+}
+
+.channel-name {
+  font-family: var(--font-heading);
+  font-size: 14px;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.channel-detail {
+  font-family: var(--font-heading);
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--gold);
+  word-break: break-all;
+}
+
+.channel-btns {
+  display: flex;
+  gap: 8px;
+}
+
+.btn-contact-action {
+  flex: 1;
+  padding: 8px 12px;
+  font-family: var(--font-heading);
+  font-size: 12.5px;
+  font-weight: 700;
+  border-radius: 6px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-contact-action.zalo {
+  background: rgba(0, 136, 255, 0.2);
+  border: 1px solid #0088ff;
+  color: #ffffff;
+}
+
+.btn-contact-action.zalo:hover {
+  background: #0088ff;
+  box-shadow: 0 0 15px rgba(0, 136, 255, 0.5);
+}
+
+.btn-contact-action.fb {
+  background: rgba(24, 119, 242, 0.2);
+  border: 1px solid #1877f2;
+  color: #ffffff;
+}
+
+.btn-contact-action.fb:hover {
+  background: #1877f2;
+  box-shadow: 0 0 15px rgba(24, 119, 242, 0.5);
+}
+
+.btn-contact-copy {
+  padding: 8px 12px;
+  font-family: var(--font-heading);
+  font-size: 12px;
+  font-weight: 700;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-contact-copy:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Floating Quick Contact Widget */
+.floating-contact-widget {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.floating-contact-btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
+  text-decoration: none;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.floating-contact-btn:hover {
+  transform: translateY(-4px) scale(1.08);
+}
+
+.floating-contact-btn.zalo {
+  background: #0088ff;
+  color: #ffffff;
+  box-shadow: 0 0 18px rgba(0, 136, 255, 0.5);
+}
+
+.floating-contact-btn.fb {
+  background: #1877f2;
+  color: #ffffff;
+  box-shadow: 0 0 18px rgba(24, 119, 242, 0.5);
+}
+
+.floating-contact-btn .tooltip {
+  position: absolute;
+  right: 58px;
+  background: rgba(8, 12, 24, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  font-family: var(--font-heading);
+  font-size: 11.5px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 6px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.floating-contact-btn:hover .tooltip {
+  opacity: 1;
+}

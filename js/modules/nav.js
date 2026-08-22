@@ -108,7 +108,9 @@ function initCommandPalette(activateMainTab, showSubPanel) {
     { title: '🎯 Thước Tính Góc 50° Tầm Trung', sub: 'Công thức 50 địa hình phẳng và dốc', tab: 'tab-ballistics', target: null, formula: '50' },
     { title: '🎯 Thước Tính Góc 30° Đường Thẳng', sub: 'Công thức 30 đào đất và đục chân', tab: 'tab-ballistics', target: null, formula: '30' },
     { title: '🎯 Thước Tính Góc 20° Siêu Thấp', sub: 'Công thức 20 kháng gió cực mạnh', tab: 'tab-ballistics', target: null, formula: '20' },
-    { title: '👗 Kho Thời Trang 540+ Trọn Bộ', sub: 'Danh mục set trang phục, cánh bay, bong bóng chat', tab: 'tab-fashion', target: null }
+    { title: '👗 Kho Thời Trang 540+ Trọn Bộ', sub: 'Danh mục set trang phục, cánh bay, bong bóng chat', tab: 'tab-fashion', target: null },
+    { title: '👑 Dịch Vụ Gunny Trọn Gói (PMT Gaming)', sub: 'Up acc thuê, tối ưu tiêu xu, cày phó bản hằng ngày, đua top LC 8B+', tab: 'tab-services', target: null },
+    { title: '📞 Liên Hệ PMT (Zalo & Facebook)', sub: 'Zalo: 0981.052.217 — Facebook: fb.com/tinyy139', tab: 'tab-services', target: null }
   ];
 
   function openPalette() {
@@ -174,6 +176,22 @@ function initCommandPalette(activateMainTab, showSubPanel) {
     if (e.target === modal) closePalette();
   });
 
+  // Bind Copy Zalo Phone button
+  const btnCopyZalo = document.getElementById('btnCopyZaloPhone');
+  btnCopyZalo?.addEventListener('click', () => {
+    playCyberClickSound();
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText('0981052217').then(() => {
+        const { showToast } = window;
+        if (typeof showToast === 'function') {
+          showToast('📋 Đã sao chép số điện thoại Zalo: 0981.052.217!');
+        } else {
+          alert('Đã sao chép SĐT: 0981052217');
+        }
+      });
+    }
+  });
+
   window.addEventListener('keydown', (e) => {
     const isTyping = ['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement?.tagName);
 
@@ -186,6 +204,7 @@ function initCommandPalette(activateMainTab, showSubPanel) {
       if (e.key === '1') activateMainTab('tab-refining');
       else if (e.key === '2') activateMainTab('tab-ballistics');
       else if (e.key === '3') activateMainTab('tab-fashion');
+      else if (e.key === '4') activateMainTab('tab-services');
     }
   });
 }
