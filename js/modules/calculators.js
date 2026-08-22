@@ -26,8 +26,9 @@ export function initCalculators() {
   renderPetTaiNang();
   renderHoaThanTuLuyen();
   renderNgocVuKhi();
+  renderThanHoMenh();
 
-  // 2. Bind listeners for all 17 interactive calculators
+  // 2. Bind listeners for all 18 interactive calculators
   bindCalculator('refStartLevel', 'refTargetLevel', updateRefiningCalc);
   bindCalculator('petEvoStartLevel', 'petEvoTargetLevel', updatePetEvoCalc);
   bindCalculator('magicExpStartLevel', 'magicExpTargetLevel', updateMagicExpCalc, 'magicExpRarity');
@@ -43,6 +44,7 @@ export function initCalculators() {
   bindCalculator('taiNangStartLevel', 'taiNangTargetLevel', updatePetTaiNangCalc);
   bindCalculator('hoaThanStartTier', 'hoaThanTargetTier', updateHoaThanTuLuyenCalc);
   bindCalculator('ngocVuKhiStartLevel', 'ngocVuKhiTargetLevel', updateNgocVuKhiCalc);
+  bindCalculator('thmStartLevel', 'thmTargetLevel', updateThanHoMenhCalc, 'thmStarType');
 
   // 3. Initial Calculations
   updateRefiningCalc();
@@ -60,6 +62,7 @@ export function initCalculators() {
   updatePetTaiNangCalc();
   updateHoaThanTuLuyenCalc();
   updateNgocVuKhiCalc();
+  updateThanHoMenhCalc();
 }
 
 function bindCalculator(startId, targetId, updateFn, extraId = null) {
@@ -882,3 +885,99 @@ function updateNgocVuKhiCalc() {
   const goalItems = [{ name: 'Đá Nâng Cấp Ngọc Vũ Khí', qty: res.totalDa.toLocaleString() }];
   renderSubBreakdown('sub-ngoc_vu_khi', `Ngọc Vũ Khí: Cấp ${s} → Cấp ${validTarget}`, ['Cấp Độ Ngọc', 'Đá Cần Nâng', 'Lũy Kế'], rows, '', goalItems);
 }
+
+/* ────────────────────────────────────────────────────────────
+   18. THẦN HỘ MỆNH (EXP 1 -> 70 & LINH BẢO PHA LÊ / LINH NGUYÊN)
+   ──────────────────────────────────────────────────────────── */
+function renderThanHoMenh() {
+  const tbody = document.getElementById('thmTableBody');
+  const selStart = document.getElementById('thmStartLevel');
+  const selTarget = document.getElementById('thmTargetLevel');
+
+  if (typeof ThanHoMenhData === 'undefined') return;
+
+  // Populate dropdowns
+  if (selStart && selTarget) {
+    let startOpts = '<option value="1" selected>Cấp 1</option>';
+    let targetOpts = '';
+    for (let lv = 2; lv <= 70; lv++) {
+      startOpts += `<option value="${lv}">Cấp ${lv}</option>`;
+      targetOpts += `<option value="${lv}" ${lv === 70 ? 'selected' : ''}>Cấp ${lv}${lv === 70 ? ' (MAX)' : ''}</option>`;
+    }
+    selStart.innerHTML = startOpts;
+    selTarget.innerHTML = targetOpts;
+  }
+
+  let totExp4 = 0, totExp5 = 0, totPhaLe = 0, totLinhNguyen = 0;
+
+  if (tbody) {
+    tbody.innerHTML = ThanHoMenhData.levels.map(r => {
+      totExp4 += (r.exp4Star || 0);
+      totExp5 += (r.exp5Star || 0);
+      totPhaLe += (r.phaLe || 0);
+      totLinhNguyen += (r.linhNguyen || 0);
+
+      return `
+        <tr>
+          <td><strong>Lên Lv ${r.level}</strong></td>
+          <td class="cyan">${(r.exp4Star || 0).toLocaleString()}</td>
+          <td class="gold">${(r.exp5Star || 0).toLocaleString()}</td>
+          <td class="purple">${r.phaLe > 0 ? r.phaLe.toLocaleString() : '-'}</td>
+          <td style="color:${r.linhNguyen > 0 ? '#ff5252' : 'inherit'};font-weight:${r.linhNguyen > 0 ? '800' : 'normal'};">
+            ${r.linhNguyen > 0 ? r.linhNguyen : '-'}
+          </td>
+        </tr>`;
+    }).join('');
+  }
+
+  // Footer totals
+  const footExp4 = document.getElementById('thmFootExp4');
+  const footExp5 = document.getElementById('thmFootExp5');
+  const footPhaLe = document.getElementById('thmFootPhaLe');
+  const footLinhNguyen = document.getElementById('thmFootLinhNguyen');
+
+  if (footExp4) footExp4.innerText = `${totExp4.toLocaleString()} EXP`;
+  if (footExp5) footExp5.innerText = `${totExp5.toLocaleString()} EXP`;
+  if (footPhaLe) footPhaLe.innerText = `${totPhaLe.toLocaleString()} Pha Lê`;
+  if (footLinhNguyen) footLinhNguyen.innerText = `${totLinhNguyen.toLocaleString()} Linh Nguyên`;
+}
+
+function updateThanHoMenhCalc() {
+  const starType = document.getElementById('thmStarType')?.value || '5Star';
+  const s = parseInt(document.getElementById('thmStartLevel')?.value || '1');
+  const t = parseInt(document.getElementById('thmTargetLevel')?.value || '70');
+
+  if (typeof CalculatorEngine === 'undefined') return;
+  const validTarget = Math.max(s + 1, t);
+  const res = CalculatorEngine.calculateThanHoMenh(s, validTarget, starType);
+
+  animateVal('resThmExp', res.totalExpNeeded);
+  animateVal('resThmPhaLe', res.totalPhaLe);
+  animateVal('resThmLinhNguyen', res.totalLinhNguyen);
+
+  const rows = res.breakdown.map(b => [
+    b.step,
+    `${(starType === '4Star' ? b.exp4Star : b.exp5Star).toLocaleString()} EXP`,
+    b.phaLe > 0 ? `${b.phaLe.toLocaleString()} Pha Lê` : '-',
+    b.linhNguyen > 0 ? `${b.linhNguyen} Linh Nguyên` : '-',
+    `Lũy kế: ${b.cumExp.toLocaleString()} EXP`
+  ]);
+
+  const goalItems = [
+    { name: `EXP Thần Hộ Mệnh (${starType === '4Star' ? '4 Sao' : '5 Sao'})`, qty: res.totalExpNeeded.toLocaleString() },
+    { name: 'Pha Lê (Linh Bảo)', qty: res.totalPhaLe.toLocaleString() }
+  ];
+  if (res.totalLinhNguyen > 0) {
+    goalItems.push({ name: 'Linh Nguyên (Linh Bảo)', qty: res.totalLinhNguyen.toLocaleString() });
+  }
+
+  renderSubBreakdown(
+    'sub-than_ho_menh',
+    `Thần Hộ Mệnh (${starType === '4Star' ? '4 Sao' : '5 Sao'}): Cấp ${s} → Cấp ${validTarget}`,
+    ['Mốc Cấp Độ', 'EXP Cần Dùng', 'Pha Lê', 'Linh Nguyên', 'Tích Lũy EXP'],
+    rows,
+    '',
+    goalItems
+  );
+}
+

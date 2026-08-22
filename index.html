@@ -260,6 +260,13 @@
                     <small class="tile-sub">Bậc 1 → 10</small>
                   </span>
                 </button>
+                <button class="hub-tile" data-target="than_ho_menh">
+                  <span class="tile-icon">🛡️</span>
+                  <span class="tile-info">
+                    <strong class="tile-name">Thần Hộ Mệnh</strong>
+                    <small class="tile-sub">Lv 1 → 70 &amp; Linh Bảo</small>
+                  </span>
+                </button>
                 <button class="hub-tile" data-target="magic_exp">
                   <span class="tile-icon">🔮</span>
                   <span class="tile-info">
@@ -1143,6 +1150,80 @@
               </table>
             </div>
           </div>
+
+          <!-- 18. THẦN HỘ MỆNH (LEVEL 1 -> 70 & LINH BẢO) -->
+          <div class="calculator-subpanel" id="calc-than_ho_menh">
+            <div class="panel-header-row">
+              <div class="panel-title-group">
+                <span class="panel-icon">🛡️</span>
+                <div>
+                  <h3 class="panel-title">18. Thần Hộ Mệnh (Lv 1 → 70 &amp; Linh Bảo)</h3>
+                  <p class="panel-subtitle">Tra cứu chi tiết lượng EXP nâng cấp Thần Hộ Mệnh 4 Sao / 5 Sao, Pha Lê &amp; Linh Nguyên đập Linh Bảo</p>
+                </div>
+              </div>
+              <div class="panel-badge-group">
+                <span class="badge gold">Cấp 1 → 70</span>
+                <span class="badge cyan">Linh Bảo 50</span>
+              </div>
+            </div>
+
+            <div class="calc-form-grid" style="grid-template-columns: 1fr 1fr 1fr;">
+              <div class="form-group">
+                <label for="thmStarType">Phẩm Chất THM:</label>
+                <select id="thmStarType" class="input-select">
+                  <option value="5Star" selected>Bản 5 Sao (Chuẩn)</option>
+                  <option value="4Star">Bản 4 Sao</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="thmStartLevel">Cấp Hiện Tại:</label>
+                <select id="thmStartLevel" class="input-select"></select>
+              </div>
+              <div class="form-group">
+                <label for="thmTargetLevel">Cấp Mục Tiêu:</label>
+                <select id="thmTargetLevel" class="input-select"></select>
+              </div>
+            </div>
+
+            <div class="stat-summary-grid" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));">
+              <div class="stat-box">
+                <span class="s-label">🎯 Tổng EXP Thần Hộ Mệnh</span>
+                <span class="s-val cyan" id="resThmExp">0</span>
+              </div>
+              <div class="stat-box">
+                <span class="s-label">🔮 Tổng Pha Lê (Linh Bảo)</span>
+                <span class="s-val purple" id="resThmPhaLe">0</span>
+              </div>
+              <div class="stat-box">
+                <span class="s-label">💎 Tổng Linh Nguyên (Linh Bảo)</span>
+                <span class="s-val gold" id="resThmLinhNguyen">0</span>
+              </div>
+            </div>
+
+            <div class="table-responsive" style="margin-top:20px;">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Lên Cấp</th>
+                    <th>Bản 4 Sao (EXP)</th>
+                    <th>Bản 5 Sao (EXP)</th>
+                    <th>Linh Bảo (Pha Lê)</th>
+                    <th>Linh Bảo (L.Nguyên)</th>
+                  </tr>
+                </thead>
+                <tbody id="thmTableBody"></tbody>
+                <tfoot>
+                  <tr>
+                    <td>TỔNG (Lv 1 → 70)</td>
+                    <td class="cyan" id="thmFootExp4">--</td>
+                    <td class="gold" id="thmFootExp5">--</td>
+                    <td class="purple" id="thmFootPhaLe">--</td>
+                    <td class="gold" id="thmFootLinhNguyen">--</td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+          </div>
         </div>
 
       </section>
@@ -1709,6 +1790,7 @@
 <script src="src/data/pet_tai_nang.js"></script>
 <script src="src/data/hoa_than_tu_luyen.js"></script>
 <script src="src/data/ngoc_vu_khi.js"></script>
+<script src="src/data/than_ho_menh.js"></script>
 
 <!-- Engine scripts -->
 <script src="src/core/calculatorEngine.js"></script>

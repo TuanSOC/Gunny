@@ -340,9 +340,47 @@ var CalculatorEngine = {
       });
     }
     return { startLevel, targetLevel, totalDa, breakdown };
+  },
+
+  // 17. Thần Hộ Mệnh (Lv 1 -> 70 & Linh Bảo Pha Lê / Linh Nguyên)
+  calculateThanHoMenh: function(startLevel = 1, targetLevel = 70, starType = "5Star") {
+    let totalExp4 = 0, totalExp5 = 0, totalPhaLe = 0, totalLinhNguyen = 0;
+    const breakdown = [];
+    if (typeof ThanHoMenhData !== 'undefined') {
+      ThanHoMenhData.levels.forEach(r => {
+        if (r.level > startLevel && r.level <= targetLevel) {
+          totalExp4 += (r.exp4Star || 0);
+          totalExp5 += (r.exp5Star || 0);
+          totalPhaLe += (r.phaLe || 0);
+          totalLinhNguyen += (r.linhNguyen || 0);
+          breakdown.push({
+            step: `Lên Lv ${r.level}`,
+            exp4Star: r.exp4Star || 0,
+            exp5Star: r.exp5Star || 0,
+            phaLe: r.phaLe || 0,
+            linhNguyen: r.linhNguyen || 0,
+            cumExp: starType === '4Star' ? totalExp4 : totalExp5,
+            cumPhaLe: totalPhaLe,
+            cumLinhNguyen: totalLinhNguyen
+          });
+        }
+      });
+    }
+    return {
+      startLevel,
+      targetLevel,
+      starType,
+      totalExp4,
+      totalExp5,
+      totalExpNeeded: starType === '4Star' ? totalExp4 : totalExp5,
+      totalPhaLe,
+      totalLinhNguyen,
+      breakdown
+    };
   }
 };
 
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = CalculatorEngine;
 }
+

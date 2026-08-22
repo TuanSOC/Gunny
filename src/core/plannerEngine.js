@@ -29,7 +29,9 @@ var PlannerEngine = {
     petLinhHach:   { name: "Linh Hạch Pet", min: 0, max: 10, unit: "Bậc", resourceName: "Linh Ngọc / Mảnh" },
     petTaiNang:    { name: "Tài Năng Pet", min: 0, max: 100, unit: "Cấp", resourceName: "Sách Trí Tuệ" },
     hoaThan:       { name: "Hóa Thần Tu Luyện", min: 0, max: 10, unit: "Bậc", resourceName: "Đá Hóa Thần" },
-    ngocVuKhi:     { name: "Ngọc Vũ Khí", min: 0, max: 20, unit: "Cấp", resourceName: "Đá Ngọc Vũ Khí" }
+    ngocVuKhi:     { name: "Ngọc Vũ Khí", min: 0, max: 20, unit: "Cấp", resourceName: "Đá Ngọc Vũ Khí" },
+    thanHoMenh:    { name: "Thần Hộ Mệnh", min: 1, max: 70, unit: "Cấp", resourceName: "EXP Thần Hộ Mệnh" },
+    linhBao:       { name: "Linh Bảo (THM)", min: 1, max: 50, unit: "Cấp", resourceName: "Pha Lê / Linh Nguyên" }
   },
 
   /**
@@ -59,7 +61,9 @@ var PlannerEngine = {
         petLinhHach: 0,
         petTaiNang: 0,
         hoaThan: 0,
-        ngocVuKhi: 0
+        ngocVuKhi: 0,
+        thanHoMenh: 1,
+        linhBao: 1
       }
     };
   },
@@ -193,6 +197,19 @@ var PlannerEngine = {
           case 'ngocVuKhi':
             result = engine.calculateNgocVuKhi(cur, tgt);
             requiredRes['daNgocVuKhi'] = result.totalDa;
+            break;
+
+          case 'thanHoMenh':
+            result = engine.calculateThanHoMenh(cur, tgt, '5Star');
+            requiredRes['expThanHoMenh'] = result.totalExpNeeded;
+            break;
+
+          case 'linhBao':
+            result = engine.calculateThanHoMenh(cur, tgt, '5Star');
+            requiredRes['phaLe'] = result.totalPhaLe;
+            if (result.totalLinhNguyen > 0) {
+              requiredRes['linhNguyen'] = result.totalLinhNguyen;
+            }
             break;
         }
 

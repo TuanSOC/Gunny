@@ -33,7 +33,10 @@ const RESOURCE_LABELS = {
   linhNgoc: 'Linh Ngọc (Linh Hạch)',
   sachTriTue: 'Sách Trí Tuệ (Tài Năng)',
   daHoaThan: 'Đá Hóa Thần',
-  daNgocVuKhi: 'Đá Ngọc Vũ Khí'
+  daNgocVuKhi: 'Đá Ngọc Vũ Khí',
+  expThanHoMenh: 'EXP Thần Hộ Mệnh',
+  phaLe: 'Pha Lê (Linh Bảo THM)',
+  linhNguyen: 'Linh Nguyên (Linh Bảo THM)'
 };
 
 export function initCharacterPlanner() {
@@ -92,7 +95,10 @@ function loadInventory() {
     linhNgoc: 100,
     sachTriTue: 100,
     daHoaThan: 50,
-    daNgocVuKhi: 50
+    daNgocVuKhi: 50,
+    expThanHoMenh: 50000,
+    phaLe: 1000,
+    linhNguyen: 10
   });
 }
 

@@ -286,7 +286,30 @@ class TestNgocVuKhi:
 
 
 # ==============================================================================
-# 18. FASHION WIKI (540+ Sets & Special Sets)
+# 18. THẦN HỘ MỆNH (Cấp 1 -> 70 & Linh Bảo)
+# ==============================================================================
+class TestThanHoMenh:
+    @pytest.fixture(autouse=True)
+    def setup(self):
+        self.data = load_data_via_node('than_ho_menh.js')
+
+    def test_than_ho_menh_levels_count(self):
+        assert len(self.data['levels']) == 69, "Phải có đủ 69 mốc cấp độ (từ Lv 2 đến Lv 70)"
+
+    def test_than_ho_menh_exp_and_linh_bao(self):
+        total_exp4 = sum(lv['exp4Star'] for lv in self.data['levels'])
+        total_exp5 = sum(lv['exp5Star'] for lv in self.data['levels'])
+        total_phale = sum(lv['phaLe'] for lv in self.data['levels'])
+        total_linhnguyen = sum(lv['linhNguyen'] for lv in self.data['levels'])
+
+        assert total_exp4 > 1000000, "Tổng EXP 4 sao phải lớn hơn 1M"
+        assert total_exp5 > total_exp4, "EXP 5 sao phải lớn hơn 4 sao"
+        assert total_linhnguyen == 218, "Tổng Linh Nguyên các mốc 5, 10, 15, 20, 25, 30, 35, 40, 45, 50 phải là 218"
+        assert total_phale > 50000, "Tổng Pha Lê Linh Bảo phải lớn hơn 50,000"
+
+
+# ==============================================================================
+# 19. FASHION WIKI (540+ Sets & Special Sets)
 # ==============================================================================
 class TestFashionData:
     @pytest.fixture(autouse=True)

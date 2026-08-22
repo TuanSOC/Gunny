@@ -23,6 +23,7 @@ def load_planner_via_node(js_code):
         global.PetTaiNangData = require('./src/data/pet_tai_nang.js');
         global.HoaThanTuLuyenData = require('./src/data/hoa_than_tu_luyen.js');
         global.NgocVuKhiData = require('./src/data/ngoc_vu_khi.js');
+        global.ThanHoMenhData = require('./src/data/than_ho_menh.js');
 
         global.CalculatorEngine = require('./src/core/calculatorEngine.js');
         const PlannerEngine = require('./src/core/plannerEngine.js');
