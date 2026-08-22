@@ -1,0 +1,337 @@
+/* ============================================================
+   GUNNY MASTER WEB APP — Ballistics & Wind Ruler Module
+   ============================================================ */
+
+/* Formula Selector Buttons */
+.formula-selector-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 22px;
+}
+
+.btn-formula {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-glass-glow);
+  color: var(--text-muted);
+  font-family: var(--font-heading);
+  font-size: 13.5px;
+  font-weight: 700;
+  padding: 10px 18px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.25s ease;
+  white-space: nowrap;
+}
+
+.btn-formula:hover {
+  background: rgba(0, 242, 254, 0.1);
+  border-color: var(--cyan);
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+.btn-formula.active {
+  background: linear-gradient(135deg, rgba(0, 242, 254, 0.2), rgba(255, 215, 0, 0.2));
+  border-color: var(--gold);
+  color: #ffffff;
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.25);
+}
+
+/* Ballistics 2-Column Layout */
+.ballistics-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 24px;
+  align-items: start;
+}
+
+@media (max-width: 992px) {
+  .ballistics-layout { grid-template-columns: 1fr; }
+}
+
+/* Controls Card */
+.controls-card {
+  background: rgba(12, 16, 26, 0.7);
+  border: 1px solid var(--border-glass-glow);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.45);
+}
+
+.control-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.label-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.label-row label {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+.pill-badge {
+  font-size: 13px;
+  font-weight: 800;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-family: var(--font-heading);
+}
+
+.pill-badge.gold {
+  background: rgba(255, 215, 0, 0.15);
+  color: var(--gold);
+  border: 1px solid rgba(255, 215, 0, 0.4);
+}
+
+.pill-badge.cyan {
+  background: rgba(0, 242, 254, 0.15);
+  color: var(--cyan);
+  border: 1px solid rgba(0, 242, 254, 0.4);
+}
+
+/* Quick Preset Chips */
+.quick-preset-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.preset-chip {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: var(--text-muted);
+  font-size: 11.5px;
+  font-weight: 700;
+  padding: 4px 9px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.preset-chip:hover {
+  background: rgba(0, 242, 254, 0.15);
+  border-color: var(--cyan);
+  color: #ffffff;
+}
+
+/* Radio Toggle Group for Direction & Elevation */
+.radio-toggle-group {
+  display: flex;
+  gap: 8px;
+}
+
+.btn-toggle {
+  flex: 1;
+  padding: 9px 12px;
+  font-family: var(--font-heading);
+  font-size: 12.5px;
+  font-weight: 700;
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+}
+
+.btn-toggle:hover {
+  border-color: var(--cyan);
+  color: #ffffff;
+}
+
+.btn-toggle.active {
+  background: rgba(0, 242, 254, 0.18);
+  border-color: var(--cyan);
+  color: #ffffff;
+  box-shadow: 0 0 12px rgba(0, 242, 254, 0.3);
+}
+
+/* Result Display Card */
+.result-display-card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.trajectory-canvas-wrap {
+  background: radial-gradient(circle at 50% 100%, rgba(18, 30, 56, 0.9) 0%, rgba(8, 12, 22, 0.98) 100%);
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(0, 242, 254, 0.35);
+  padding: 16px;
+  box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.7), 0 8px 30px rgba(0, 0, 0, 0.5);
+  position: relative;
+  overflow: hidden;
+}
+
+.trajectory-svg {
+  width: 100%;
+  height: 180px;
+  display: block;
+}
+
+.big-result-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.big-res-box {
+  background: linear-gradient(135deg, rgba(14, 22, 42, 0.85) 0%, rgba(8, 12, 24, 0.95) 100%);
+  border: 1px solid var(--border-glass-glow);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+}
+
+.r-label {
+  font-size: 11.5px;
+  font-weight: 800;
+  color: var(--text-muted);
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+}
+
+.r-num {
+  font-family: var(--font-heading);
+  font-size: 38px;
+  font-weight: 900;
+  line-height: 1.1;
+}
+
+.cyan-glow { color: var(--cyan); text-shadow: 0 0 20px var(--cyan-glow); }
+.gold-glow { color: var(--gold); text-shadow: 0 0 20px var(--gold-glow); }
+
+/* Force Gauge Power Meter */
+.power-gauge-card {
+  background: rgba(10, 15, 28, 0.75);
+  border: 1px solid rgba(255, 215, 0, 0.25);
+  border-radius: var(--radius-md);
+  padding: 14px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.power-gauge-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+.power-track {
+  height: 16px;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+}
+
+.power-fill {
+  height: 100%;
+  width: 60%;
+  background: linear-gradient(90deg, #00f2fe 0%, #ffd700 70%, #ff4757 100%);
+  border-radius: 8px;
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 0 12px rgba(255, 215, 0, 0.4);
+}
+
+.power-markers {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-dim);
+  padding: 0 2px;
+}
+
+.note-banner {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--gold);
+  background: rgba(255, 215, 0, 0.08);
+  border: 1px solid rgba(255, 215, 0, 0.25);
+  border-radius: var(--radius-sm);
+  padding: 12px 18px;
+  text-align: center;
+  line-height: 1.5;
+}
+
+/* Multi-Formula Comparison Table */
+.formula-compare-card {
+  background: rgba(10, 16, 30, 0.75);
+  border: 1px solid var(--border-glass-glow);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  margin-top: 20px;
+}
+
+.formula-compare-head {
+  font-family: var(--font-heading);
+  font-size: 14.5px;
+  font-weight: 800;
+  color: var(--cyan);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.formula-compare-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 13px;
+}
+
+.formula-compare-table th {
+  background: rgba(255, 255, 255, 0.04);
+  padding: 9px 12px;
+  color: var(--text-muted);
+  font-weight: 700;
+  text-align: left;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.formula-compare-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.formula-compare-table tr:hover td {
+  background: rgba(0, 242, 254, 0.08);
+}
+
+.formula-compare-table tr.active td {
+  background: rgba(255, 215, 0, 0.12) !important;
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.formula-compare-table tr.active td:first-child {
+  border-left: 3px solid var(--gold);
+}

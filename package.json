@@ -1,0 +1,10 @@
+{
+  "name": "pmt-gunny-master",
+  "version": "2.0.0",
+  "description": "PMT Gunny Master Web App",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "pytest tests/test_gunny_engine.py -v"
+  }
+}
