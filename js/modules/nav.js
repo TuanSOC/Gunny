@@ -102,6 +102,7 @@ function initCommandPalette(activateMainTab, showSubPanel) {
     { title: '📚 Tài Năng Pet (Level 1 → 100 MAX)', sub: 'Bảng sách trí tuệ và linh đan tài năng', tab: 'tab-refining', target: 'pet_tai_nang' },
     { title: '☀️ Hóa Thần Tu Luyện (Bậc 1 → 10 MAX)', sub: 'Bảng đá hóa thần và điểm tu luyện', tab: 'tab-refining', target: 'hoa_than' },
     { title: '⚔️ Ngọc Vũ Khí (Level 1 → 20 MAX)', sub: 'Bảng đá nâng cấp ngọc vũ khí', tab: 'tab-refining', target: 'ngoc_vu_khi' },
+    { title: '👤 Kế Hoạch & Quản Lý Hồ Sơ Nhân Vật', sub: 'Tạo profile, thiết lập mục tiêu, kiểm tra kho và tài nguyên thiếu', tab: 'tab-planner', target: null },
     { title: '🎯 Thước Tính Góc 65° Chuẩn Toàn Năng', sub: 'Công thức 65 kinh điển, tính theo cự ly và gió', tab: 'tab-ballistics', target: null, formula: '65' },
     { title: '🚀 Thước Tính Góc Siêu Cao 90°', sub: 'Công thức siêu cao (90 - khoảng cách +- gió)', tab: 'tab-ballistics', target: null, formula: '90' },
     { title: '🎯 Thước Tính Góc 70° Chiều Sâu', sub: 'Công thức 70 bắn lựu đạn và tivi', tab: 'tab-ballistics', target: null, formula: '70' },
@@ -202,9 +203,10 @@ function initCommandPalette(activateMainTab, showSubPanel) {
       if (modal.classList.contains('active')) closePalette();
     } else if (!isTyping && !e.ctrlKey && !e.altKey && !e.metaKey) {
       if (e.key === '1') activateMainTab('tab-refining');
-      else if (e.key === '2') activateMainTab('tab-ballistics');
-      else if (e.key === '3') activateMainTab('tab-fashion');
-      else if (e.key === '4') activateMainTab('tab-services');
+      else if (e.key === '2') activateMainTab('tab-planner');
+      else if (e.key === '3') activateMainTab('tab-ballistics');
+      else if (e.key === '4') activateMainTab('tab-fashion');
+      else if (e.key === '5') activateMainTab('tab-services');
     }
   });
 }

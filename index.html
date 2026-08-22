@@ -76,6 +76,10 @@
         <span class="tab-icon">🧮</span>
         <span class="tab-text">17 Bảng Tra Cứu &amp; Hóa Thần</span>
       </button>
+      <button class="main-tab" data-tab="tab-planner" id="tab-btn-planner">
+        <span class="tab-icon">👤</span>
+        <span class="tab-text">Kế Hoạch Nhân Vật &amp; Mục Tiêu</span>
+      </button>
       <button class="main-tab" data-tab="tab-ballistics" id="tab-btn-ballistics">
         <span class="tab-icon">🎯</span>
         <span class="tab-text">Thước Bắn Góc</span>
@@ -1143,7 +1147,119 @@
 
       </section>
 
-      <!-- ════════ TAB 2: THƯỚC BẮN GÓC ════════ -->
+      <!-- ════════ TAB 2: KẾ HOẠCH NHÂN VẬT & MỤC TIÊU ════════ -->
+      <section id="tab-planner" class="tab-panel">
+        <div class="planner-layout">
+          <!-- Hub Banner -->
+          <div class="category-hub-card glass-card">
+            <div class="hub-header">
+              <div class="hub-title-group">
+                <span class="hub-badge"><span class="pulse-dot"></span> CHARACTER COMPANION &amp; PLANNER</span>
+                <h2 class="hub-title">👤 Kế Hoạch &amp; Quản Lý Hồ Sơ Nhân Vật</h2>
+              </div>
+              <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;">
+                <span class="badge gold">🛡️ Lưu LocalStorage Tự Động</span>
+                <span class="badge cyan">⚡ Tính Toán Thiếu Hụt Kho</span>
+                <button id="btnCopyPlanReport" class="btn-planner-action gold" style="padding:6px 14px;">
+                  📋 Sao Chép Kế Hoạch
+                </button>
+              </div>
+            </div>
+            <p class="hub-desc">Theo dõi thông số nhân vật hiện tại, thiết lập mục tiêu nâng cấp trên toàn bộ 15 hệ thống Gunny, quản lý kho nguyên liệu và tính toán chính xác số lượng tài nguyên còn thiếu để đạt mốc mong muốn.</p>
+          </div>
+
+          <!-- Character Switcher & Profile Bar -->
+          <div class="char-switcher-bar">
+            <div class="char-select-group">
+              <label for="charSelect" style="font-weight:700;color:var(--gold);white-space:nowrap;">Hồ Sơ:</label>
+              <select id="charSelect" class="input-select" style="min-width:220px;"></select>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+              <input type="text" id="charNameInput" class="input-text" placeholder="Tên nhân vật" style="width:140px;padding:6px 10px;font-size:12.5px;">
+              <input type="number" id="charLevelInput" class="input-text" placeholder="Cấp độ" title="Cấp độ nhân vật" style="width:80px;padding:6px 10px;font-size:12.5px;">
+              <input type="number" id="charPowerInput" class="input-text" placeholder="Lực chiến" title="Lực chiến hiện tại" style="width:120px;padding:6px 10px;font-size:12.5px;">
+            </div>
+            <div class="char-actions-group">
+              <button id="btnNewChar" class="btn-planner-action" title="Tạo nhân vật mới">➕ Tạo Mới</button>
+              <button id="btnDuplicateChar" class="btn-planner-action" title="Nhân bản nhân vật">📋 Nhân Bản</button>
+              <button id="btnDeleteChar" class="btn-planner-action danger" title="Xóa nhân vật">🗑️ Xóa</button>
+            </div>
+          </div>
+
+          <!-- Overall Progress Card -->
+          <div class="planner-progress-card">
+            <div class="progress-header">
+              <div style="font-family:var(--font-heading);font-weight:800;font-size:15px;color:var(--cyan);display:flex;align-items:center;gap:8px;">
+                <span>📊</span> TIẾN ĐỘ HOÀN THÀNH TOÀN BỘ MỤC TIÊU
+              </div>
+              <div style="font-family:var(--font-heading);font-weight:900;font-size:18px;color:var(--gold);" id="planProgressText">
+                100%
+              </div>
+            </div>
+            <div class="progress-track-bg">
+              <div id="planProgressFill" class="progress-track-fill" style="width:100%;"></div>
+            </div>
+          </div>
+
+          <!-- 2-Column Comparison Grid: Current State vs Target Goals -->
+          <div class="planner-matrix-grid">
+            <!-- Column 1: Current State -->
+            <div class="glass-card">
+              <div class="card-header-bar">
+                <h3>⚙️ TRẠNG THÁI HIỆN TẠI (CURRENT STATE)</h3>
+                <span class="badge purple">15 Hệ Thống</span>
+              </div>
+              <div id="currentSystemsContainer" style="margin-top:14px;"></div>
+            </div>
+
+            <!-- Column 2: Target Goals -->
+            <div class="glass-card">
+              <div class="card-header-bar">
+                <h3>🎯 MỤC TIÊU MONG MUỐN (TARGET GOALS)</h3>
+                <span class="badge gold">Thiết Lập Mục Tiêu</span>
+              </div>
+              <div id="targetGoalsContainer" style="margin-top:14px;"></div>
+            </div>
+          </div>
+
+          <!-- Resource Deficit & Inventory Management Table -->
+          <div class="glass-card">
+            <div class="card-header-bar">
+              <div>
+                <h3>📦 KHO NGUYÊN LIỆU &amp; PHÂN TÍCH THÂM HỤT (RESOURCE DEFICIT)</h3>
+                <p>Nhập số lượng nguyên liệu bạn đang có trong túi vào cột "Đang Có" để tính toán số còn thiếu</p>
+              </div>
+              <span class="badge cyan">Thời Gian Thực</span>
+            </div>
+
+            <div class="deficit-table-wrap" style="margin-top:16px;">
+              <table class="data-table min-w-800">
+                <thead>
+                  <tr>
+                    <th>Tên Tài Nguyên</th>
+                    <th>Tổng Cần Dùng</th>
+                    <th>Đang Có (Kho)</th>
+                    <th>Còn Thiếu</th>
+                    <th>Trạng Thái</th>
+                  </tr>
+                </thead>
+                <tbody id="plannerDeficitTableBody"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Detailed Itemized Upgrade Steps Breakdown -->
+          <div class="glass-card">
+            <div class="card-header-bar">
+              <h3>📋 LỘ TRÌNH NÂNG CẤP CHI TIẾT TỪNG HỆ THỐNG</h3>
+              <span class="badge gold">Breakdown Steps</span>
+            </div>
+            <div id="plannerBreakdownList" style="margin-top:16px;"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ════════ TAB 3: THƯỚC BẮN GÓC ════════ -->
       <section id="tab-ballistics" class="tab-panel">
         <div class="glass-card">
           <div class="card-header-bar">
@@ -1597,6 +1713,8 @@
 <!-- Engine scripts -->
 <script src="src/core/calculatorEngine.js"></script>
 <script src="src/core/ballisticsEngine.js"></script>
+<script src="src/core/resourceEngine.js"></script>
+<script src="src/core/plannerEngine.js"></script>
 
 <!-- Client App Logic (Modular ES6 Architecture) -->
 <script type="module" src="js/app.js"></script>
