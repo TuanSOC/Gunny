@@ -1,57 +1,84 @@
-# SPECIFICATION: Gunny Master — Standalone Web Application
+# SPECIFICATION: Gunny Master — Complete Companion, Planner & Optimizer
 
-## 1. Overview & Objectives
-**Gunny Master Web App** là trang web tĩnh (Static Web Application) độc lập, hiện đại, hỗ trợ toàn diện 100% nhu cầu tra cứu và tính toán cho Gunner trên mọi nền tảng (PC, Tablet, Mobile):
-1. **12 Bảng Tra Cứu Nguyên Liệu Master**: Gia Công (0->14 MAX), Tiến Hóa Pet, Ma Thạch EXP, Quy Đổi Châu Báu, Up Thú Cưỡi, Up Phụ Ma, Up Vật Tổ, Đúc Hồn, Chiến Hồn Đơn, Manh Hóa Pet, Ngọc Thú Cưỡi, Mảnh Ngọc Lam.
-2. **Thước Tính Góc & Lực Bắn Trực Quan (Ballistics Assistant)**: Công thức Góc 65, Góc 70, Góc 30, Siêu Cao (Góc 90), Góc 50 kèm điều chỉnh gió/khoảng cách và đường đạn SVG Canvas tương tác.
-3. **Bộ Mô Phỏng Lực Chiến (Power Simulator)**: Tính toán & dự đoán Lực chiến chi tiết dựa trên cấp cường hóa, trang bị, châu báu, tu luyện và tọa kỵ.
-4. **Wiki Phó Bản & Kho Vũ Khí (Dungeon & Weapon DB)**: Tra cứu phó bản chiến thuật và bộ 4 chỉ số cơ bản của Vũ khí (**Tấn Công**, **Phòng Thủ**, **Nhanh Nhẹn**, **May Mắn**).
+> **Phiên bản**: 2.1.0  
+> **Kiến trúc**: Vanilla ES6 Modular Static Web App (Zero heavy dependencies, siêu nhẹ, siêu mượt)  
+> **Repository**: [https://github.com/TuanSOC/Gunny](https://github.com/TuanSOC/Gunny)
 
 ---
 
-## 2. Feature Matrix (Danh Sách Tính Năng Web App)
-
-### A. 🧮 12 Bảng Tra Cứu Nguyên Liệu Master
-- **Gia Công**: Level 0 -> Level 14 MAX (4,091 Đá | 6,142 Đồng | 7,468 Bạc | 8,195 Vàng | 8,690 Ngọc).
-- **Tiến Hóa Pet**: Level 1 -> Level 50 (80,903 Cỏ Thiên Điệp).
-- **Ma Thạch EXP**: Hoàn Mỹ, Siêu Việt, Truyền Thuyết (Level 2 -> 10).
-- **Quy Đổi Châu Báu**: Châu Báu Lv 13 -> 21.
-- **Up Thú Cưỡi**: 9 Loại Thú Cưỡi từ Ngựa -> Cỗ Máy Thời Gian (Level 1 -> 10).
-- **Up Phụ Ma**: Bậc 1 -> Bậc 5 (Đá Phụ Ma).
-- **Up Vật Tổ**: Level 1 -> Level 50 (1,496,690 Xu / Vé).
-- **Đúc Hồn**: Level 1 -> 5 (Đồng, Bạc, Vàng, Kim Cương).
-- **Chiến Hồn Đơn**: Level 1 -> 5 & Kim Hồn (1 Tụ vs 3 Tụ).
-- **Manh Hóa Pet**: Mốc 1 -> Mốc 29 (Số lượng mảnh cần).
-- **Ngọc Thú Cưỡi**: Quy đổi Ngọc 1, 2, 3 cho Thú cưỡi (3,656 Ngọc 1).
-- **Mảnh Ngọc Lam**: Cấp 1 -> Cấp 9 (18,600 Mảnh).
-
-### B. 🎯 Thước Tính Góc & Lực Bắn (Ballistics Engine & Trajectory Arc)
-- Công thức Góc 65, Góc 70, Góc 30, Siêu Cao (Góc 90), Góc 50.
-- Điều chỉnh gió xuôi / gió ngược, khoảng cách màn hình (1 - 20 đoạn).
-- Mô phỏng độ cong đường đạn đồ họa SVG Canvas kết hợp góc & lực bắn tối ưu.
-
-### C. ⚡ Bộ Mô Phỏng Lực Chiến (Power Engine)
-- Tính toán tổng Lực chiến theo các thông số nhân vật (Vũ khí cơ bản, Cường hóa, Châu báu, Tu luyện, Thẻ bài, Pet, Tọa kỵ, Ma thạch).
-
-### D. 📖 Hướng Dẫn Phó Bản & Kho Vũ Khí (4 Chỉ Số Cơ Bản)
-- Chiến thuật phó bản (Khu Rừng Ma Thuật, Đấu Trường Dũng Sĩ, Rồng Băng Giá, Kiến Vương, Vua Gà, Ma Vương, Đào Hoa Đảo).
-- Kho Vũ khí tra cứu 4 chỉ số cơ bản: **Tấn Công**, **Phòng Thủ**, **Nhanh Nhẹn**, **May Mắn**.
+## 1. Mục Tiêu Tổng Thể (Primary Objective)
+Tiến hóa Gunny Master từ một tập hợp các bảng tính rời rạc thành một **Hệ Thống Trợ Thủ Toàn Diện (Gunny Companion / Character Planner / Resource Optimizer / Wiki)**:
+1. **Tra Cứu Dữ Liệu Chuẩn**: 17 Bảng nâng cấp, Kho thời trang 540+ set, Dữ liệu Vũ khí & Pet.
+2. **Hồ Sơ Nhân Vật (Character Planner)**: Quản lý cấp độ hiện tại của nhân vật trên mọi hệ thống (Gia công, Thú cưỡi, Pet, Phụ ma, Vật tổ, Đúc hồn, Tu luyện...).
+3. **Mục Tiêu Nâng Cấp (Target Goal Planner)**: Thiết lập mục tiêu mong muốn và tính toán chính xác tổng tài nguyên còn thiếu.
+4. **Mô Phỏng Chuỗi Quy Đổi Tài Nguyên (Resource Conversion Chain)**: Tính toán chuỗi chuyển đổi cấp tiến (Đá ➔ Đồng ➔ Bạc ➔ Vàng ➔ Ngọc) và cấp tối đa có thể đạt được.
+5. **Gợi Ý Nâng Cấp Tối Ưu (Upgrade Optimizer)**: Xếp hạng độ hiệu quả `Power Gain / Resource Cost` giúp người chơi đầu tư tài nguyên thông minh nhất.
+6. **So Sánh Vũ Khí & Pet (Comparison Engine)**: So sánh trực quan thông số giữa 2 vũ khí hoặc pet.
+7. **Thước Bắn Góc & Quỹ Đạo Đạn (Ballistics Assistant)**: Công thức 65, 90, 70, 50, 30, 20 chuẩn xác 100%.
+8. **Dự Toán Thời Gian Cày Cuốc (Daily Planner & ETA)**: Tính số ngày hoàn thành mục tiêu theo thu nhập tài nguyên trung bình mỗi ngày.
+9. **Chất Lượng Dữ Liệu (Data Quality & Verification)**: Quản lý phiên bản dữ liệu và cơ chế báo lỗi dữ liệu.
 
 ---
 
-## 3. Architecture & Files
-- `index.html` (Trang chủ tĩnh duy nhất)
-- `css/style.css` (Hệ thống giao diện Modern Premium Glassmorphic)
-- `js/app.js` (Logic web client độc lập)
-- `src/core/calculatorEngine.js`
-- `src/core/ballisticsEngine.js`
-- `src/core/powerEngine.js`
-- `src/data/*.js` (Dữ liệu 12 bảng & Wiki)
-- `server.js` (Server chạy localhost đơn giản)
-- `scripts/test_engine.js` (Unit test kiểm định thuật toán)
+## 2. Phân Tách Kiến Trúc (Architecture Breakdown)
+
+### A. Tầng Dữ Liệu (Data Layer - `src/data/`)
+- `src/data/refining.js`: Gia công 0 ➔ 14
+- `src/data/pet_evolution.js`: Cỏ thiên điệp 1 ➔ 50
+- `src/data/magic_stones_exp.js`: Ma thạch thường, ưu tú, truyền thuyết
+- `src/data/jewel_conversion.js`: Quy đổi châu báu 13 ➔ 21
+- `src/data/mount_up.js`: 9 loại thú cưỡi 1 ➔ 10
+- `src/data/phu_ma.js`: Phụ ma 1 ➔ 5
+- `src/data/vat_to.js`: Vật tổ 1 ➔ 50
+- `src/data/duc_hon.js`: Đúc hồn vũ khí, nón, áo
+- `src/data/chien_hon_don.js`: Chiến hồn đơn 1 ➔ 100
+- `src/data/manh_hoa_pet.js`: Manh hóa pet 1 ➔ 50
+- `src/data/ngoc.js`: Ngọc thú cưỡi & Mảnh ngọc lam
+- `src/data/mieu_than.js`: Miếu thần 1 ➔ 20
+- `src/data/pet_linh_hach.js`: Linh hạch pet 1 ➔ 10
+- `src/data/pet_tai_nang.js`: Tài năng pet 1 ➔ 100
+- `src/data/hoa_than_tu_luyen.js`: Hóa thần tu luyện 1 ➔ 10
+- `src/data/ngoc_vu_khi.js`: Ngọc vũ khí 1 ➔ 20
+- `src/data/weapons.js`: Danh mục vũ khí chuẩn
+- `src/data/pets.js`: Danh mục pet chuẩn
+- `src/data/fashion.js`: 540+ set thời trang
+
+### B. Tầng Thuật Toán Core (Core Engines - `src/core/`)
+- `calculatorEngine.js`: 17 hàm tính toán chi phí nâng cấp rời rạc.
+- `ballisticsEngine.js`: Thuật toán góc lực và bù trừ gió Gunny PC.
+- `resourceEngine.js`: [NEW] Quản lý túi tài nguyên & chuỗi quy đổi đa tầng.
+- `plannerEngine.js`: [NEW] Quản lý profile nhân vật, delta tài nguyên và tiến độ %.
+- `optimizerEngine.js`: [NEW] Thuật toán xếp hạng độ hiệu quả Lực Chiến / Chi Phí.
+- `comparisonEngine.js`: [NEW] Thuật toán so sánh vũ khí & pet.
+- `dailyPlannerEngine.js`: [NEW] Thuật toán tính số ngày ETA hoàn thành mục tiêu.
+
+### C. Tầng Giao Diện Người Dùng (UI Layer - `js/modules/` & `css/modules/`)
+- `js/modules/calculators.js`: Giao diện 17 bảng tính.
+- `js/modules/ballistics.js`: Giao diện Thước bắn góc.
+- `js/modules/fashion.js`: Giao diện Kho thời trang.
+- `js/modules/planner.js`: [NEW] Giao diện Hồ sơ nhân vật & Mục tiêu.
+- `js/modules/optimizer.js`: [NEW] Giao diện Gợi ý nâng cấp.
+- `js/modules/wiki.js`: [NEW] Giao diện Tra cứu & So sánh Vũ khí/Pet.
+- `js/modules/dailyPlanner.js`: [NEW] Giao diện Kế hoạch cày cuốc & ETA.
+- `js/modules/nav.js`: Điều hướng, Command Palette (`Ctrl + K`).
+- `js/modules/utils.js`: Tiện ích lưu trữ LocalStorage, Toast, Format số.
 
 ---
 
-## 4. Verification Plan
-- Runs `node scripts/test_engine.js` để đảm bảo độ chính xác 100% của 10 bảng tính.
-- Khởi động local dev server bằng `node server.js` và kiểm tra giao diện trên `http://localhost:8080/`.
+## 3. Lộ Trình Triển Khai (Roadmap)
+- **Phase 0**: Audit toàn diện & Trình kế hoạch kiến trúc (Đang thực hiện).
+- **Phase 1**: Xây dựng Core Engines (`resourceEngine.js`, `plannerEngine.js`, Pytest tests).
+- **Phase 2**: Xây dựng UI Character Planner & Lưu trữ nhiều hồ sơ nhân vật.
+- **Phase 3**: Xây dựng Upgrade Optimizer (Gợi ý đầu tư thông minh).
+- **Phase 4**: Xây dựng Weapon & Pet DB kèm tính năng So Sánh trực quan.
+- **Phase 5**: Cải tiến trải nghiệm Ballistics Engine.
+- **Phase 6**: Xây dựng Gunny Wiki & Global Search.
+- **Phase 7**: Xây dựng Daily Resource Planner & ETA.
+- **Phase 8**: Hoàn thiện Data Quality, Mobile Testing, Versioning.
+
+---
+
+## 4. Kế Hoạch Kiểm Thử (Verification Plan)
+- Giữ vững **25/25 test cases** hiện tại trong `tests/test_gunny_engine.py`.
+- Viết mới các bài test cho từng engine mới (`tests/test_resource_engine.py`, `tests/test_planner_engine.py`, `tests/test_optimizer_engine.py`).
+- Đảm bảo 100% không có lỗi JS syntax, không có lỗi console, không tràn viền mobile (320px - 1440px).
