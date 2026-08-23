@@ -152,6 +152,63 @@ export function initNavigation() {
 
   // 5. Global Search / Command Palette (Ctrl + K)
   initCommandPalette(activateMainTab, showSubPanel);
+
+  // 6. PMT Service Promo Welcome Modal
+  initServicePromoModal();
+}
+
+/* ════════════════════════════════════════════════════════════
+   PMT SERVICE PROMO WELCOME MODAL
+   ════════════════════════════════════════════════════════════ */
+function initServicePromoModal() {
+  const promoModal   = document.getElementById('pmtServicePromoModal');
+  const btnOpenPromo = document.getElementById('btnOpenServiceModal');
+  const btnClosePromo = document.getElementById('btnClosePromoModal');
+  const btnExplore   = document.getElementById('btnPromoExplore');
+  const btnCopyZalo  = document.getElementById('btnPromoCopyZalo');
+  const chkDismiss   = document.getElementById('chkDismissPromoToday');
+
+  if (!promoModal) return;
+
+  function openPromo() {
+    promoModal.classList.add('active');
+    playCyberClickSound();
+  }
+
+  function closePromo() {
+    promoModal.classList.remove('active');
+    if (chkDismiss && chkDismiss.checked) {
+      const today = new Date().toISOString().slice(0, 10);
+      save('dismiss_service_promo_date', today);
+    }
+    playCyberClickSound();
+  }
+
+  btnOpenPromo?.addEventListener('click', openPromo);
+  btnClosePromo?.addEventListener('click', closePromo);
+  btnExplore?.addEventListener('click', closePromo);
+
+  promoModal.addEventListener('click', (e) => {
+    if (e.target === promoModal) closePromo();
+  });
+
+  btnCopyZalo?.addEventListener('click', () => {
+    playCyberClickSound();
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText('0981052217').then(() => {
+        showToast('📋 Đã sao chép SĐT Zalo PMT: 0981.052.217!');
+      });
+    }
+  });
+
+  // Auto show on first load if not dismissed today
+  const today = new Date().toISOString().slice(0, 10);
+  const dismissedDate = load('dismiss_service_promo_date', null);
+  if (dismissedDate !== today) {
+    setTimeout(() => {
+      openPromo();
+    }, 450);
+  }
 }
 
 /* ════════════════════════════════════════════════════════════
@@ -283,6 +340,9 @@ function initCommandPalette(activateMainTab, showSubPanel) {
       modal.classList.contains('active') ? closePalette() : openPalette();
     } else if (e.key === 'Escape') {
       if (modal.classList.contains('active')) closePalette();
+      if (document.getElementById('pmtServicePromoModal')?.classList.contains('active')) {
+        document.getElementById('pmtServicePromoModal')?.classList.remove('active');
+      }
     } else if (!isTyping && !e.ctrlKey && !e.altKey && !e.metaKey) {
       if (e.key === '1') activateMainTab('tab-dashboard');
       else if (e.key === '2') activateMainTab('tab-character');
