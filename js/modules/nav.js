@@ -2,7 +2,7 @@
    PMT GUNNY MASTER — Navigation & Command Palette Module
    ============================================================ */
 
-import { save, load } from './utils.js';
+import { save, load, showToast } from './utils.js';
 import { playCyberClickSound } from './cyberEffects.js';
 
 export function initNavigation() {
@@ -185,12 +185,7 @@ function initCommandPalette(activateMainTab, showSubPanel) {
     playCyberClickSound();
     if (navigator.clipboard) {
       navigator.clipboard.writeText('0981052217').then(() => {
-        const { showToast } = window;
-        if (typeof showToast === 'function') {
-          showToast('📋 Đã sao chép số điện thoại Zalo: 0981.052.217!');
-        } else {
-          alert('Đã sao chép SĐT: 0981052217');
-        }
+        showToast('📋 Đã sao chép số điện thoại Zalo: 0981.052.217!');
       });
     }
   });

@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Initialize Navigation, Command Palette & Goal Bag
   initNavigation();
 
-  // Initialize 17 Master Calculators & Itemized Breakdowns
+  // Initialize 21 Master Calculators & Itemized Breakdowns
   initCalculators();
 
   // Initialize Angle & Wind Ballistics Ruler

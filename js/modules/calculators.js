@@ -1,5 +1,5 @@
 /* ============================================================
-   PMT GUNNY MASTER — 17 Interactive Calculators Module
+   PMT GUNNY MASTER — 21 Interactive Calculators Module
    Includes Real-Time Itemized Step-by-Step Level Breakdowns,
    1-Click Goal Adding, and Report Copying
    ============================================================ */
@@ -657,7 +657,7 @@ function updateManhHoaCalc() {
 function renderNgocThuCuoi() {
   const container = document.getElementById('ngocThuCuoiContainer');
   const tbody = document.getElementById('ngocThuCuoiTableBody');
-  const data = (typeof NgocThuCuoiData !== 'undefined') ? NgocThuCuoiData : (typeof NgocData !== 'undefined' ? { types: NgocData.thuCuoiExp, totalNgoc1: NgocData.tongNgoc1CanToanBo } : null);
+  const data = (typeof NgocThuCuoiData !== 'undefined') ? NgocThuCuoiData : null;
   if (!data) return;
 
   if (container) {
@@ -785,7 +785,6 @@ function updatePetLinhHachCalc() {
   animateVal('resLinhHachManh', res.totalManh);
   animateVal('resLinhHachDa', res.totalDa);
   animateVal('resLinhHachGold', res.totalVang);
-  animateVal('resLinhHachVang', res.totalVang);
 
   const rows = res.breakdown.map(b => [
     b.step,
