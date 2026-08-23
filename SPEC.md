@@ -1,84 +1,113 @@
-# SPECIFICATION: Gunny Master — Complete Companion, Planner & Optimizer
+# SPECIFICATION: PMT Gunny Master — Modern Gaming Utility Dashboard
 
-> **Phiên bản**: 2.1.0  
-> **Kiến trúc**: Vanilla ES6 Modular Static Web App (Zero heavy dependencies, siêu nhẹ, siêu mượt)  
+> **Phiên bản**: 3.0.0 (Premium Gaming Utility Dashboard Edition)  
+> **Kiến trúc**: Vanilla ES6 Modular Static Web App (Zero heavy dependencies, 100% Client-side, Ultra-fast, Accessible, Fully Responsive)  
 > **Repository**: [https://github.com/TuanSOC/Gunny](https://github.com/TuanSOC/Gunny)
 
 ---
 
-## 1. Mục Tiêu Tổng Thể (Primary Objective)
-Tiến hóa Gunny Master từ một tập hợp các bảng tính rời rạc thành một **Hệ Thống Trợ Thủ Toàn Diện (Gunny Companion / Character Planner / Resource Optimizer / Wiki)**:
-1. **Tra Cứu Dữ Liệu Chuẩn**: 17 Bảng nâng cấp, Kho thời trang 540+ set, Dữ liệu Vũ khí & Pet.
-2. **Hồ Sơ Nhân Vật (Character Planner)**: Quản lý cấp độ hiện tại của nhân vật trên mọi hệ thống (Gia công, Thú cưỡi, Pet, Phụ ma, Vật tổ, Đúc hồn, Tu luyện...).
-3. **Mục Tiêu Nâng Cấp (Target Goal Planner)**: Thiết lập mục tiêu mong muốn và tính toán chính xác tổng tài nguyên còn thiếu.
-4. **Mô Phỏng Chuỗi Quy Đổi Tài Nguyên (Resource Conversion Chain)**: Tính toán chuỗi chuyển đổi cấp tiến (Đá ➔ Đồng ➔ Bạc ➔ Vàng ➔ Ngọc) và cấp tối đa có thể đạt được.
-5. **Gợi Ý Nâng Cấp Tối Ưu (Upgrade Optimizer)**: Xếp hạng độ hiệu quả `Power Gain / Resource Cost` giúp người chơi đầu tư tài nguyên thông minh nhất.
-6. **So Sánh Vũ Khí & Pet (Comparison Engine)**: So sánh trực quan thông số giữa 2 vũ khí hoặc pet.
-7. **Thước Bắn Góc & Quỹ Đạo Đạn (Ballistics Assistant)**: Công thức 65, 90, 70, 50, 30, 20 chuẩn xác 100%.
-8. **Dự Toán Thời Gian Cày Cuốc (Daily Planner & ETA)**: Tính số ngày hoàn thành mục tiêu theo thu nhập tài nguyên trung bình mỗi ngày.
-9. **Chất Lượng Dữ Liệu (Data Quality & Verification)**: Quản lý phiên bản dữ liệu và cơ chế báo lỗi dữ liệu.
+## 1. Mục Tiêu Thiết Kế (Design Objective)
+
+Nâng cấp toàn diện giao diện frontend từ phong cách bảng tính rời rạc thành một **Hệ Thống Trợ Thủ & Bảng Điều Khiển Game Cao Cấp (Modern, Premium Gaming Utility Dashboard)**:
+- **Phong cách visual**: Sự kết hợp giữa *Premium Gaming Companion* + *Modern Dashboard* + *Technical Precision Tool*. Tông màu tối (Dark theme) sang trọng, sạch sẽ, card nổi nhẹ nhàng, viền tinh tế, điểm nhấn cyan/purple/amber gold, typography hiện đại (Inter + Outfit), visual hierarchy rõ nét, không lạm dụng neon chói mắt hay animation giật lag.
+- **Nguyên tắc cốt lõi**: **TUYỆT ĐỐI KHÔNG làm thay đổi, làm sai lệch hoặc phá vỡ bất kỳ logic tính toán, dữ liệu, công thức, ID phần tử, router hay core engine hiện có**.
 
 ---
 
-## 2. Phân Tách Kiến Trúc (Architecture Breakdown)
+## 2. Cấu Trúc Khung Ứng Dụng (Application Shell)
 
-### A. Tầng Dữ Liệu (Data Layer - `src/data/`)
-- `src/data/refining.js`: Gia công 0 ➔ 14
-- `src/data/pet_evolution.js`: Cỏ thiên điệp 1 ➔ 50
-- `src/data/magic_stones_exp.js`: Ma thạch thường, ưu tú, truyền thuyết
-- `src/data/jewel_conversion.js`: Quy đổi châu báu 13 ➔ 21
-- `src/data/mount_up.js`: 9 loại thú cưỡi 1 ➔ 10
-- `src/data/phu_ma.js`: Phụ ma 1 ➔ 5
-- `src/data/vat_to.js`: Vật tổ 1 ➔ 50
-- `src/data/duc_hon.js`: Đúc hồn vũ khí, nón, áo
-- `src/data/chien_hon_don.js`: Chiến hồn đơn 1 ➔ 100
-- `src/data/manh_hoa_pet.js`: Manh hóa pet 1 ➔ 50
-- `src/data/ngoc.js`: Ngọc thú cưỡi & Mảnh ngọc lam
-- `src/data/mieu_than.js`: Miếu thần 1 ➔ 20
-- `src/data/pet_linh_hach.js`: Linh hạch pet 1 ➔ 10
-- `src/data/pet_tai_nang.js`: Tài năng pet 1 ➔ 100
-- `src/data/hoa_than_tu_luyen.js`: Hóa thần tu luyện 1 ➔ 10
-- `src/data/ngoc_vu_khi.js`: Ngọc vũ khí 1 ➔ 20
-- `src/data/weapons.js`: Danh mục vũ khí chuẩn
-- `src/data/pets.js`: Danh mục pet chuẩn
-- `src/data/fashion.js`: 540+ set thời trang
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ TOP HEADER: [Logo + Title] [Global Search Ctrl+K] [Theme/Sound] [Contact]   │
+├───────────────────┬─────────────────────────────────────────────────────────┤
+│ COLLAPSIBLE       │ BREADCRUMB & MAIN CONTENT AREA                          │
+│ SIDEBAR           │ ┌─────────────────────────────────────────────────────┐ │
+│ ───────────────── │ │ [Dashboard Hub] / [Character Overview] /            │ │
+│ 📊 Tổng Quan      │ │ [21 Calculators] / [Ballistics AI] /                │ │
+│ 👤 Hồ Sơ NV       │ │ [Fashion Wiki] / [Services PMT]                     │ │
+│ ⚔️ Trang Bị & Rèn │ │                                                     │ │
+│ 🐾 Pet & Thú Cưỡi │ │ • Standardized Resource Cards (Gold/Cyan/Purple)    │ │
+│ 🔥 Hóa Thần       │ │ • Live Trajectory Radar Canvas                      │ │
+│ 🎯 Thước Bắn Góc  │ │ • Filterable Knowledge Base & Catalogs              │ │
+│ 👗 Kho Thời Trang │ │ • Step-by-Step Level Breakdown Tables               │ │
+│ 👑 Dịch Vụ PMT    │ └─────────────────────────────────────────────────────┘ │
+└───────────────────┴─────────────────────────────────────────────────────────┘
+```
 
-### B. Tầng Thuật Toán Core (Core Engines - `src/core/`)
-- `calculatorEngine.js`: 17 hàm tính toán chi phí nâng cấp rời rạc.
-- `ballisticsEngine.js`: Thuật toán góc lực và bù trừ gió Gunny PC.
-- `resourceEngine.js`: [NEW] Quản lý túi tài nguyên & chuỗi quy đổi đa tầng.
-- `plannerEngine.js`: [NEW] Quản lý profile nhân vật, delta tài nguyên và tiến độ %.
-- `optimizerEngine.js`: [NEW] Thuật toán xếp hạng độ hiệu quả Lực Chiến / Chi Phí.
-- `comparisonEngine.js`: [NEW] Thuật toán so sánh vũ khí & pet.
-- `dailyPlannerEngine.js`: [NEW] Thuật toán tính số ngày ETA hoàn thành mục tiêu.
+### A. Left Sidebar (Thanh Điều Hướng Bên Trái)
+- Khả năng **Thu gọn (Collapse)** / Mở rộng linh hoạt với lưu trạng thái vào `localStorage`.
+- Phân nhóm logic chuyên nghiệp:
+  1. **TỔNG QUAN**: Dashboard (Trang Chủ Hub), Character Overview (Tổng Quan Tiến Độ & Lực Chiến).
+  2. **TRANG BỊ & RÈN (7 tính năng)**: Gia Công, Châu Báu, Phụ Ma, Đúc Hồn, Ngọc Vũ Khí, Mảnh Ngọc Lam, Đột Phá Thẻ Bài.
+  3. **PET & THÚ CƯỠI (8 tính năng)**: Tiến Hóa Pet, Manh Hóa, Linh Hạch, Tài Năng, Thú Cưỡi, Ngọc Tọa Kỵ, Ô Tinh Hạch, Cá Tính Pet.
+  4. **HÓA THẦN & THẦN KHÍ (6 tính năng)**: Miếu Thần, Hóa Thần Tu Luyện, Thần Hộ Mệnh, EXP Ma Thạch, Vật Tổ, Chiến Hồn.
+  5. **CÔNG CỤ & WIKI**: Thước Bắn Góc (AI Ballistics), Kho Thời Trang (540+ Set), Dịch Vụ PMT Gaming.
+- Trên thiết bị di động (<= 1024px), sidebar chuyển thành **Slide-in Drawer** có backdrop mượt mà, không gây tràn viền (horizontal overflow).
 
-### C. Tầng Giao Diện Người Dùng (UI Layer - `js/modules/` & `css/modules/`)
-- `js/modules/calculators.js`: Giao diện 17 bảng tính.
-- `js/modules/ballistics.js`: Giao diện Thước bắn góc.
-- `js/modules/fashion.js`: Giao diện Kho thời trang.
-- `js/modules/planner.js`: [NEW] Giao diện Hồ sơ nhân vật & Mục tiêu.
-- `js/modules/optimizer.js`: [NEW] Giao diện Gợi ý nâng cấp.
-- `js/modules/wiki.js`: [NEW] Giao diện Tra cứu & So sánh Vũ khí/Pet.
-- `js/modules/dailyPlanner.js`: [NEW] Giao diện Kế hoạch cày cuốc & ETA.
-- `js/modules/nav.js`: Điều hướng, Command Palette (`Ctrl + K`).
-- `js/modules/utils.js`: Tiện ích lưu trữ LocalStorage, Toast, Format số.
+### B. Top Header (Thanh Tiêu Đề Trên Cùng)
+- Nút Toggle Sidebar (trên mobile và desktop).
+- Logo Gunny Master phát sáng tinh tế kèm Subtitle.
+- Thanh **Global Search Bar** với placeholder `"Tìm tính năng, vũ khí, công thức... (Ctrl + K)"` mở Command Palette.
+- Bộ chuyển Theme 4 chế độ (Cyan, Gold, Purple, Emerald).
+- Toggle Âm thanh Web Audio API.
+- Nút liên hệ nhanh Zalo / Facebook PMT và Trạng thái kết nối.
 
----
-
-## 3. Lộ Trình Triển Khai (Roadmap)
-- **Phase 0**: Audit toàn diện & Trình kế hoạch kiến trúc (Đang thực hiện).
-- **Phase 1**: Xây dựng Core Engines (`resourceEngine.js`, `plannerEngine.js`, Pytest tests).
-- **Phase 2**: Xây dựng UI Character Planner & Lưu trữ nhiều hồ sơ nhân vật.
-- **Phase 3**: Xây dựng Upgrade Optimizer (Gợi ý đầu tư thông minh).
-- **Phase 4**: Xây dựng Weapon & Pet DB kèm tính năng So Sánh trực quan.
-- **Phase 5**: Cải tiến trải nghiệm Ballistics Engine.
-- **Phase 6**: Xây dựng Gunny Wiki & Global Search.
-- **Phase 7**: Xây dựng Daily Resource Planner & ETA.
-- **Phase 8**: Hoàn thiện Data Quality, Mobile Testing, Versioning.
+### C. Reusable Design System Components
+- `btn-primary`, `btn-secondary`, `btn-outline`, `btn-ghost`, `btn-icon`
+- `form-group`, `input-select`, `input-number`, `slider-neon`
+- `stat-box`, `resource-card`, `glass-card`, `card-header-bar`
+- `badge` (Gold, Cyan, Purple, Green, Red)
+- `data-table`, `breakdown-table`, `formula-compare-table`
+- `modal-overlay`, `command-palette-card`
+- `toast-container`, `toast-item`
 
 ---
 
-## 4. Kế Hoạch Kiểm Thử (Verification Plan)
-- Giữ vững **25/25 test cases** hiện tại trong `tests/test_gunny_engine.py`.
-- Viết mới các bài test cho từng engine mới (`tests/test_resource_engine.py`, `tests/test_planner_engine.py`, `tests/test_optimizer_engine.py`).
-- Đảm bảo 100% không có lỗi JS syntax, không có lỗi console, không tràn viền mobile (320px - 1440px).
+## 3. Các Trang & Chức Năng Chi Tiết (Views & Features)
+
+### 1. Dashboard (Trang Chủ Hub)
+- Banner chào đón Gunner với thống kê hệ thống (21 Calculators, 540+ Sets, 6 Công thức, 100% Dữ liệu chuẩn).
+- Quick Actions card truy cập nhanh các tính năng phổ biến nhất.
+- Khối phân loại hệ thống thông minh (Trang bị, Pet, Hóa Thần) với 1-click chuyển đến từng bảng tính.
+
+### 2. Character Overview (Hồ Sơ & Tiến Độ Nhân Vật)
+- Dashboard trực quan hiển thị Lực Chiến Ước Tính và Tỷ Lệ Tiến Độ Toàn Diện.
+- Lưới Card Tiến Độ cho từng hệ thống (Gia Công, Pet, Thú Cưỡi, Đúc Hồn, Phụ Ma, Thần Hộ Mệnh, Vật Tổ...).
+- Mỗi card hiển thị cấp hiện tại, mốc max, thanh tiến độ % và nút điều hướng tức thì tới Calculator tương ứng.
+
+### 3. Hệ Thống 21 Calculators Chuẩn Hóa
+- Form nhập liệu gọn gàng: Mốc bắt đầu và Mốc mục tiêu nằm cạnh nhau trên desktop.
+- Hộp tổng kết tài nguyên nổi bật (Resource Cards): Đá, Đồng, Bạc, Vàng, Ngọc, Cỏ, EXP, Thuốc... với số lượng lớn, định dạng phân cách hàng nghìn.
+- Bảng phân tích chi tiết từng bước nâng (Itemized Step-by-Step Breakdown) kèm nút Sao Chép Báo Cáo 1-click.
+- Bảng tra cứu dữ liệu gốc đầy đủ (Master Data Table).
+
+### 4. Thước Bắn Góc & Radar Parabol (AI Ballistics)
+- Đưa khung mô phỏng Quỹ Đạo Radar Parabol (SVG Canvas) lên vị trí trung tâm, trực quan và sắc nét.
+- 6 Công thức kinh điển: 65° Chuẩn, 70° Chiều sâu, 50° Tầm trung, 30° Đường thẳng, 20° Siêu thấp, 90° Siêu cao.
+- Bảng so sánh đa công thức tự động tính toán theo Gió và Khoảng cách theo thời gian thực.
+- Thanh đo lực bắn Power Gauge động.
+
+### 5. Kho Thời Trang & Wiki (Fashion Knowledge Base)
+- Danh mục 540+ Set trang phục & 1,139+ vật phẩm (Cánh, Bong bóng, Nón, Áo, Tóc...).
+- 2 Chế độ hiển thị: Xem theo trọn bộ và Xem chi tiết từng món.
+- Bộ lọc nhanh (Pills) + Search tức thì + Lọc giới tính & loại trang bị.
+- Card thời trang sắc nét có nút sao chép tên/danh sách món 1-click.
+
+### 6. Dịch Vụ & Liên Hệ PMT
+- Bảng giới thiệu các gói dịch vụ Gunny uy tín (Up acc, tối ưu xu, cày phó bản, đua top LC...).
+- Hộp liên hệ Zalo & Facebook với nút sao chép SĐT Zalo tích hợp Toast thông báo.
+
+### 7. Global Command Palette (`Ctrl + K` / `Cmd + K`)
+- Tìm kiếm nhanh tức thì toàn bộ 21 tính năng, 6 công thức bắn, thời trang và dịch vụ.
+
+---
+
+## 4. Kế Hoạch Kiểm Thử & Đảm Bảo Chất Lượng (Verification)
+
+1. **Automated Unit Tests**:
+   - Chạy toàn bộ test suite Pytest `tests/test_gunny_engine.py` (33/33 tests passed).
+2. **Visual & Responsive Testing**:
+   - Kiểm tra hiển thị trên các kích thước màn hình: 320px (iPhone SE), 375px, 414px (iPhone Pro Max), 768px (iPad/Tablet), 1024px (Small Laptop), 1440px (Desktop Full HD).
+   - Đảm bảo 0 lỗi console, 0 horizontal overflow.
+3. **Logic Integrity**:
+   - Đảm bảo 21/21 calculators trả về số liệu tính toán chính xác tuyệt đối như bản gốc.

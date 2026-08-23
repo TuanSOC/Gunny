@@ -1,337 +1,312 @@
 /* ============================================================
-   GUNNY MASTER WEB APP — Ballistics & Wind Ruler Module
+   PMT GUNNY MASTER — Ballistics Assistant & Trajectory Radar Styles
    ============================================================ */
 
-/* Formula Selector Buttons */
 .formula-selector-group {
   display: flex;
+  gap: 8px;
   flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 22px;
+  margin-bottom: 20px;
 }
 
 .btn-formula {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid var(--border-glass-glow);
-  color: var(--text-muted);
-  font-family: var(--font-heading);
-  font-size: 13.5px;
-  font-weight: 700;
-  padding: 10px 18px;
-  border-radius: var(--radius-sm);
-  cursor: pointer;
-  transition: all 0.25s ease;
-  white-space: nowrap;
-}
-
-.btn-formula:hover {
-  background: rgba(0, 242, 254, 0.1);
-  border-color: var(--cyan);
-  color: #ffffff;
-  transform: translateY(-2px);
-}
-
-.btn-formula.active {
-  background: linear-gradient(135deg, rgba(0, 242, 254, 0.2), rgba(255, 215, 0, 0.2));
-  border-color: var(--gold);
-  color: #ffffff;
-  box-shadow: 0 0 20px rgba(255, 215, 0, 0.25);
-}
-
-/* Ballistics 2-Column Layout */
-.ballistics-layout {
-  display: grid;
-  grid-template-columns: 1fr 1.4fr;
-  gap: 24px;
-  align-items: start;
-}
-
-@media (max-width: 992px) {
-  .ballistics-layout { grid-template-columns: 1fr; }
-}
-
-/* Controls Card */
-.controls-card {
-  background: rgba(12, 16, 26, 0.7);
-  border: 1px solid var(--border-glass-glow);
-  border-radius: var(--radius-md);
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.45);
-}
-
-.control-group {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.label-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-}
-
-.label-row label {
-  font-size: 13.5px;
-  font-weight: 700;
-  color: var(--text-muted);
-}
-
-.pill-badge {
-  font-size: 13px;
-  font-weight: 800;
-  padding: 4px 12px;
-  border-radius: 20px;
-  font-family: var(--font-heading);
-}
-
-.pill-badge.gold {
-  background: rgba(255, 215, 0, 0.15);
-  color: var(--gold);
-  border: 1px solid rgba(255, 215, 0, 0.4);
-}
-
-.pill-badge.cyan {
-  background: rgba(0, 242, 254, 0.15);
-  color: var(--cyan);
-  border: 1px solid rgba(0, 242, 254, 0.4);
-}
-
-/* Quick Preset Chips */
-.quick-preset-chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin-top: 4px;
-}
-
-.preset-chip {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  color: var(--text-muted);
-  font-size: 11.5px;
-  font-weight: 700;
-  padding: 4px 9px;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.preset-chip:hover {
-  background: rgba(0, 242, 254, 0.15);
-  border-color: var(--cyan);
-  color: #ffffff;
-}
-
-/* Radio Toggle Group for Direction & Elevation */
-.radio-toggle-group {
-  display: flex;
-  gap: 8px;
-}
-
-.btn-toggle {
-  flex: 1;
-  padding: 9px 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
   font-family: var(--font-heading);
   font-size: 12.5px;
   font-weight: 700;
+  padding: 8px 14px;
   border-radius: var(--radius-sm);
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  color: var(--text-muted);
   cursor: pointer;
-  transition: all 0.2s ease;
-  text-align: center;
+  transition: all var(--transition-fast);
 }
 
-.btn-toggle:hover {
+.btn-formula:hover {
+  background: var(--bg-hover);
+  color: #ffffff;
+  border-color: var(--cyan);
+}
+
+.btn-formula.active {
+  background: var(--cyan-dim);
   border-color: var(--cyan);
   color: #ffffff;
+  box-shadow: 0 0 16px rgba(0, 242, 254, 0.2);
 }
 
-.btn-toggle.active {
-  background: rgba(0, 242, 254, 0.18);
-  border-color: var(--cyan);
-  color: #ffffff;
-  box-shadow: 0 0 12px rgba(0, 242, 254, 0.3);
+/* Ballistics Layout Grid */
+.ballistics-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 24px;
 }
 
-/* Result Display Card */
-.result-display-card {
+@media (max-width: 900px) {
+  .ballistics-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.controls-card {
+  background: rgba(12, 17, 28, 0.6);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 20px;
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
 
-.trajectory-canvas-wrap {
-  background: radial-gradient(circle at 50% 100%, rgba(18, 30, 56, 0.9) 0%, rgba(8, 12, 22, 0.98) 100%);
+.control-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.label-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.label-row label {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+/* Sliders */
+.slider-neon {
+  width: 100%;
+  height: 6px;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.08);
+  outline: none;
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+}
+
+.slider-neon::-webkit-slider-thumb {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--cyan);
+  box-shadow: 0 0 12px var(--cyan);
+  cursor: pointer;
+  transition: transform var(--transition-fast);
+}
+
+.slider-neon::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+
+.quick-preset-chips {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.preset-chip {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: var(--radius-xs);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.preset-chip:hover {
+  background: var(--cyan-dim);
+  border-color: var(--cyan);
+  color: #ffffff;
+}
+
+/* Radio / Button Toggle Group */
+.radio-toggle-group {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.btn-toggle {
+  flex: 1;
+  min-width: 100px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-muted);
+  font-size: 11.5px;
+  font-weight: 600;
+  padding: 7px 10px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  text-align: center;
+}
+
+.btn-toggle:hover {
+  background: var(--bg-hover);
+  color: #ffffff;
+}
+
+.btn-toggle.active {
+  background: var(--cyan-dim);
+  border-color: var(--cyan);
+  color: #ffffff;
+  font-weight: 700;
+}
+
+/* Result Display Card */
+.result-display-card {
+  background: rgba(12, 17, 28, 0.6);
+  border: 1px solid var(--border-subtle);
   border-radius: var(--radius-md);
-  border: 1px solid rgba(0, 242, 254, 0.35);
-  padding: 16px;
-  box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.7), 0 8px 30px rgba(0, 0, 0, 0.5);
-  position: relative;
-  overflow: hidden;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  justify-content: space-between;
+}
+
+/* Trajectory Radar Canvas Wrap */
+.trajectory-canvas-wrap {
+  background: rgba(6, 9, 16, 0.9);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 10px;
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.6);
 }
 
 .trajectory-svg {
   width: 100%;
-  height: 180px;
+  height: auto;
   display: block;
 }
 
+/* Calculated Results Big Numbers */
 .big-result-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 14px;
+  gap: 12px;
 }
 
 .big-res-box {
-  background: linear-gradient(135deg, rgba(14, 22, 42, 0.85) 0%, rgba(8, 12, 24, 0.95) 100%);
-  border: 1px solid var(--border-glass-glow);
+  background: rgba(15, 21, 36, 0.7);
+  border: 1px solid var(--border-subtle);
   border-radius: var(--radius-md);
-  padding: 16px;
-  text-align: center;
+  padding: 14px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 6px;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+  text-align: center;
 }
 
 .r-label {
   font-size: 11.5px;
-  font-weight: 800;
+  font-weight: 600;
   color: var(--text-muted);
-  letter-spacing: 0.8px;
-  text-transform: uppercase;
 }
 
 .r-num {
   font-family: var(--font-heading);
-  font-size: 38px;
+  font-size: 32px;
   font-weight: 900;
-  line-height: 1.1;
+  line-height: 1.2;
 }
 
-.cyan-glow { color: var(--cyan); text-shadow: 0 0 20px var(--cyan-glow); }
-.gold-glow { color: var(--gold); text-shadow: 0 0 20px var(--gold-glow); }
+.r-num.cyan-glow {
+  color: var(--cyan);
+  text-shadow: 0 0 20px var(--cyan-glow);
+}
 
-/* Force Gauge Power Meter */
+.r-num.gold-glow {
+  color: var(--gold);
+  text-shadow: 0 0 20px var(--gold-glow);
+}
+
+/* Power Gauge Force Meter */
 .power-gauge-card {
-  background: rgba(10, 15, 28, 0.75);
-  border: 1px solid rgba(255, 215, 0, 0.25);
+  background: rgba(10, 14, 25, 0.7);
+  border: 1px solid var(--border-subtle);
   border-radius: var(--radius-md);
-  padding: 14px 18px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+  padding: 12px 16px;
 }
 
 .power-gauge-head {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 12.5px;
-  font-weight: 700;
+  font-size: 12px;
   color: var(--text-muted);
+  margin-bottom: 8px;
 }
 
 .power-track {
-  height: 16px;
-  background: rgba(0, 0, 0, 0.5);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 8px;
-  position: relative;
+  width: 100%;
+  height: 10px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-pill);
   overflow: hidden;
 }
 
 .power-fill {
   height: 100%;
-  width: 60%;
-  background: linear-gradient(90deg, #00f2fe 0%, #ffd700 70%, #ff4757 100%);
-  border-radius: 8px;
-  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 0 12px rgba(255, 215, 0, 0.4);
+  background: var(--grad-gold);
+  border-radius: var(--radius-pill);
+  box-shadow: 0 0 12px rgba(245, 158, 11, 0.5);
+  transition: width var(--transition-base);
 }
 
 .power-markers {
   display: flex;
   justify-content: space-between;
-  font-size: 11px;
-  font-weight: 700;
+  font-size: 10px;
   color: var(--text-dim);
-  padding: 0 2px;
+  margin-top: 4px;
+  font-family: var(--font-heading);
 }
 
 .note-banner {
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--gold);
-  background: rgba(255, 215, 0, 0.08);
-  border: 1px solid rgba(255, 215, 0, 0.25);
+  background: rgba(0, 242, 254, 0.06);
+  border: 1px dashed rgba(0, 242, 254, 0.25);
   border-radius: var(--radius-sm);
-  padding: 12px 18px;
-  text-align: center;
-  line-height: 1.5;
+  padding: 8px 12px;
+  font-size: 12px;
+  color: var(--text-secondary);
 }
 
-/* Multi-Formula Comparison Table */
+/* Formula Compare Card */
 .formula-compare-card {
-  background: rgba(10, 16, 30, 0.75);
-  border: 1px solid var(--border-glass-glow);
+  background: rgba(12, 17, 28, 0.6);
+  border: 1px solid var(--border-subtle);
   border-radius: var(--radius-md);
   padding: 16px;
-  margin-top: 20px;
 }
 
 .formula-compare-head {
-  font-family: var(--font-heading);
-  font-size: 14.5px;
-  font-weight: 800;
-  color: var(--cyan);
-  margin-bottom: 12px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-}
-
-.formula-compare-table {
-  width: 100%;
-  border-collapse: separate;
-  border-spacing: 0;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+  font-family: var(--font-heading);
   font-size: 13px;
-}
-
-.formula-compare-table th {
-  background: rgba(255, 255, 255, 0.04);
-  padding: 9px 12px;
-  color: var(--text-muted);
   font-weight: 700;
-  text-align: left;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.formula-compare-table td {
-  padding: 10px 12px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-  cursor: pointer;
-  transition: background 0.2s ease;
-}
-
-.formula-compare-table tr:hover td {
-  background: rgba(0, 242, 254, 0.08);
-}
-
-.formula-compare-table tr.active td {
-  background: rgba(255, 215, 0, 0.12) !important;
   color: #ffffff;
-  font-weight: 700;
 }
 
-.formula-compare-table tr.active td:first-child {
-  border-left: 3px solid var(--gold);
+.formula-compare-table tr {
+  cursor: pointer;
+}
+
+.formula-compare-table tr.active {
+  background: var(--cyan-dim);
 }
