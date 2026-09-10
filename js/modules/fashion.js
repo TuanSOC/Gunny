@@ -4,7 +4,6 @@
    ============================================================ */
 
 import { save, load } from './utils.js';
-import { playCyberClickSound } from './cyberEffects.js';
 
 let activeFashionMode = load('fashionMode', 'SETS'); // 'SETS' or 'ITEMS'
 
@@ -35,7 +34,6 @@ export function initFashionWiki() {
 
   pillBtns.forEach(pill => {
     pill.addEventListener('click', () => {
-      playCyberClickSound();
       pillBtns.forEach(p => p.classList.remove('active'));
       pill.classList.add('active');
 
@@ -52,7 +50,6 @@ export function initFashionWiki() {
   });
 
   function setFashionMode(mode) {
-    playCyberClickSound();
     activeFashionMode = mode;
     save('fashionMode', mode);
     setDisplayLimit = 60;
@@ -72,20 +69,17 @@ export function initFashionWiki() {
   });
 
   btnClearSearch?.addEventListener('click', () => {
-    playCyberClickSound();
     if (fashionSearchInput) fashionSearchInput.value = '';
     renderFashionWiki();
   });
 
   fashionGenderFilter?.addEventListener('change', () => {
-    playCyberClickSound();
     setDisplayLimit = 60;
     itemDisplayLimit = 90;
     renderFashionWiki();
   });
 
   fashionSlotFilter?.addEventListener('change', () => {
-    playCyberClickSound();
     setDisplayLimit = 60;
     itemDisplayLimit = 90;
     renderFashionWiki();
@@ -205,7 +199,6 @@ function renderFashionWiki() {
 
     fashionGrid.querySelectorAll('.btn-copy-set').forEach(btn => {
       btn.addEventListener('click', () => {
-        playCyberClickSound();
         const text = btn.dataset.copy;
         if (navigator.clipboard) {
           navigator.clipboard.writeText(text).then(() => {
@@ -298,7 +291,6 @@ function renderFashionWiki() {
 
     fashionGrid.querySelectorAll('.btn-copy-item').forEach(btn => {
       btn.addEventListener('click', () => {
-        playCyberClickSound();
         const text = btn.dataset.copy;
         if (navigator.clipboard) {
           navigator.clipboard.writeText(text).then(() => {

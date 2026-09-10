@@ -5,7 +5,7 @@
    ============================================================ */
 
 import { animateCount, showToast } from './utils.js';
-import { playCyberClickSound } from './cyberEffects.js';
+import { itemBadge } from './itemRegistry.js';
 
 export function initCalculators() {
   // 1. Render all static/dynamic table views
@@ -79,7 +79,6 @@ function bindCalculator(startId, targetId, updateFn, extraId = null) {
     if (!id) return;
     const el = document.getElementById(id);
     el?.addEventListener('change', () => {
-      playCyberClickSound();
       updateFn();
     });
     el?.addEventListener('input', () => {
@@ -128,6 +127,11 @@ function renderSubBreakdown(subId, title, headers, rows, summaryText = '', goalI
     </tr>
   `).join('');
 
+  // Hàng "chip" nguyên liệu mục tiêu — có icon để user nhận biết món đồ
+  const goalChipsHtml = (goalItems && goalItems.length)
+    ? `<div class="goal-chips">${goalItems.map(it => itemBadge(it.name, { qty: it.qty })).join('')}</div>`
+    : '';
+
   breakdownCard.innerHTML = `
     <div class="breakdown-header-bar">
       <span class="breakdown-title">📋 ${title}</span>
@@ -138,18 +142,37 @@ function renderSubBreakdown(subId, title, headers, rows, summaryText = '', goalI
         </button>
       </div>
     </div>
+    ${goalChipsHtml}
+    ${rows.length > 6 ? `<div class="bd-filter-wrap"><span class="bd-filter-ic">🔍</span><input type="text" class="bd-filter" placeholder="Lọc nhanh theo cấp / số liệu..."></div>` : ''}
     <div class="breakdown-body table-responsive">
       <table class="breakdown-table">
         <thead><tr><th>#</th>${thHtml}</tr></thead>
         <tbody>${rowsHtml}</tbody>
       </table>
+      <div class="bd-noresult" style="display:none;">Không có dòng nào khớp bộ lọc.</div>
       ${summaryText ? `<div style="margin-top:10px;font-size:12.5px;color:var(--text-muted);">${summaryText}</div>` : ''}
     </div>
   `;
 
+  // Lọc nhanh các dòng trong bảng
+  const filterInput = breakdownCard.querySelector('.bd-filter');
+  if (filterInput) {
+    const bodyRows = [...breakdownCard.querySelectorAll('.breakdown-table tbody tr')];
+    const noResult = breakdownCard.querySelector('.bd-noresult');
+    filterInput.addEventListener('input', () => {
+      const q = filterInput.value.trim().toLowerCase();
+      let shown = 0;
+      bodyRows.forEach(tr => {
+        const match = !q || tr.textContent.toLowerCase().includes(q);
+        tr.style.display = match ? '' : 'none';
+        if (match) shown++;
+      });
+      if (noResult) noResult.style.display = shown ? 'none' : 'block';
+    });
+  }
+
   // Bind Copy Report button
   breakdownCard.querySelector('.btn-copy-report-sm')?.addEventListener('click', () => {
-    playCyberClickSound();
     let report = `📊 [BÁO CÁO PMT GUNNY MASTER - ${title.toUpperCase()}]\n\n`;
     report += `🎯 TỔNG KẾT NGUYÊN LIỆU:\n`;
     goalItems.forEach(it => {
@@ -215,7 +238,7 @@ function updateRefiningCalc() {
     { name: 'Vàng', qty: res.totalVang.toLocaleString() },
     { name: 'Ngọc', qty: res.totalNgoc.toLocaleString() }
   ];
-  renderSubBreakdown('sub-gia_cong', `Gia Công: Cấp ${s} → Cấp ${validTarget}`, ['Mốc Nâng', 'Đá Cần', 'Đồng', 'Bạc', 'Vàng', 'Ngọc', 'Lũy Kế Tích Lũy'], rows, '', goalItems);
+  renderSubBreakdown('sub-refining', `Gia Công: Cấp ${s} → Cấp ${validTarget}`, ['Mốc Nâng', 'Đá Cần', 'Đồng', 'Bạc', 'Vàng', 'Ngọc', 'Lũy Kế Tích Lũy'], rows, '', goalItems);
 }
 
 /* ────────────────────────────────────────────────────────────
@@ -255,7 +278,7 @@ function updatePetEvoCalc() {
     `Cộng dồn: ${b.cumCo.toLocaleString()} Cỏ (${((b.cumCo / res.totalCoThienDiep) * 100).toFixed(1)}%)`
   ]);
   const goalItems = [{ name: 'Cỏ Thiên Điệp', qty: res.totalCoThienDiep.toLocaleString() }];
-  renderSubBreakdown('sub-tien_hoa_pet', `Tiến Hóa Pet: Lv ${s} → Lv ${validTarget}`, ['Khoảng Cấp', 'Cỏ Cần Cấp Này', 'Tiến Trình Tích Lũy'], rows, '', goalItems);
+  renderSubBreakdown('sub-pet_evo', `Tiến Hóa Pet: Lv ${s} → Lv ${validTarget}`, ['Khoảng Cấp', 'Cỏ Cần Cấp Này', 'Tiến Trình Tích Lũy'], rows, '', goalItems);
 }
 
 /* ────────────────────────────────────────────────────────────
@@ -343,7 +366,6 @@ function renderJewelConvertList() {
 
   container.querySelectorAll('.btn-copy-jewel-recipe').forEach(btn => {
     btn.addEventListener('click', () => {
-      playCyberClickSound();
       const targetName = btn.dataset.target;
       const item = JewelConversionData.conversions.find(c => c.target === targetName);
       if (!item) return;
@@ -446,7 +468,6 @@ function renderMountUpTable() {
   // Bind 1-Click Copy Table Button
   const btnCopy = document.getElementById('btnCopyMountTable');
   btnCopy?.addEventListener('click', () => {
-    playCyberClickSound();
     let text = `📊 [BÁO CÁO PMT GUNNY MASTER - BẢNG UP THÚ CƯỠI (9 LOẠI TỌA KỴ)]\n\n`;
     text += `Lv | Ngựa | Heo | Sói | Chổi | Cá Vàng | Cá 7 Màu | Thảm Kiến | Thảm Gà | Cỗ Máy TG\n`;
     text += `---|---|---|---|---|---|---|---|---|---\n`;
@@ -648,7 +669,7 @@ function updateManhHoaCalc() {
     `Tích lũy: ${b.cumQty.toLocaleString()} Mảnh`
   ]);
   const goalItems = [{ name: 'Mảnh Manh Hóa Pet', qty: res.totalQty.toLocaleString() }];
-  renderSubBreakdown('sub-manh_hoa_pet', `Manh Hóa Pet: Mốc ${s} → Mốc ${validTarget}`, ['Khoảng Mốc', 'Số Mảnh Cần', 'Lũy Kế'], rows, '', goalItems);
+  renderSubBreakdown('sub-manh_hoa', `Manh Hóa Pet: Mốc ${s} → Mốc ${validTarget}`, ['Khoảng Mốc', 'Số Mảnh Cần', 'Lũy Kế'], rows, '', goalItems);
 }
 
 /* ────────────────────────────────────────────────────────────

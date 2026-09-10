@@ -1,76 +1,14 @@
 /* ============================================================
-   PMT GUNNY MASTER — Cyber Effects, Dynamic Particles, Theme & Audio
+   PMT GUNNY MASTER — Cyber Effects & Dynamic Particles
    ============================================================ */
-
-import { save, load, showToast } from './utils.js';
-
-let isSoundEnabled = load('pmt_sound_enabled', true);
-let activeTheme = load('pmt_theme', 'cyan');
 
 export function initCyberEffects() {
   initCyberParticles();
   initCardSpotlight();
-  initThemeSwitcher();
-  initSoundToggle();
 }
 
 /**
- * 1. Theme Switcher System
- */
-function initThemeSwitcher() {
-  const themeDots = document.querySelectorAll('.btn-theme-dot');
-
-  function applyTheme(theme) {
-    activeTheme = theme;
-    save('pmt_theme', theme);
-    if (theme === 'cyan') {
-      delete document.documentElement.dataset.theme;
-    } else {
-      document.documentElement.dataset.theme = theme;
-    }
-
-    themeDots.forEach(dot => {
-      dot.classList.toggle('active', dot.dataset.theme === theme);
-    });
-  }
-
-  applyTheme(activeTheme);
-
-  themeDots.forEach(dot => {
-    dot.addEventListener('click', () => {
-      applyTheme(dot.dataset.theme);
-      playCyberClickSound();
-      showToast(`🎨 Đã chuyển giao diện: ${dot.title}`);
-    });
-  });
-}
-
-/**
- * 2. Sound Effects Toggle
- */
-function initSoundToggle() {
-  const btnToggle = document.getElementById('btnToggleSound');
-  const soundIcon = document.getElementById('soundIcon');
-
-  function updateSoundUI() {
-    if (soundIcon) {
-      soundIcon.textContent = isSoundEnabled ? '🔊' : '🔇';
-    }
-  }
-
-  updateSoundUI();
-
-  btnToggle?.addEventListener('click', () => {
-    isSoundEnabled = !isSoundEnabled;
-    save('pmt_sound_enabled', isSoundEnabled);
-    updateSoundUI();
-    if (isSoundEnabled) playCyberClickSound();
-    showToast(isSoundEnabled ? '🔊 Đã bật âm thanh hiệu ứng' : '🔇 Đã tắt âm thanh');
-  });
-}
-
-/**
- * 3. Subtle 60fps Cyberpunk Background Dust / Constellation Particles
+ * Subtle 60fps Cyberpunk Background Dust / Constellation Particles
  */
 function initCyberParticles() {
   const canvas = document.getElementById('bgParticlesCanvas');
@@ -159,36 +97,3 @@ function initCardSpotlight() {
   });
 }
 
-/**
- * 5. Sci-Fi UI Click Sound Generator (Web Audio API)
- */
-let audioCtx = null;
-export function playCyberClickSound() {
-  if (!isSoundEnabled) return;
-  try {
-    if (!audioCtx) {
-      const AudioContext = window.AudioContext || window.webkitAudioContext;
-      if (AudioContext) audioCtx = new AudioContext();
-    }
-    if (audioCtx && audioCtx.state === 'suspended') {
-      audioCtx.resume();
-    }
-    if (!audioCtx) return;
-
-    const osc = audioCtx.createOscillator();
-    const gain = audioCtx.createGain();
-
-    osc.type = 'sine';
-    osc.frequency.setValueAtTime(580, audioCtx.currentTime);
-    osc.frequency.exponentialRampToValueAtTime(880, audioCtx.currentTime + 0.06);
-
-    gain.gain.setValueAtTime(0.04, audioCtx.currentTime);
-    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.06);
-
-    osc.connect(gain);
-    gain.connect(audioCtx.destination);
-
-    osc.start();
-    osc.stop(audioCtx.currentTime + 0.06);
-  } catch (_) {}
-}

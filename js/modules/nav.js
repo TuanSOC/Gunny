@@ -3,7 +3,6 @@
    ============================================================ */
 
 import { save, load, showToast } from './utils.js';
-import { playCyberClickSound } from './cyberEffects.js';
 
 export function initNavigation() {
   const appShell       = document.querySelector('.app-shell');
@@ -39,7 +38,6 @@ export function initNavigation() {
   updateSidebarState(isCollapsed);
 
   sidebarToggle?.addEventListener('click', () => {
-    playCyberClickSound();
     const willCollapse = !appShell.classList.contains('sidebar-collapsed');
     updateSidebarState(willCollapse);
   });
@@ -47,7 +45,6 @@ export function initNavigation() {
   // 2. Mobile Drawer Toggle
   function openMobileSidebar() {
     appShell?.classList.add('mobile-open');
-    playCyberClickSound();
   }
 
   function closeMobileSidebar() {
@@ -58,7 +55,7 @@ export function initNavigation() {
   sidebarBackdrop?.addEventListener('click', closeMobileSidebar);
 
   // 3. Tab Switching
-  function activateMainTab(tabId) {
+  function activateMainTab(tabId, silent = false) {
     navItemBtns.forEach(btn => btn.classList.remove('active'));
     tabPanels.forEach(p => p.classList.remove('active'));
 
@@ -74,18 +71,18 @@ export function initNavigation() {
 
     if (activeNavBtn) save('activeMainTab', activeNavBtn.dataset.tab);
     closeMobileSidebar();
-    playCyberClickSound();
   }
 
   const savedTab = load('activeMainTab', 'tab-dashboard');
-  activateMainTab(savedTab);
+  activateMainTab(savedTab, true); // im lặng khi mới tải trang
 
   navItemBtns.forEach(btn => {
     btn.addEventListener('click', () => {
       const tab = btn.dataset.tab;
       const targetSub = btn.dataset.target;
       if (tab) {
-        activateMainTab(tab);
+        // Nếu là mục con (có target) → showSubPanel tự lo highlight sidebar
+        activateMainTab(tab, !!targetSub);
         if (targetSub) {
           showSubPanel(targetSub, true);
         }
@@ -98,7 +95,7 @@ export function initNavigation() {
   const subPanels = document.querySelectorAll('.sub-panel');
   const hubTiles  = document.querySelectorAll('.hub-tile');
 
-  function showSubPanel(key, shouldScroll = false) {
+  function showSubPanel(key, shouldScroll = false, silent = false) {
     subPanels.forEach(sp => sp.classList.remove('active'));
     const target = document.getElementById(`sub-${key}`);
     if (target) {
@@ -116,12 +113,18 @@ export function initNavigation() {
       tile.classList.toggle('active', tile.dataset.target === key);
     });
 
+    // Đồng bộ mục sidebar với bảng đang mở (chỉ khi đang ở tab Tra Cứu)
+    if (document.getElementById('tab-refining')?.classList.contains('active')) {
+      navItemBtns.forEach(btn => {
+        if (btn.dataset.target) btn.classList.toggle('active', btn.dataset.target === key);
+      });
+    }
+
     save('masterTableKey', key);
-    playCyberClickSound();
   }
 
   const savedMasterTable = load('masterTableKey', 'refining');
-  showSubPanel(savedMasterTable);
+  showSubPanel(savedMasterTable, false, true); // im lặng khi mới tải trang
 
   masterSel?.addEventListener('change', () => {
     showSubPanel(masterSel.value, true);
@@ -172,7 +175,6 @@ function initServicePromoModal() {
 
   function openPromo() {
     promoModal.classList.add('active');
-    playCyberClickSound();
   }
 
   function closePromo() {
@@ -181,7 +183,6 @@ function initServicePromoModal() {
       const today = new Date().toISOString().slice(0, 10);
       save('dismiss_service_promo_date', today);
     }
-    playCyberClickSound();
   }
 
   btnOpenPromo?.addEventListener('click', openPromo);
@@ -193,7 +194,6 @@ function initServicePromoModal() {
   });
 
   btnCopyZalo?.addEventListener('click', () => {
-    playCyberClickSound();
     if (navigator.clipboard) {
       navigator.clipboard.writeText('0981052217').then(() => {
         showToast('📋 Đã sao chép SĐT Zalo PMT: 0981.052.217!');
@@ -201,14 +201,7 @@ function initServicePromoModal() {
     }
   });
 
-  // Auto show on first load if not dismissed today
-  const today = new Date().toISOString().slice(0, 10);
-  const dismissedDate = load('dismiss_service_promo_date', null);
-  if (dismissedDate !== today) {
-    setTimeout(() => {
-      openPromo();
-    }, 450);
-  }
+  // Không tự bật popup nữa — chỉ mở khi user bấm nút "Dịch Vụ PMT".
 }
 
 /* ════════════════════════════════════════════════════════════
@@ -254,8 +247,7 @@ function initCommandPalette(activateMainTab, showSubPanel) {
     { title: '🎯 Thước Tính Góc 30° Đường Thẳng', sub: 'Công thức 30 đào đất và đục chân', tab: 'tab-ballistics', target: null, formula: '30' },
     { title: '🎯 Thước Tính Góc 20° Siêu Thấp', sub: 'Công thức 20 kháng gió cực mạnh', tab: 'tab-ballistics', target: null, formula: '20' },
     { title: '👗 Kho Thời Trang 540+ Trọn Bộ', sub: 'Danh mục set trang phục, cánh bay, bong bóng chat', tab: 'tab-fashion', target: null },
-    { title: '👑 Dịch Vụ Gunny Trọn Gói (PMT Gaming)', sub: 'Up acc thuê, tối ưu tiêu xu, cày phó bản hằng ngày, đua top LC', tab: 'tab-services', target: null },
-    { title: '📞 Liên Hệ PMT (Zalo & Facebook)', sub: 'Zalo: 0981.052.217 — Facebook: fb.com/tinyy139', tab: 'tab-services', target: null }
+    { title: '👑 Dịch Vụ & Liên Hệ PMT Gaming', sub: 'Up acc thuê, tối ưu tiêu xu, đua top LC · Zalo 0981.052.217 · fb.com/tinyy139', tab: 'tab-services', target: null }
   ];
 
   function openPalette() {
@@ -263,12 +255,10 @@ function initCommandPalette(activateMainTab, showSubPanel) {
     searchInput.value = '';
     renderResults('');
     setTimeout(() => searchInput.focus(), 50);
-    playCyberClickSound();
   }
 
   function closePalette() {
     modal.classList.remove('active');
-    playCyberClickSound();
   }
 
   function renderResults(q) {
@@ -324,7 +314,6 @@ function initCommandPalette(activateMainTab, showSubPanel) {
   // Bind Copy Zalo Phone button
   const btnCopyZalo = document.getElementById('btnCopyZaloPhone');
   btnCopyZalo?.addEventListener('click', () => {
-    playCyberClickSound();
     if (navigator.clipboard) {
       navigator.clipboard.writeText('0981052217').then(() => {
         showToast('📋 Đã sao chép số điện thoại Zalo: 0981.052.217!');

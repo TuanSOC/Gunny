@@ -436,35 +436,6 @@ body {
   gap: 10px;
 }
 
-.theme-pill-group {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  background: rgba(12, 17, 28, 0.7);
-  padding: 3px;
-  border-radius: var(--radius-pill);
-  border: 1px solid var(--border-subtle);
-}
-
-.btn-theme-dot {
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  border: 1px solid transparent;
-  cursor: pointer;
-  transition: transform var(--transition-fast), border-color var(--transition-fast);
-}
-
-.btn-theme-dot:hover {
-  transform: scale(1.15);
-}
-
-.btn-theme-dot.active {
-  border-color: #ffffff;
-  transform: scale(1.15);
-  box-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
-}
-
 .btn-header-action {
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid var(--border-subtle);
@@ -622,15 +593,6 @@ body {
 
   .header-right {
     gap: 6px;
-  }
-
-  .theme-pill-group {
-    padding: 2px;
-  }
-
-  .btn-theme-dot {
-    width: 14px;
-    height: 14px;
   }
 
   .btn-header-action {

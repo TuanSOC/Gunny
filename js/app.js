@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Initialize Cyberpunk Particles & Interactive Spotlights
   initCyberEffects();
 
-  // Initialize Navigation, Command Palette & Goal Bag
+  // Initialize Navigation & Command Palette
   initNavigation();
 
   // Initialize 21 Master Calculators & Itemized Breakdowns

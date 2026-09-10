@@ -100,37 +100,6 @@
   --transition-smooth: 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* ════════════════ THEME PRESETS ════════════════ */
-[data-theme="gold"] {
-  --cyan: #f59e0b;
-  --cyan-hover: #fbbf24;
-  --cyan-glow: rgba(245, 158, 11, 0.35);
-  --cyan-dim: rgba(245, 158, 11, 0.12);
-  --border-glass-glow: rgba(245, 158, 11, 0.3);
-  --bg-active: rgba(245, 158, 11, 0.12);
-  --grad-accent: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
-}
-
-[data-theme="purple"] {
-  --cyan: #a855f7;
-  --cyan-hover: #c084fc;
-  --cyan-glow: rgba(168, 85, 247, 0.35);
-  --cyan-dim: rgba(168, 85, 247, 0.12);
-  --border-glass-glow: rgba(168, 85, 247, 0.3);
-  --bg-active: rgba(168, 85, 247, 0.12);
-  --grad-accent: linear-gradient(135deg, #c084fc 0%, #a855f7 100%);
-}
-
-[data-theme="emerald"] {
-  --cyan: #10b981;
-  --cyan-hover: #34d399;
-  --cyan-glow: rgba(16, 185, 129, 0.35);
-  --cyan-dim: rgba(16, 185, 129, 0.12);
-  --border-glass-glow: rgba(16, 185, 129, 0.3);
-  --bg-active: rgba(16, 185, 129, 0.12);
-  --grad-accent: linear-gradient(135deg, #34d399 0%, #10b981 100%);
-}
-
 /* Custom Scrollbar Styling */
 ::-webkit-scrollbar {
   width: 6px;

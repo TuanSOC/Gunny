@@ -4,7 +4,6 @@
    Height Differentials, Quick Presets & Visual Force Meter
    ============================================================ */
 
-import { playCyberClickSound } from './cyberEffects.js';
 
 export function initBallistics() {
   const distSlider    = document.getElementById('balDistance');
@@ -37,7 +36,6 @@ export function initBallistics() {
   // 1. Formula Selector Buttons
   formulaBtns.forEach(btn => {
     btn.addEventListener('click', () => {
-      playCyberClickSound();
       formulaBtns.forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       activeFormula = btn.dataset.formula || '65';
@@ -47,7 +45,6 @@ export function initBallistics() {
 
   // 2. Wind Direction Buttons
   btnDirXuoi?.addEventListener('click', () => {
-    playCyberClickSound();
     activeWindDir = 'xuoi';
     btnDirXuoi.classList.add('active');
     btnDirNguoc?.classList.remove('active');
@@ -58,7 +55,6 @@ export function initBallistics() {
   });
 
   btnDirNguoc?.addEventListener('click', () => {
-    playCyberClickSound();
     activeWindDir = 'nguoc';
     btnDirNguoc.classList.add('active');
     btnDirXuoi?.classList.remove('active');
@@ -71,7 +67,6 @@ export function initBallistics() {
   // 3. Height / Elevation Differential Buttons
   heightBtns.forEach(btn => {
     btn.addEventListener('click', () => {
-      playCyberClickSound();
       heightBtns.forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       activeHeight = parseInt(btn.dataset.height || '0');
@@ -82,7 +77,6 @@ export function initBallistics() {
   // 4. Quick Preset Chips
   presetChips.forEach(chip => {
     chip.addEventListener('click', () => {
-      playCyberClickSound();
       if (chip.dataset.dist && distSlider) {
         distSlider.value = chip.dataset.dist;
       }
@@ -193,7 +187,6 @@ export function initBallistics() {
 
       compareTbody.querySelectorAll('tr').forEach(tr => {
         tr.addEventListener('click', () => {
-          playCyberClickSound();
           const fCode = tr.dataset.formula;
           if (fCode) {
             activeFormula = fCode;
