@@ -55,7 +55,7 @@ export function initNavigation() {
   sidebarBackdrop?.addEventListener('click', closeMobileSidebar);
 
   // 3. Tab Switching
-  function activateMainTab(tabId, silent = false) {
+  function activateMainTab(tabId) {
     navItemBtns.forEach(btn => btn.classList.remove('active'));
     tabPanels.forEach(p => p.classList.remove('active'));
 
@@ -74,15 +74,15 @@ export function initNavigation() {
   }
 
   const savedTab = load('activeMainTab', 'tab-dashboard');
-  activateMainTab(savedTab, true); // im lặng khi mới tải trang
+  activateMainTab(savedTab);
 
   navItemBtns.forEach(btn => {
     btn.addEventListener('click', () => {
       const tab = btn.dataset.tab;
       const targetSub = btn.dataset.target;
       if (tab) {
-        // Nếu là mục con (có target) → showSubPanel tự lo highlight sidebar
-        activateMainTab(tab, !!targetSub);
+        activateMainTab(tab);
+        // Mục con (có target) → showSubPanel tự đồng bộ highlight sidebar
         if (targetSub) {
           showSubPanel(targetSub, true);
         }
@@ -95,7 +95,7 @@ export function initNavigation() {
   const subPanels = document.querySelectorAll('.sub-panel');
   const hubTiles  = document.querySelectorAll('.hub-tile');
 
-  function showSubPanel(key, shouldScroll = false, silent = false) {
+  function showSubPanel(key, shouldScroll = false) {
     subPanels.forEach(sp => sp.classList.remove('active'));
     const target = document.getElementById(`sub-${key}`);
     if (target) {
@@ -124,7 +124,7 @@ export function initNavigation() {
   }
 
   const savedMasterTable = load('masterTableKey', 'refining');
-  showSubPanel(savedMasterTable, false, true); // im lặng khi mới tải trang
+  showSubPanel(savedMasterTable);
 
   masterSel?.addEventListener('change', () => {
     showSubPanel(masterSel.value, true);
@@ -270,7 +270,7 @@ function initCommandPalette(activateMainTab, showSubPanel) {
     }
 
     resultsList.innerHTML = matches.map(item => `
-      <div class="palette-item" data-tab="${item.tab}" data-target="${item.target || ''}" data-formula="${item.formula || ''}">
+      <div class="palette-item" data-tab="${item.tab}" data-target="${item.target || ''}">
         <div class="palette-item-title">${item.title}</div>
         <div class="palette-item-sub">${item.sub}</div>
       </div>
@@ -280,18 +280,12 @@ function initCommandPalette(activateMainTab, showSubPanel) {
       el.addEventListener('click', () => {
         const tab = el.dataset.tab;
         const target = el.dataset.target;
-        const formula = el.dataset.formula;
 
         closePalette();
         activateMainTab(tab);
 
         if (target) {
           showSubPanel(target, true);
-        }
-
-        if (formula) {
-          const btn = document.getElementById(`btn-f${formula}`);
-          btn?.click();
         }
       });
     });

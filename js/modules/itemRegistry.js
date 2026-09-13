@@ -16,6 +16,8 @@ const ICON_RULES = [
   [['đá gia công', 'gia công'], '⛏️', 'gold'],
   [['đồng'],                    '🪙', 'gold'],
   [['bạc'],                     '🥈', 'cyan'],
+  // Cá Vàng / Cá 7 Màu (đan thú cưỡi) phải khớp TRƯỚC 'vàng' để không nhầm ra tiền vàng
+  [['cá vàng', 'cá 7 màu'],     '🐟', 'cyan'],
   // "Vàng Linh Hạch" & "Vàng" đều là tiền vàng
   [['vàng'],                    '🥇', 'gold'],
   [['ngọc lam', 'mảnh ngọc'],   '🔷', 'blue'],
@@ -56,8 +58,8 @@ const ICON_RULES = [
 
   // — Thú cưỡi (đan up) —
   [['ngựa'], '🐴', 'gold'],  [['heo'], '🐷', 'red'],
-  [['sói'],  '🐺', 'cyan'],  [['chổi', 'chổi'], '🧹', 'purple'],
-  [['cá vàng', 'cá 7 màu', 'cá'], '🐟', 'cyan'],
+  [['sói'],  '🐺', 'cyan'],  [['chổi'], '🧹', 'purple'],
+  [['cá'], '🐟', 'cyan'],
   [['thảm'], '🧶', 'green'], [['cỗ máy'], '🤖', 'blue'],
 
   // — Chung chung (fallback theo loại) —
@@ -67,6 +69,12 @@ const ICON_RULES = [
 ];
 
 const DEFAULT_META = { icon: '📦', color: 'cyan' };
+
+/** Escape ký tự HTML để chèn an toàn vào markup. */
+function esc(s) {
+  return String(s).replace(/[&<>"']/g, c =>
+    ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+}
 
 /** Bỏ emoji + khoảng trắng thừa ở đầu tên để so khớp/hiển thị sạch. */
 export function cleanName(name) {
@@ -91,12 +99,13 @@ export function iconFor(name) {
  */
 export function itemBadge(name, opts = {}) {
   const clean = cleanName(name);
+  const safe = esc(clean);
   const { icon, color } = iconFor(name);
   const qtyHtml = opts.qty != null
-    ? `<b class="ig-qty">${opts.qty}</b>` : '';
-  return `<span class="ig-badge" data-c="${color}" title="${clean}">`
+    ? `<b class="ig-qty">${esc(opts.qty)}</b>` : '';
+  return `<span class="ig-badge" data-c="${color}" title="${safe}">`
        + `<span class="ig-ic">${icon}</span>`
-       + `<span class="ig-name">${clean}</span>${qtyHtml}</span>`;
+       + `<span class="ig-name">${safe}</span>${qtyHtml}</span>`;
 }
 
 /** Chỉ lấy icon (khi cần chèn trước text sẵn có). */
