@@ -1,7 +1,162 @@
 /* ============================================================
    PMT GUNNY MASTER — Enhancements
-   Item badges · Goal Bag · Table quick-filter · Responsive
+   Item badges · Table quick-filter · MacBook guide · Responsive
    ============================================================ */
+
+/* ── Hướng dẫn MacBook ────────────────────────────────────── */
+.macos-dl {
+  display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+  background: var(--bg-input); border: 1px solid var(--border-glass-glow);
+  border-radius: var(--radius-md); padding: 16px;
+}
+.macos-file { display: flex; align-items: center; gap: 14px; flex: 1 1 240px; min-width: 0; }
+.macos-file-ic {
+  width: 48px; height: 48px; flex: 0 0 auto; border-radius: 12px;
+  display: grid; place-items: center; font-weight: 800; font-size: 12px;
+  background: var(--cyan-dim); color: var(--cyan); border: 1px solid var(--border-glass-glow);
+  font-family: var(--font-mono);
+}
+.macos-file-name { font-weight: 700; color: var(--text-main); word-break: break-word; }
+.macos-file-sub { color: var(--text-muted); font-size: 13px; margin-top: 2px; }
+.macos-dl-btn { margin-left: auto; }
+
+ol.macos-steps { list-style: none; counter-reset: mstep; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 14px; }
+ol.macos-steps > li {
+  counter-increment: mstep; position: relative;
+  background: var(--bg-input); border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md); padding: 16px 18px 16px 60px;
+}
+ol.macos-steps > li::before {
+  content: counter(mstep); position: absolute; left: 16px; top: 16px;
+  width: 30px; height: 30px; border-radius: 9px; display: grid; place-items: center;
+  font-family: var(--font-mono); font-weight: 700; font-size: 14px;
+  background: var(--cyan-dim); color: var(--cyan); border: 1px solid var(--border-glass-glow);
+}
+ol.macos-steps h3 { margin: 2px 0 6px; font-size: 16px; color: var(--text-main); }
+ol.macos-steps p { margin: 6px 0; color: var(--text-secondary); font-size: 14.5px; }
+.macos-path { color: var(--cyan); font-weight: 600; }
+.macos-mono { font-family: var(--font-mono); font-size: 13px; color: var(--text-main); }
+
+.macos-callout {
+  margin-top: 12px; padding: 12px 14px; border-radius: 10px;
+  background: var(--gold-dim); border: 1px solid var(--border-gold-glow);
+  display: flex; gap: 10px; align-items: flex-start; font-size: 14px; color: var(--text-secondary);
+}
+.macos-callout b { color: var(--gold); }
+
+.macos-cmd {
+  margin-top: 12px; display: flex; align-items: center; gap: 10px;
+  background: #05090f; border: 1px solid var(--border-glass-glow);
+  border-radius: 10px; padding: 11px 11px 11px 14px; overflow-x: auto;
+}
+.macos-cmd code { font-family: var(--font-mono); color: #b7f5ff; font-size: 13.5px; white-space: nowrap; flex: 1; }
+.macos-copy {
+  flex: 0 0 auto; cursor: pointer; font: inherit; font-size: 12.5px; font-weight: 700;
+  color: #b7f5ff; background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.16); border-radius: 8px; padding: 6px 12px;
+  transition: background var(--transition-fast);
+}
+.macos-copy:hover { background: rgba(255,255,255,0.14); }
+
+.macos-faq { display: flex; flex-direction: column; gap: 10px; }
+.macos-faq details {
+  background: var(--bg-input); border: 1px solid var(--border-subtle);
+  border-radius: 12px; padding: 4px 16px;
+}
+.macos-faq summary {
+  cursor: pointer; list-style: none; padding: 13px 0; font-weight: 700;
+  font-size: 15px; color: var(--text-main); display: flex; align-items: center; gap: 10px;
+}
+.macos-faq summary::-webkit-details-marker { display: none; }
+.macos-faq summary::before { content: '＋'; color: var(--cyan); font-weight: 700; }
+.macos-faq details[open] summary::before { content: '－'; }
+.macos-faq details p { margin: 0 0 14px 22px; color: var(--text-secondary); font-size: 14px; }
+
+.macos-chips { display: flex; flex-wrap: wrap; gap: 10px; }
+.macos-chip {
+  display: inline-flex; align-items: center; gap: 7px;
+  background: var(--bg-input); border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-pill); padding: 8px 14px; font-size: 13.5px; color: var(--text-secondary);
+}
+@media (max-width: 640px) {
+  .macos-dl-btn { margin-left: 0; width: 100%; justify-content: center; }
+}
+
+/* ════════════════════════════════════════════════════════════
+   FANCY POLISH — chiều sâu & điểm nhấn cao cấp (nạp sau cùng)
+   ════════════════════════════════════════════════════════════ */
+
+/* App background — thêm lớp gradient mesh tinh tế */
+body,
+.app-content {
+  background-image:
+    radial-gradient(1200px 600px at 12% -8%, rgba(0, 242, 254, 0.06), transparent 60%),
+    radial-gradient(1000px 560px at 100% 0%, rgba(168, 85, 247, 0.05), transparent 55%);
+  background-attachment: fixed;
+}
+
+/* Tiêu đề hero — chữ gradient cao cấp */
+.hero-title {
+  background: linear-gradient(120deg, #ffffff 20%, #cfe9f5 55%, var(--cyan) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* Glass card — nâng nhẹ khi hover + viền trên ánh cyan */
+.glass-card { transition: border-color var(--transition-base), box-shadow var(--transition-base), transform var(--transition-base); }
+.glass-card:hover { transform: translateY(-3px); }
+.glass-card::before {
+  background: linear-gradient(90deg, transparent, rgba(0, 242, 254, 0.5), transparent);
+  opacity: 0.55;
+}
+
+/* Card header — gạch nối gradient thay cho đường mảnh phẳng */
+.card-header-bar { border-bottom: 1px solid transparent; border-image: linear-gradient(90deg, var(--border-glass-glow), transparent) 1; }
+
+/* Sidebar mục đang chọn — nền gradient + thanh nhấn gradient */
+.nav-item-btn.active {
+  background: linear-gradient(90deg, var(--cyan-dim), rgba(0, 242, 254, 0.02) 90%);
+}
+.nav-item-btn.active::before {
+  background: linear-gradient(180deg, var(--cyan), #38bdf8);
+  width: 3px;
+}
+
+/* Nhóm "Công Cụ & Dịch Vụ" — khối ưu tiên nổi bật ở trên */
+.nav-group-featured {
+  background: linear-gradient(160deg, rgba(0, 242, 254, 0.07), rgba(168, 85, 247, 0.05));
+  border: 1px solid var(--border-glass-glow);
+  border-radius: var(--radius-md);
+  padding: 8px 8px 10px;
+  margin-bottom: 16px;
+}
+.nav-group-featured .nav-group-title { color: var(--cyan); }
+
+/* Nút chính — thêm ánh sáng chạy nhẹ khi hover */
+.btn-primary { position: relative; overflow: hidden; }
+.btn-primary::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.25) 50%, transparent 70%);
+  transform: translateX(-120%); transition: transform .6s ease;
+}
+.btn-primary:hover::after { transform: translateX(120%); }
+
+/* Ô số liệu & thẻ lối tắt — nâng nhẹ khi hover */
+.hero-stat-card, .quick-action-card, .stat-box, .hub-tile {
+  transition: transform var(--transition-fast), box-shadow var(--transition-base), border-color var(--transition-base);
+}
+.hero-stat-card:hover, .quick-action-card:hover, .hub-tile:hover { transform: translateY(-2px); }
+
+/* Số liệu lớn — nhấn nhẹ độ tương phản */
+.h-num { text-shadow: 0 0 18px var(--cyan-glow); }
+
+@media (prefers-reduced-motion: reduce) {
+  .glass-card:hover, .hero-stat-card:hover, .quick-action-card:hover, .hub-tile:hover { transform: none; }
+  .btn-primary::after { display: none; }
+  body, .app-content { background-attachment: scroll; }
+}
 
 /* ── Item Badge (icon + tên vật phẩm) ────────────────────── */
 .ig-badge {

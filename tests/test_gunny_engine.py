@@ -365,53 +365,6 @@ class TestFashionData:
         assert len(bubbles) >= 15, "Phải có ít nhất 15 Bong Bóng chat"
 
 
-# ==============================================================================
-# 19. BALLISTICS ENGINE (Gunny PC Standard Angle & Force Engine)
-# ==============================================================================
-class TestBallisticsEngine:
-    def _calc(self, distance, wind, wind_dir, formula, height=0):
-        filepath = os.path.join(ROOT_DIR, 'src', 'core', 'ballisticsEngine.js').replace('\\', '/')
-        node_code = f"""
-        const engine = require('{filepath}');
-        const res = engine.calculateAngle({distance}, {wind}, '{wind_dir}', '{formula}', {height});
-        process.stdout.write(JSON.stringify(res));
-        """
-        res = subprocess.run(
-            ["node", "-e", node_code],
-            capture_output=True,
-            text=True,
-            encoding="utf-8",
-            check=True
-        )
-        return json.loads(res.stdout)
-
-    def test_standard_65_zero_wind(self):
-        res = self._calc(10, 0.0, 'THUAN', '65')
-        assert res['recommendedAngle'] == 65, "Góc 65 không gió phải là 65°"
-        assert res['recommendedPower'] == 56, "Lực góc 65 ở 1 màn hình (10 cự ly) phải là 56 lực"
-
-    def test_standard_65_with_wind(self):
-        res_xuoi = self._calc(10, 1.5, 'THUAN', '65')
-        assert res_xuoi['recommendedAngle'] == 68, "Gió xuôi 1.5 phải là 65 + 3 = 68°"
-
-        res_nguoc = self._calc(10, 2.0, 'NGUOC', '65')
-        assert res_nguoc['recommendedAngle'] == 61, "Gió ngược 2.0 phải là 65 - 4 = 61°"
-
-    def test_high_toss_90(self):
-        res = self._calc(10, 2.0, 'NGUOC', '90')
-        assert res['recommendedAngle'] == 76, "Siêu cao kc 10 gió ngược 2.0: 90 - 10 - 4 = 76°"
-        assert res['recommendedPower'] == 95, "Siêu cao lực phải cố định 95"
-
-    def test_standard_30_straight(self):
-        res = self._calc(10, 0.0, 'THUAN', '30')
-        assert res['recommendedAngle'] == 30, "Góc 30 không gió phải là 30°"
-        assert res['recommendedPower'] == 48, "Lực góc 30 ở khoảng cách 10 phải là 48 lực"
-
-    def test_standard_20_straight(self):
-        res = self._calc(10, 0.0, 'THUAN', '20')
-        assert res['recommendedAngle'] == 20, "Góc 20 phải là 20°"
-        assert res['recommendedPower'] == 54, "Lực góc 20 ở 1 màn hình (10 cự ly) phải là 54 lực"
-
 
 # ==============================================================================
 # 21. CÁ TÍNH PET (LEVEL 1 -> 60 & ĐÁ TÍN NHIỆM)

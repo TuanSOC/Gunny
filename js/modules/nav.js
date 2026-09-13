@@ -18,9 +18,9 @@ export function initNavigation() {
     'tab-dashboard': 'Bảng Điều Khiển Tổng Quan',
     'tab-character': 'Hồ Sơ & Lực Chiến Nhân Vật',
     'tab-refining': '21 Bảng Tra Cứu Nguyên Liệu',
-    'tab-ballistics': 'Thước Tính Góc & Quỹ Đạo AI',
     'tab-fashion': 'Kho Dữ Liệu Thời Trang 540+ Set',
-    'tab-services': 'Dịch Vụ PMT Gaming & Liên Hệ'
+    'tab-services': 'Dịch Vụ PMT Gaming & Liên Hệ',
+    'tab-macos': 'Hướng Dẫn Cài Trên MacBook'
   };
 
   // 1. Sidebar Collapse (Desktop)
@@ -240,14 +240,9 @@ function initCommandPalette(activateMainTab, showSubPanel) {
     { title: '🃏 Đột Phá Thẻ Bài (Level 1 → 30 MAX)', sub: 'Bảng đá đột phá và điểm hồn thẻ bài', tab: 'tab-refining', target: 'the_bai_dot_pha' },
     { title: '💎 Ô Tinh Hạch Thú Cưỡi (Level 1 → 10 MAX)', sub: 'Bảng kết tinh thuần túy và thuốc tuyệt cảnh', tab: 'tab-refining', target: 'tinh_hach_thu_cuoi' },
     { title: '🐾 Cá Tính Pet (Level 1 → 60 MAX)', sub: 'Bảng đá tín nhiệm nâng cá tính pet', tab: 'tab-refining', target: 'pet_ca_tinh' },
-    { title: '🎯 Thước Tính Góc 65° Chuẩn Toàn Năng', sub: 'Công thức 65 kinh điển, tính theo cự ly và gió', tab: 'tab-ballistics', target: null, formula: '65' },
-    { title: '🚀 Thước Tính Góc Siêu Cao 90°', sub: 'Công thức siêu cao (90 - khoảng cách +- gió)', tab: 'tab-ballistics', target: null, formula: '90' },
-    { title: '🎯 Thước Tính Góc 70° Chiều Sâu', sub: 'Công thức 70 bắn lựu đạn và tivi', tab: 'tab-ballistics', target: null, formula: '70' },
-    { title: '🎯 Thước Tính Góc 50° Tầm Trung', sub: 'Công thức 50 địa hình phẳng và dốc', tab: 'tab-ballistics', target: null, formula: '50' },
-    { title: '🎯 Thước Tính Góc 30° Đường Thẳng', sub: 'Công thức 30 đào đất và đục chân', tab: 'tab-ballistics', target: null, formula: '30' },
-    { title: '🎯 Thước Tính Góc 20° Siêu Thấp', sub: 'Công thức 20 kháng gió cực mạnh', tab: 'tab-ballistics', target: null, formula: '20' },
     { title: '👗 Kho Thời Trang 540+ Trọn Bộ', sub: 'Danh mục set trang phục, cánh bay, bong bóng chat', tab: 'tab-fashion', target: null },
-    { title: '👑 Dịch Vụ & Liên Hệ PMT Gaming', sub: 'Up acc thuê, tối ưu tiêu xu, đua top LC · Zalo 0981.052.217 · fb.com/tinyy139', tab: 'tab-services', target: null }
+    { title: '👑 Dịch Vụ & Liên Hệ PMT Gaming', sub: 'Up acc thuê, tối ưu tiêu xu, đua top LC · Zalo 0981.052.217 · fb.com/tinyy139', tab: 'tab-services', target: null },
+    { title: '🍎 Hướng Dẫn Cài Trên MacBook', sub: 'Tải .dmg, cài Gunny Client, vượt cảnh báo macOS & xử lý lỗi', tab: 'tab-macos', target: null }
   ];
 
   function openPalette() {
@@ -336,9 +331,9 @@ function initCommandPalette(activateMainTab, showSubPanel) {
       if (e.key === '1') activateMainTab('tab-dashboard');
       else if (e.key === '2') activateMainTab('tab-character');
       else if (e.key === '3') activateMainTab('tab-refining');
-      else if (e.key === '4') activateMainTab('tab-ballistics');
-      else if (e.key === '5') activateMainTab('tab-fashion');
-      else if (e.key === '6') activateMainTab('tab-services');
+      else if (e.key === '4') activateMainTab('tab-fashion');
+      else if (e.key === '5') activateMainTab('tab-services');
+      else if (e.key === '6') activateMainTab('tab-macos');
     }
   });
 }

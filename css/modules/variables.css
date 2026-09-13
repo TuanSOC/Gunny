@@ -4,44 +4,44 @@
 
 :root {
   /* Surface & Background Hierarchy */
-  --bg-app: #080b12;
-  --bg-sidebar: #0b0f19;
-  --bg-sidebar-collapsed: #0b0f19;
-  --bg-header: rgba(11, 15, 25, 0.85);
-  --bg-card: rgba(16, 22, 36, 0.75);
-  --bg-card-hover: rgba(22, 30, 48, 0.88);
-  --bg-card-solid: #101624;
-  --bg-input: rgba(12, 17, 28, 0.9);
+  --bg-app: #10151e;
+  --bg-sidebar: #141a25;
+  --bg-sidebar-collapsed: #141a25;
+  --bg-header: rgba(20, 26, 37, 0.85);
+  --bg-card: rgba(25, 32, 46, 0.72);
+  --bg-card-hover: rgba(32, 41, 58, 0.85);
+  --bg-card-solid: #191f2c;
+  --bg-input: rgba(20, 26, 36, 0.9);
   --bg-hover: rgba(255, 255, 255, 0.05);
-  --bg-active: rgba(0, 242, 254, 0.12);
+  --bg-active: rgba(0, 242, 254, 0.10);
 
   /* Borders & Dividers */
   --border-subtle: rgba(255, 255, 255, 0.07);
   --border-medium: rgba(255, 255, 255, 0.12);
   --border-focus: rgba(0, 242, 254, 0.5);
   --border-glass: rgba(255, 255, 255, 0.08);
-  --border-glass-glow: rgba(0, 242, 254, 0.28);
-  --border-gold-glow: rgba(245, 158, 11, 0.35);
+  --border-glass-glow: rgba(0, 242, 254, 0.16);
+  --border-gold-glow: rgba(245, 158, 11, 0.22);
 
   /* Accent & Status Colors */
   --cyan: #00f2fe;
   --cyan-hover: #38bdf8;
-  --cyan-glow: rgba(0, 242, 254, 0.35);
+  --cyan-glow: rgba(0, 242, 254, 0.18);
   --cyan-dim: rgba(0, 242, 254, 0.12);
 
   --gold: #f59e0b;
   --gold-hover: #fbbf24;
-  --gold-glow: rgba(245, 158, 11, 0.35);
+  --gold-glow: rgba(245, 158, 11, 0.20);
   --gold-dim: rgba(245, 158, 11, 0.12);
 
   --purple: #a855f7;
   --purple-hover: #c084fc;
-  --purple-glow: rgba(168, 85, 247, 0.35);
+  --purple-glow: rgba(168, 85, 247, 0.20);
   --purple-dim: rgba(168, 85, 247, 0.12);
 
   --green: #10b981;
   --green-hover: #34d399;
-  --green-glow: rgba(16, 185, 129, 0.35);
+  --green-glow: rgba(16, 185, 129, 0.20);
   --green-dim: rgba(16, 185, 129, 0.12);
 
   --red: #ef4444;
@@ -90,9 +90,9 @@
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
   --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.45);
   --shadow-lg: 0 12px 32px -8px rgba(0, 0, 0, 0.65);
-  --shadow-glow-cyan: 0 0 24px rgba(0, 242, 254, 0.18);
-  --shadow-glow-gold: 0 0 24px rgba(245, 158, 11, 0.18);
-  --shadow-glow-purple: 0 0 24px rgba(168, 85, 247, 0.18);
+  --shadow-glow-cyan: 0 0 16px rgba(0, 242, 254, 0.10);
+  --shadow-glow-gold: 0 0 16px rgba(245, 158, 11, 0.10);
+  --shadow-glow-purple: 0 0 16px rgba(168, 85, 247, 0.10);
 
   /* Transitions */
   --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
